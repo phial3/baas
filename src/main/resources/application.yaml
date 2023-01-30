@@ -1,0 +1,63 @@
+server:
+  port: 8081
+
+# profile
+spring:
+  profiles:
+    active: dev,dynamic
+  # db
+  datasource:
+    dynamic:
+      primary: master
+      strict: true
+      datasource:
+        master:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+          url: "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8"
+          username: "root"
+          password: "123456aA#"
+        salve:
+          type: com.zaxxer.hikari.HikariDataSource
+          driver-class-name: "com.mysql.cj.jdbc.Driver"
+          url: "jdbc:mysql://127.0.0.1:3306/db_test?useUnicode=true&characterEncoding=utf8"
+          username: "root"
+          password: "123456aA#"
+
+  redis:
+    #?????
+    database: 0
+    host: "127.0.0.1"
+    port: 6379
+    username: "default"
+    password: "123456aA"
+    #??????
+    timeout: 10000
+    jedis:
+      pool:
+        #?????
+        max-active: 8
+        #????????(???????)
+        max-wait: -1
+        #????
+        max-idle: 8
+        #????
+        min-idle: 0
+
+# mybatis
+mybatis-plus:
+  config-location: "classpath:config/mybatis-config.xml"
+  mapper-locations: "classpath:mapper/*.xml"
+  global-config:
+    db-config:
+      # id
+      id-type: auto
+      # logic-delete
+      logic-delete-field: delete
+      logic-not-delete-value: 0
+      logic-delete-value: 1
+
+security:
+  csrf:
+    excludes:
+    allows:
