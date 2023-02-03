@@ -30,9 +30,9 @@
 //    public DynamicRoutingDataSource() {
 //
 //        DataSource masterDataSource = BaasApplicationContext.getBean("master", HikariDataSource.class);
-//        DataSource salveDataSource = BaasApplicationContext.getBean("salve", HikariDataSource.class);
+//        DataSource slaveDataSource = BaasApplicationContext.getBean("slave", HikariDataSource.class);
 //        dataSourceMap.put("master", masterDataSource);
-//        dataSourceMap.put("salve", salveDataSource);
+//        dataSourceMap.put("slave", salveDataSource);
 //        log.info("DynamicRoutingDataSource construct finished dataSourceMap keys:{}", dataSourceMap.keySet());
 //
 //        this.setTargetDataSources(new HashMap<>(dataSourceMap));

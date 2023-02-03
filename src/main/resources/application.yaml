@@ -17,31 +17,40 @@ spring:
           url: "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8"
           username: "root"
           password: "123456aA#"
-        salve:
+          hikari:
+            connection-timeout: 5000
+            validation-timeout: 3000
+            idle-timeout: 10000
+            max-lifetime: 10000
+            maximum-pool-size: 10
+            minimum-idle: 5
+        slave:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: "com.mysql.cj.jdbc.Driver"
           url: "jdbc:mysql://127.0.0.1:3306/db_test?useUnicode=true&characterEncoding=utf8"
           username: "root"
           password: "123456aA#"
-
+          hikari:
+            connection-timeout: 5000
+            validation-timeout: 3000
+            idle-timeout: 10000
+            max-lifetime: 10000
+            maximum-pool-size: 10
+            minimum-idle: 5
   redis:
-    #?????
+    #db
     database: 0
     host: "127.0.0.1"
     port: 6379
     username: "default"
     password: "123456aA"
-    #??????
+    # conn timeout
     timeout: 10000
     jedis:
       pool:
-        #?????
         max-active: 8
-        #????????(???????)
         max-wait: -1
-        #????
         max-idle: 8
-        #????
         min-idle: 0
 
 # mybatis
@@ -59,5 +68,5 @@ mybatis-plus:
 
 security:
   csrf:
-    excludes:
-    allows:
+    excludes: ""
+    allows: ""
