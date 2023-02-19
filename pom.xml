@@ -18,6 +18,12 @@
     <description>baas</description>
 
 
+    <modules>
+        <module>baas-api</module>
+        <module>baas-manager</module>
+    </modules>
+
+
     <properties>
         <java.version>8</java.version>
 
