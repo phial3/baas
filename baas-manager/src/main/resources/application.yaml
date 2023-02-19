@@ -1,0 +1,14 @@
+server:
+  port: 8081
+
+# profile
+spring:
+  profiles:
+    active: db,dynamictp
+  main:
+    allow-circular-references: true
+
+security:
+  csrf:
+    excludes: ""
+    allows: ""
