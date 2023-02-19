@@ -5,7 +5,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.Resource;
 import java.util.Collection;
+import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
 @Component
@@ -13,6 +15,8 @@ public class EntityEventDispatcher implements ApplicationReadyListener {
 
     private Collection<EntityEventListener> listeners;
 
+    @Resource
+    private ThreadPoolExecutor executor;
 
     @Override
     public void applicationReady(ConfigurableApplicationContext context) {
@@ -21,8 +25,9 @@ public class EntityEventDispatcher implements ApplicationReadyListener {
     }
 
     public void emitEvent(final Entity event) {
-        listeners.stream().forEach(e -> {
+        listeners.forEach(e -> {
             if (e.support(event)) {
+                executor.execute(() -> e.onEntityChange(event));
             }
         });
     }

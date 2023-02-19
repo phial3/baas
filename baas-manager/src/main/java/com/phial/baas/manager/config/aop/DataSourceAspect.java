@@ -1,6 +1,7 @@
 package com.phial.baas.manager.config.aop;
 
 import cn.hutool.json.JSONUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.After;
 import org.aspectj.lang.annotation.Around;
@@ -15,8 +16,8 @@ import org.slf4j.LoggerFactory;
  */
 //@Aspect
 //@Component
+@Slf4j
 public class DataSourceAspect {
-    private static final Logger logger = LoggerFactory.getLogger(DataSourceAspect.class);
 
     @Pointcut("execution(* com.phial.baas.manager..*(..))")
     public void doAspect() {
@@ -24,7 +25,7 @@ public class DataSourceAspect {
 
     @Around("doAspect()")
     public void aroundDataSource(JoinPoint point) {
-        logger.info("DataSourceAspect aroundDataSource() Around point:{}", JSONUtil.toJsonStr(point));
+        log.info("DataSourceAspect aroundDataSource() Around point:{}", JSONUtil.toJsonStr(point));
     }
 
     /**
@@ -32,7 +33,7 @@ public class DataSourceAspect {
      */
     @Before("doAspect()")
     public void switchDataSource(JoinPoint point) {
-        logger.info("DataSourceAspect switchDataSource() Before point:{}", JSONUtil.toJsonStr(point));
+        log.info("DataSourceAspect switchDataSource() Before point:{}", JSONUtil.toJsonStr(point));
     }
 
     /**
@@ -40,6 +41,6 @@ public class DataSourceAspect {
      */
     @After("doAspect()")
     public void restoreDataSource(JoinPoint point) {
-        logger.info("DataSourceAspect restoreDataSource() After point:{}", JSONUtil.toJsonStr(point));
+        log.info("DataSourceAspect restoreDataSource() After point:{}", JSONUtil.toJsonStr(point));
     }
 }

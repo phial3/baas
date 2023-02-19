@@ -1,5 +1,6 @@
 package com.phial.baas.manager.config.redis;
 
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.listener.MessageListener;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,16 +13,15 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author gyf
  * @date 2022/12/12
  */
+@Slf4j
 public class RedisMessageListener implements MessageListener<String> {
-
-    static Logger logger = LoggerFactory.getLogger(RedisMessageListener.class);
 
     private final Map<String, Long> messageUnDuplicate = new ConcurrentHashMap<>();
 
     @Override
     public void onMessage(CharSequence channel, String msg) {
         removeOldMsgCache();
-        logger.info("onMessage:{}", msg);
+        log.info("onMessage:{}", msg);
     }
 
     private void removeOldMsgCache() {

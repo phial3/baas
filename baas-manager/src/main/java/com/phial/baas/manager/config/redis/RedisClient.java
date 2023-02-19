@@ -1,6 +1,7 @@
 package com.phial.baas.manager.config.redis;
 
 import com.alibaba.fastjson.JSON;
+import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.RAtomicLong;
 import org.redisson.api.RBucket;
 import org.redisson.api.RScoredSortedSet;
@@ -11,15 +12,17 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
+@Slf4j
 @Component
 public class RedisClient {
 
     @Resource
     private RedissonClient redissonClient;
 
-    private int listenerId = 0;
+    private final ConcurrentHashMap<String, Long> topicListenerMap = new ConcurrentHashMap<>();
 
     public RedisClient(RedissonClient client) {
         this.redissonClient = client;
@@ -91,18 +94,18 @@ public class RedisClient {
 
     public void publish(String topic, RedisEvent value) {
         RTopic rTopic = this.redissonClient.getTopic(topic);
-        value.setSender(listenerId);
-        for (int i = 0; i < 2; i++) {
-            rTopic.publish(JSON.toJSONString(value));
-        }
+        long pubId = rTopic.publish(JSON.toJSONString(value));
+        //topicListenerMap.put(topic, pubId);
     }
 
     public void listen(String topic, RedisMessageListener listener) {
-        if (listenerId > 0) {
+        if (!topicListenerMap.containsKey(topic)) {
+            log.warn("redis client have no listen topic:{}", topic);
             return;
         }
         RTopic rTopic = this.redissonClient.getTopic(topic);
-        listenerId = rTopic.addListener(String.class, listener);
+        int listenerId = rTopic.addListener(String.class, listener);
+        topicListenerMap.put(topic, (long) listenerId);
     }
 
     public void pushFixedScoreSortedSet(String key, String value, int length) {

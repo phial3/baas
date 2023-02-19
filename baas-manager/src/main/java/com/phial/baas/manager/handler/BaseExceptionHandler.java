@@ -1,5 +1,6 @@
 package com.phial.baas.manager.handler;
 
+import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.ConversionNotSupportedException;
@@ -27,10 +28,9 @@ import javax.servlet.http.HttpServletRequest;
  * @author gyf
  * @date 2022/12/12
  */
+@Slf4j
 @RestControllerAdvice
 public class BaseExceptionHandler {
-    private static final Logger log = LoggerFactory.getLogger(BaseExceptionHandler.class);
-
     /**
      * Request attribute key to access HandlerMethod object
      */
