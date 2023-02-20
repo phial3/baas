@@ -21,11 +21,18 @@
     <modules>
         <module>baas-api</module>
         <module>baas-manager</module>
+        <module>baas-chainmaker</module>
+        <module>baas-fiscobcos</module>
+        <module>baas-xuperchain</module>
+        <module>baas-fabric</module>
     </modules>
 
 
     <properties>
         <java.version>8</java.version>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <k8s-client.version>17.0.1</k8s-client.version>
         <hutool.version>5.8.12</hutool.version>

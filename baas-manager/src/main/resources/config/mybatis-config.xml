@@ -57,7 +57,7 @@
     </settings>
 
     <plugins>
-        <plugin interceptor="com.phial.baas.manager.config.mybatis.DataSourceInterceptorPlugin"/>
+        <plugin interceptor="org.phial.baas.manager.config.mybatis.DataSourceInterceptorPlugin"/>
     </plugins>
 
 </configuration>

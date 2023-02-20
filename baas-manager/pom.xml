@@ -9,7 +9,7 @@
     </parent>
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.phial</groupId>
+    <groupId>org.phial</groupId>
     <artifactId>baas-manager</artifactId>
     <version>0.0.1</version>
     <packaging>jar</packaging>
@@ -25,7 +25,7 @@
     <dependencies>
         <!-- 内部组件 -->
         <dependency>
-            <groupId>com.phial</groupId>
+            <groupId>org.phial</groupId>
             <artifactId>baas-api</artifactId>
             <version>0.0.1</version>
         </dependency>
