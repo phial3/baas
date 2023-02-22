@@ -38,12 +38,14 @@
             <version>${redisson-spring-boot.version}</version>
         </dependency>
 
+        <!-- 鉴权 https://sa-token.cc/ -->
         <dependency>
             <groupId>cn.dev33</groupId>
             <artifactId>sa-token-spring-boot-starter</artifactId>
             <version>${sa-token.version}</version>
         </dependency>
 
+        <!-- 动态线程池 https://dynamictp.cn/ -->
         <dependency>
             <groupId>cn.dynamictp</groupId>
             <artifactId>dynamic-tp-spring-boot-starter-common</artifactId>
@@ -56,6 +58,7 @@
             </exclusions>
         </dependency>
 
+        <!-- 日志 https://tlog.yomahub.com/ -->
         <dependency>
             <groupId>com.yomahub</groupId>
             <artifactId>tlog-all-spring-boot-starter</artifactId>
@@ -76,6 +79,10 @@
                 <exclusion>
                     <artifactId>transmittable-thread-local</artifactId>
                     <groupId>com.alibaba</groupId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>commons-lang</artifactId>
+                    <groupId>commons-lang</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
