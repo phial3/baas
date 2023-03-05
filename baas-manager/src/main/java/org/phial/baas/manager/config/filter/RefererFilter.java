@@ -40,7 +40,7 @@ public class RefererFilter implements Filter {
 
     /**
      * 允许的refer，一般配置域名，多个之间逗号隔开
-     * eg: "http://test.umetrip.com,https://test.umetrip.com"
+     * eg: "http://test.baidu.com,https://test.baidu.com"
      */
     @Value("${security.csrf.allows}")
     private String allows;

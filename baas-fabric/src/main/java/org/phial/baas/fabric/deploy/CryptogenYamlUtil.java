@@ -150,29 +150,29 @@ public class CryptogenYamlUtil {
 
 
     //示例
-    //xxx/Umetrip/crypto-config/
+    //xxx/baidu/crypto-config/
     public static String getCryptoPath() {
         return CommonFabricConstant.DATA_PATH + CommonFabricConstant.PROFILE + "/crypto-config/";
     }
 
     //示例
-    //xxx/Umetrip/crypto-config/peerOrganizations/
-    //xxx/Umetrip/crypto-config/ordererOrganizations/
+    //xxx/baidu/crypto-config/peerOrganizations/
+    //xxx/baidu/crypto-config/ordererOrganizations/
     public static String getTypePath(String type) {
         return getCryptoPath() + CryptoEnum.CryptoUserType.getCryptoUserType(type).getMemberType() + "Organizations/";
     }
 
 
     //示例
-    //xxx/Umetrip/crypto-config/peerOrganizations/www.hlzh.com/
+    //xxx/baidu/crypto-config/peerOrganizations/www.hlzh.com/
     public static String getOrgPath(String type, String domain) {
         return getTypePath(type) + domain + "/";
     }
 
 
     //示例
-    //xxx/Umetrip/crypto-config/peerOrganizations/www.hlzh.com/peers/peer0-www-hlzh-com/
-    //xxx/Umetrip/crypto-config/ordererOrganizations/www.hlzh.com/orderers/peer0-www-hlzh-com/
+    //xxx/baidu/crypto-config/peerOrganizations/www.hlzh.com/peers/peer0-www-hlzh-com/
+    //xxx/baidu/crypto-config/ordererOrganizations/www.hlzh.com/orderers/peer0-www-hlzh-com/
     public static String getNodePath(Node node) {
         return getOrgPath(node.getType().getType(), node.getDomain())
                 + CryptoEnum.CryptoUserType.getCryptoUserType(node.getType().getType()).getMemberType() + "s/" + node.getDnsName() + "/";

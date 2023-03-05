@@ -118,7 +118,7 @@ public final class CryptoFactory {
 
 //            HFCAClient caClient = getHFCAClient(caNodeDomain.getFabricNode());
 //            String crl = caClient.revoke(fabricUser.parseUserContext(), targetUser.getEnrollment(), "derb", true);
-//            com.umetrip.blockchain.fabric.domain.member.User user = targetUser.parseUser(userType);
+//            com.baidu.blockchain.fabric.domain.member.User user = targetUser.parseUser(userType);
 //            user.setCrl(crl);
 //            user.update();
 

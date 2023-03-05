@@ -172,8 +172,8 @@ public class K8sYamlUtil {
 
 
         //往外挂载
-//        yaml.addHostPath(filePathPrefix + "crypto-config/ordererOrganizations/umetrip.com/orderers/orderer5-umetrip-com/msp", "msp");
-//        yaml.addHostPath(filePathPrefix + "crypto-config/ordererOrganizations/umetrip.com/orderers/orderer5-umetrip-com/tls", "tls");
+//        yaml.addHostPath(filePathPrefix + "crypto-config/ordererOrganizations/baidu.com/orderers/orderer5-baidu-com/msp", "msp");
+//        yaml.addHostPath(filePathPrefix + "crypto-config/ordererOrganizations/baidu.com/orderers/orderer5-baidu-com/tls", "tls");
         yaml.addHostPath(CommonFabricConstant.DATA_PATH + CommonFabricConstant.PROFILE + "/" + node.getName(), "production");
         yaml.addHostPath("/usr/share/zoneinfo/Asia/Shanghai", "time");
         yaml.addConfigMap(dnsName, "configmap");
