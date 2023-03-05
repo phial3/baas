@@ -1,5 +1,8 @@
 package org.phial.baas.api.constant;
 
+import lombok.Getter;
+
+@Getter
 public enum NodeStatusEnum {
     INIT(1, "INIT"),
     ONLINE(2, "ONLINE"),

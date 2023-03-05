@@ -1,4 +1,4 @@
-package org.phial.baas.manager.util.crypto;
+package org.phial.baas.api.util.crypto;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.binary.Base64;
@@ -12,8 +12,6 @@ import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPrivateKey;
 import org.bouncycastle.jcajce.provider.asymmetric.ec.BCECPublicKey;
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
 import org.bouncycastle.jce.spec.ECParameterSpec;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.nio.charset.StandardCharsets;
 import java.security.KeyFactory;
@@ -150,7 +148,7 @@ public class SM2Util {
     }
 
 
-    public static void main(String[] args) throws Exception {
+    public static void main() throws Exception {
         Security.addProvider(new BouncyCastleProvider());
 
         String pub =

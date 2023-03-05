@@ -3,6 +3,7 @@ package org.phial.baas.api.domain;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.extern.slf4j.Slf4j;
+import org.phial.baas.api.constant.ChainStatusEnum;
 
 import java.io.Serializable;
 
@@ -35,8 +36,7 @@ public class Chain extends Entity<Long> implements Serializable {
     /**
      * 网络状态: 'ONLINE','INIT', 'OFFLINE'
      */
-    private String status;
-
+    private ChainStatusEnum status;
 
     /**
      * 块高度

@@ -1,4 +1,4 @@
-package org.phial.baas.manager.util.crypto;
+package org.phial.baas.api.util.crypto;
 
 import cn.hutool.core.util.CharsetUtil;
 import cn.hutool.crypto.Mode;
@@ -76,7 +76,7 @@ public class SM4Util {
         return encrypt;
     }
 
-    public static void main(String[] args) {
+    public static void main() {
 
 
         String decode1 = decode("48314f71c030a64dcb6a8912e255094d", "2X7r7u7Jd84mMFK2");

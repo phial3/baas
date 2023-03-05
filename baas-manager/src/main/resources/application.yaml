@@ -14,7 +14,7 @@ server:
 # profile
 spring:
   profiles:
-    active: db,dynamictp
+    active: db,dynamictp,fabric,chainmaker
   application:
     name: baas
   main:
@@ -25,3 +25,9 @@ security:
   csrf:
     excludes: ""
     allows: ""
+
+logging:
+  config:
+    classpath: logback-spring.xml
+  level:
+    root: debug

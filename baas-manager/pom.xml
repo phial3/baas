@@ -26,8 +26,8 @@
         <!-- 内部组件 -->
         <dependency>
             <groupId>org.phial</groupId>
-            <artifactId>baas-api</artifactId>
-            <version>0.0.1</version>
+            <artifactId>baas-fabric</artifactId>
+            <version>${project.version}</version>
         </dependency>
         <!-- -->
 

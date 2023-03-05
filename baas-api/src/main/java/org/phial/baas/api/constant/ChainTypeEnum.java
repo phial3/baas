@@ -18,7 +18,7 @@ public enum ChainTypeEnum {
     }
 
     @Getter
-    private enum ChainMakerNodeType {
+    public enum ChainMakerNodeType {
         CA("ca", "CA节点"),
         CONSENSUS("consensus", "共识节点"),
         COMMON("common", "同步节点"),
@@ -43,7 +43,7 @@ public enum ChainTypeEnum {
     }
 
     @Getter
-    private enum FabricNodeType {
+    public enum FabricNodeType {
         CA("ca", "CA节点"),
         PEER("peer", "peer节点"),
         ORDER("orderer", "order节点");
@@ -67,7 +67,7 @@ public enum ChainTypeEnum {
     }
 
     @Getter
-    private enum BcosNodeType {
+    public enum BcosNodeType {
         CA("ca", "CA节点");
 
         private final String type;
@@ -85,6 +85,28 @@ public enum ChainTypeEnum {
                 }
             }
             throw new IllegalArgumentException("BcosNodeType getByType type=" + type + " not found");
+        }
+    }
+
+    @Getter
+    public enum XuperNodeType {
+        CA("ca", "CA节点");
+
+        private final String type;
+        private final String name;
+
+        XuperNodeType(String type, String name) {
+            this.type = type;
+            this.name = name;
+        }
+
+        public XuperNodeType getByType(String type) {
+            for (XuperNodeType nodeType : XuperNodeType.values()) {
+                if (type.equals(nodeType.getType())) {
+                    return nodeType;
+                }
+            }
+            throw new IllegalArgumentException("XuperNodeType getByType type=" + type + " not found");
         }
     }
 }

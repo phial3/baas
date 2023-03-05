@@ -1,0 +1,10 @@
+baas:
+  fabric:
+    image:
+      ca: ""
+      peer: ""
+      orderer: ""
+      tools: ""
+      db: ""
+    k8s:
+      namespace: fabric

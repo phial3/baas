@@ -1,10 +1,10 @@
-package org.phial.baas.manager.util;
+package org.phial.baas.api.util;
 
 import org.yaml.snakeyaml.Yaml;
 
 import java.io.StringWriter;
 
-public class YamlUtils {
+public class YamlUtil {
 
     /**
      * Java 对象转 yaml 字符串

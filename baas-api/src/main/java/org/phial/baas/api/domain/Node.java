@@ -3,6 +3,10 @@ package org.phial.baas.api.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.phial.baas.api.constant.ChainTypeEnum;
+import org.phial.baas.api.constant.CommonConstant;
+import org.phial.baas.api.constant.CommonFabricConstant;
+import org.phial.baas.api.constant.NodeStatusEnum;
 
 import java.io.Serializable;
 
@@ -33,7 +37,7 @@ public class Node extends Entity<Long> implements Serializable {
     /**
      * 节点类型
      */
-    private String type;
+    private ChainTypeEnum.FabricNodeType type;
 
     /**
      * IP
@@ -83,7 +87,7 @@ public class Node extends Entity<Long> implements Serializable {
     /**
      * 节点状态
      */
-    private Integer status;
+    private NodeStatusEnum status;
 
 
     /**
@@ -105,4 +109,21 @@ public class Node extends Entity<Long> implements Serializable {
      * 内存限制
      */
     private String limitsMemory;
+
+
+    /////////////////////////////////////////////
+    /////////// 以下property没有持久化 //////////////
+    /////////////////////////////////////////////
+
+    public String getDnsName() {
+        return this.name.replace(".", "-");
+    }
+
+    public String getNodeHttpUrl() {
+        return CommonConstant.getNodeHttpUrl(this.getRpcK8s());
+    }
+
+    public String getNodeGrpcUrl() {
+        return CommonConstant.getNodeGrpcUrl(this.getRpcPort());
+    }
 }

@@ -1,6 +1,9 @@
 package org.phial.baas.api.service;
 
+import org.phial.baas.api.domain.Chain;
+
 public interface ChainService {
+    Chain getByChainIdOrNull(String chainId);
 
     void deploy();
 

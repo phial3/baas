@@ -1,0 +1,10 @@
+baas:
+  chainmaker:
+    image:
+      ca: ""
+      consensus: ""
+      common: ""
+      vm: ""
+      db: ""
+    k8s:
+      namespace: chainmaker

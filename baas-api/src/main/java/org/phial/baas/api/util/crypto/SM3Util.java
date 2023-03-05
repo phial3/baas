@@ -1,4 +1,4 @@
-package org.phial.baas.manager.util.crypto;
+package org.phial.baas.api.util.crypto;
 
 import org.bouncycastle.crypto.digests.SM3Digest;
 import org.bouncycastle.pqc.legacy.math.linearalgebra.ByteUtils;

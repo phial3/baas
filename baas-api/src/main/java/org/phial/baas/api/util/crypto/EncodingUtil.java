@@ -1,9 +1,9 @@
-package org.phial.baas.manager.util.crypto;
+package org.phial.baas.api.util.crypto;
 
 import cn.hutool.core.lang.Assert;
-import jodd.util.Base64;
-import org.bouncycastle.pqc.legacy.math.linearalgebra.ByteUtils;
 import org.bouncycastle.util.encoders.Hex;
+import org.springframework.util.Base64Utils;
+
 
 public class EncodingUtil {
 
@@ -20,7 +20,7 @@ public class EncodingUtil {
                 res = data.getBytes();
                 break;
             case BASE64:
-                res = Base64.decode(data);
+                res = Base64Utils.decodeFromString(data);
                 break;
             case HEX:
                 res = Hex.decode(data);
@@ -39,7 +39,7 @@ public class EncodingUtil {
                 res = new String(data);
                 break;
             case BASE64:
-                res = Base64.encodeToString(data);
+                res = Base64Utils.encodeToString(data);
                 break;
             case HEX:
                 res = Hex.toHexString(data);
@@ -51,6 +51,6 @@ public class EncodingUtil {
     }
 
     public static String base64ToHex(String base64Str) {
-        return ByteUtils.toHexString(org.bouncycastle.util.encoders.Base64.decode(base64Str));
+        return Hex.toHexString(Base64Utils.decodeFromString(base64Str));
     }
 }

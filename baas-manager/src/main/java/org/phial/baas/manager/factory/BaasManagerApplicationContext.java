@@ -15,7 +15,7 @@ import javax.annotation.PostConstruct;
  */
 @Slf4j
 @Component
-public class BaasApplicationContext implements ApplicationContextAware, BeanPostProcessor {
+public class BaasManagerApplicationContext implements ApplicationContextAware, BeanPostProcessor {
 
     private static ApplicationContext ctx;
 

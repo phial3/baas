@@ -96,10 +96,30 @@ public class BaseExceptionHandler {
     }
 
     /**
+     * 服务运行中出现异常
+     *
+     * @param e 异常
+     * @return 异常结果
+     */
+    @ExceptionHandler(value = RuntimeException.class)
+    public Object handleRuntimeException(RuntimeException e) {
+        log.error("服务运行异常", e);
+        return ResponseEntity.ok(e);
+    }
+
+
+    @ExceptionHandler(Exception.class)
+    public Object allExceptionHandler(Exception e) {
+        log.error("服务运行异常", e);
+        return ResponseEntity.ok(e);
+    }
+
+
+    /**
      * 抓取所有的错误,未定义异常
      */
-    @ExceptionHandler({Exception.class, Throwable.class})
-    private Object handleException(Throwable t, HttpServletRequest request) {
+    @ExceptionHandler(Throwable.class)
+    private Object handleThrowableException(Throwable t, HttpServletRequest request) {
         /**
          * If this.class is annotated by @RestController
          */
@@ -128,5 +148,4 @@ public class BaseExceptionHandler {
         }
         return stringBuilder.toString();
     }
-
 }
