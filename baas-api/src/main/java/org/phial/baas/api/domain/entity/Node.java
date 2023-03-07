@@ -1,11 +1,9 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.phial.baas.api.constant.ChainTypeEnum;
 import org.phial.baas.api.constant.CommonConstant;
-import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.NodeStatusEnum;
 import org.phial.baas.api.constant.NodeTypeEnum;
 
@@ -39,6 +37,12 @@ public class Node extends Entity<Long> implements Serializable {
      * 节点类型
      */
     private NodeTypeEnum type;
+
+
+    /**
+     * 节点状态
+     */
+    private NodeStatusEnum status;
 
     /**
      * IP
@@ -84,11 +88,6 @@ public class Node extends Entity<Long> implements Serializable {
      *
      */
     private String pvcName;
-
-    /**
-     * 节点状态
-     */
-    private NodeStatusEnum status;
 
 
     /**

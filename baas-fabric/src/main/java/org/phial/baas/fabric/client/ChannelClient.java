@@ -317,6 +317,7 @@ public class ChannelClient {
 
     /**
      * 传入方法名字和请求参数，执行合约中的内容方法
+     * Submit transactions that store state to the ledger.
      *
      * @param methodName 方法名
      * @param parameters
@@ -327,15 +328,12 @@ public class ChannelClient {
      */
     private String invokeContract(String chainCodeId, String methodName, String... parameters)
             throws InterruptedException, TimeoutException, ContractException {
-        // Submit transactions that store state to the ledger.
         Contract contract = getContract(chainCodeId);
         byte[] result = contract.createTransaction(methodName).submit(parameters);
-        //如果
         if (result == null || result.length == 0) {
             return StringUtils.EMPTY;
-        } else {
-            return new String(result, StandardCharsets.UTF_8);
         }
+        return new String(result, StandardCharsets.UTF_8);
     }
 
 
@@ -351,20 +349,18 @@ public class ChannelClient {
      * @throws TimeoutException
      * @throws ContractException
      */
-    public String callContractNoLedger(String chainCodeId, String methodName, String... parameters) {
-        byte[] result = null;
+    public String queryContract(String chainCodeId, String methodName, String... parameters) {
         try {
             Contract contract = getContract(chainCodeId);
-            result = contract.createTransaction(methodName).evaluate(parameters);
-            //如果
+            byte[] result = contract.createTransaction(methodName).evaluate(parameters);
             if (result == null || result.length == 0) {
                 return StringUtils.EMPTY;
             }
             return new String(result, StandardCharsets.UTF_8);
         } catch (ContractException e) {
-            log.error("callContractNoLedger error:", e);
+            log.error("queryContract error:", e);
             e.printStackTrace();
         }
-        return null;
+        return StringUtils.EMPTY;
     }
 }

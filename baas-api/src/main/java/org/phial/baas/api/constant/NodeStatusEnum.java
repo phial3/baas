@@ -16,4 +16,12 @@ public enum NodeStatusEnum {
         this.status = status;
     }
 
+    public NodeStatusEnum getByCode(int code) {
+        for (NodeStatusEnum statusEnum : NodeStatusEnum.values()) {
+            if (code == statusEnum.getCode()) {
+                return statusEnum;
+            }
+        }
+        throw new IllegalArgumentException("NodeStatusEnum getByCode code=" + code + " not found");
+    }
 }

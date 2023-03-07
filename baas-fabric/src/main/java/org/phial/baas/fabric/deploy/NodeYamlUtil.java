@@ -1,7 +1,7 @@
 package org.phial.baas.fabric.deploy;
 
-import org.phial.baas.api.domain.Node;
-import org.phial.baas.api.domain.Organization;
+import org.phial.baas.api.domain.entity.Node;
+import org.phial.baas.api.domain.entity.Organization;
 import org.phial.baas.api.util.YamlUtil;
 import org.phial.baas.fabric.deploy.yaml.CaConfigYaml;
 import org.phial.baas.fabric.entity.NodeDomain;

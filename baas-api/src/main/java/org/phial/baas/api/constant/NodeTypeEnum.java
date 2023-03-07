@@ -2,6 +2,9 @@ package org.phial.baas.api.constant;
 
 import lombok.Getter;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Getter
 public enum NodeTypeEnum {
     // 每个组织一个CA节点
@@ -33,12 +36,22 @@ public enum NodeTypeEnum {
         this.chainType = chainType;
     }
 
-    public NodeTypeEnum getByCode(Integer code) {
+    public NodeTypeEnum getByCode(int code) {
         for (NodeTypeEnum nodeType : NodeTypeEnum.values()) {
-            if (code.equals(nodeType.getCode())) {
+            if (code == nodeType.getCode()) {
                 return nodeType;
             }
         }
         throw new IllegalArgumentException("NodeTypeEnum getByCode code=" + code + " not found");
+    }
+
+    public List<NodeTypeEnum> getNodeTypes(ChainTypeEnum chainType) {
+        List<NodeTypeEnum> results = new ArrayList<>();
+        for (NodeTypeEnum nodeType : NodeTypeEnum.values()) {
+            if (nodeType.getChainType() == chainType) {
+                results.add(nodeType);
+            }
+        }
+        return results;
     }
 }

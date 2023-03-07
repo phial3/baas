@@ -18,6 +18,15 @@ public enum ChainTypeEnum {
         this.code = code;
         this.type = type;
     }
+
+    public static ChainTypeEnum getByCode(int code) {
+        for (ChainTypeEnum statusEnum : ChainTypeEnum.values()) {
+            if (code == statusEnum.getCode()) {
+                return statusEnum;
+            }
+        }
+        throw new IllegalArgumentException("ChainTypeEnum getByCode code=" + code + " not found");
+    }
 }
 
 

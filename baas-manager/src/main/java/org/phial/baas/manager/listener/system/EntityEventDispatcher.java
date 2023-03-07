@@ -1,6 +1,6 @@
 package org.phial.baas.manager.listener.system;
 
-import org.phial.baas.api.domain.Entity;
+import org.phial.baas.api.domain.entity.Entity;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.stereotype.Component;

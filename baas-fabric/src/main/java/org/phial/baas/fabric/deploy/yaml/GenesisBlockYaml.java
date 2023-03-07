@@ -3,11 +3,9 @@ package org.phial.baas.fabric.deploy.yaml;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Getter;
-import org.phial.baas.api.constant.CommonConstant;
-import org.phial.baas.api.domain.Node;
-import org.phial.baas.api.domain.Organization;
+import org.phial.baas.api.domain.entity.Node;
+import org.phial.baas.api.domain.entity.Organization;
 import org.phial.baas.fabric.entity.CANodeDomain;
-import org.phial.baas.fabric.entity.NodeDomain;
 import org.phial.baas.fabric.entity.OrderNodeDomain;
 
 import java.util.ArrayList;

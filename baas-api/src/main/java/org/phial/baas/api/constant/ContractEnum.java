@@ -2,9 +2,10 @@ package org.phial.baas.api.constant;
 
 import lombok.Getter;
 
-@Getter
+
 public class ContractEnum {
 
+    @Getter
     public enum ContractStatusEnum {
         INIT(1, "INIT"),
         NORMAL(2, "NORMAL"),
@@ -18,22 +19,43 @@ public class ContractEnum {
             this.status = status;
             this.code = code;
         }
+
+        public static ContractStatusEnum getByCode(int code) {
+            for (ContractStatusEnum contractStatus : ContractStatusEnum.values()) {
+                if (code == contractStatus.getCode()) {
+                    return contractStatus;
+                }
+            }
+            throw new IllegalArgumentException("ContractStatusEnum getByCode code=" + code + " not found");
+        }
     }
 
+    @Getter
     public enum RuntimeType {
-        RUST("rust", "WASM"),
-        CPP("c++", "WXVM"),
-        TINY_GO("tinygo", "GASM"),
-        SOLIDITY("solidity", "EVM"),
-        JAVA("java", "HVM"),
-        GOLANG("golang", "GO");
+        RUST(1,"rust", "WASM"),
+        CPP(2,"c++", "WXVM"),
+        TINY_GO(3,"tinygo", "GASM"),
+        SOLIDITY(4,"solidity", "EVM"),
+        JAVA(5,"java", "HVM"),
+        GOLANG(6,"golang", "GO");
 
+        private final Integer code;
         private final String language;
         private final String runtimeType;
 
-        RuntimeType(String language, String runtimeType) {
+        RuntimeType(Integer code, String language, String runtimeType) {
+            this.code = code;
             this.language = language;
             this.runtimeType = runtimeType;
+        }
+
+        public static RuntimeType getByCode(int code) {
+            for (RuntimeType runtime : RuntimeType.values()) {
+                if (code == runtime.getCode()) {
+                    return runtime;
+                }
+            }
+            throw new IllegalArgumentException("ContractEnum.RuntimeType getByCode code=" + code + " not found");
         }
     }
 }

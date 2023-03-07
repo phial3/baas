@@ -1,4 +1,4 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.format.annotation.DateTimeFormat;

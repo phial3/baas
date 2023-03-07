@@ -30,7 +30,7 @@ import java.util.Map;
 @Slf4j
 public class K8sClient {
 
-    private String namespace;
+    private final String namespace;
 
     private final CoreV1Api coreV1Api;
 

@@ -3,7 +3,7 @@ package org.phial.baas.fabric.deploy;
 import lombok.extern.slf4j.Slf4j;
 import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.CryptoEnum;
-import org.phial.baas.api.domain.Node;
+import org.phial.baas.api.domain.entity.Node;
 import org.phial.baas.api.util.FileUtil;
 import org.phial.baas.fabric.entity.NodeDomain;
 

@@ -1,4 +1,4 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -35,7 +35,7 @@ public class SmartContract extends Entity<Long> implements Serializable {
     private String version;
 
     /**
-     * 部署的chain
+     * 部署的chainId,英文+字母_
      */
     private String chainId;
 
@@ -47,5 +47,5 @@ public class SmartContract extends Entity<Long> implements Serializable {
     /**
      * 运行类型, go,cpp,wasm
      */
-    private String runtimeType;
+    private ContractEnum.RuntimeType runtimeType;
 }

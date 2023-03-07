@@ -28,7 +28,7 @@ public interface CommonConstant {
     String ILLEGAL_ACCESS = "系统不支持当前域名的访问！";
 
     static String getK8sNodeIp() {
-        return StringUtils.isBlank(System.getenv("NODE_IP")) ? "127.0.0.1" : System.getenv("NODE_IP");
+        return StringUtils.isBlank(System.getenv("HOST_NODE_IP")) ? "127.0.0.1" : System.getenv("HOST_NODE_IP");
     }
 
     static String getNodeGrpcUrl(long rpcK8sPort) {

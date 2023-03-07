@@ -1,10 +1,10 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-@EqualsAndHashCode(callSuper = true)
 @Data
+@EqualsAndHashCode(callSuper = true)
 public class RoleOrganization extends Entity<Long> {
     private Long id;
     private String roleId; //角色ID主键

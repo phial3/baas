@@ -1,7 +1,7 @@
 package org.phial.baas.api.service;
 
-import org.phial.baas.api.domain.Node;
-import org.phial.baas.api.domain.Organization;
+import org.phial.baas.api.domain.entity.Node;
+import org.phial.baas.api.domain.entity.Organization;
 
 public interface OrganizationService {
 

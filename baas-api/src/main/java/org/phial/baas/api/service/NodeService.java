@@ -1,6 +1,6 @@
 package org.phial.baas.api.service;
 
-import org.phial.baas.api.domain.Node;
+import org.phial.baas.api.domain.entity.Node;
 
 import java.util.List;
 

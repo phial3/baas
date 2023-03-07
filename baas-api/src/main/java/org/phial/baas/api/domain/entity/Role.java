@@ -1,4 +1,4 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -11,5 +11,5 @@ public class Role extends Entity<Long> {
     private String name; //角色名称
     private String tenantId; //租户ID
     private String description; //角色描述
-    private String status; //状态（1:启用, 0:禁用等）
+    private Integer status; //状态（1:启用, 0:禁用等）
 }

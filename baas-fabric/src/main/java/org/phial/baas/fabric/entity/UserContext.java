@@ -14,20 +14,14 @@ package org.phial.baas.fabric.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.bouncycastle.util.io.pem.PemObject;
-import org.bouncycastle.util.io.pem.PemWriter;
 import org.hyperledger.fabric.gateway.Identities;
 import org.hyperledger.fabric.sdk.Enrollment;
 import org.hyperledger.fabric.sdk.User;
-import org.hyperledger.fabric.sdk.identity.X509Enrollment;
 import org.phial.baas.api.constant.CryptoEnum;
-import org.phial.baas.api.domain.SysUser;
+import org.phial.baas.api.domain.entity.SysUser;
 
 import java.io.ByteArrayInputStream;
-import java.io.IOException;
 import java.io.Serializable;
-import java.io.StringWriter;
-import java.security.Key;
 import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.cert.CertificateFactory;

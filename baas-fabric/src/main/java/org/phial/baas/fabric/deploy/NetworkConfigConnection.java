@@ -7,10 +7,10 @@ import org.phial.baas.api.constant.ChainStatusEnum;
 import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.NodeStatusEnum;
 import org.phial.baas.api.constant.NodeTypeEnum;
-import org.phial.baas.api.domain.Chain;
-import org.phial.baas.api.domain.ChainNode;
-import org.phial.baas.api.domain.Node;
-import org.phial.baas.api.domain.Organization;
+import org.phial.baas.api.domain.entity.Chain;
+import org.phial.baas.api.domain.entity.ChainNode;
+import org.phial.baas.api.domain.entity.Node;
+import org.phial.baas.api.domain.entity.Organization;
 import org.phial.baas.api.service.ChainNodeService;
 import org.phial.baas.api.service.ChainService;
 import org.phial.baas.api.service.NodeService;
@@ -25,7 +25,6 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.stream.Collectors;
 
 /**

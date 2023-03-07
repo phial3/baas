@@ -1,8 +1,9 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.phial.baas.api.constant.CryptoEnum;
+import org.phial.baas.api.constant.SysUserStatusEnum;
 
 import java.util.Date;
 
@@ -10,8 +11,8 @@ import java.util.Date;
 @EqualsAndHashCode(callSuper = true)
 public class SysUser extends Entity<Long> {
     protected Long id;
-    protected String user_id; //用户ID，主键
-    protected String tenant_id; //租户ID
+    //protected String user_id; //用户ID，主键
+    protected String tenantId; //租户ID
     protected String username;//用户名
     protected String password; //密码
     protected String email; //电子邮箱
@@ -29,7 +30,7 @@ public class SysUser extends Entity<Long> {
     /**
      * 状态
      */
-    protected Integer status;
+    protected SysUserStatusEnum status;
 
     /**
      * 失效时间

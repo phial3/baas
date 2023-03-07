@@ -1,4 +1,4 @@
-package org.phial.baas.api.domain;
+package org.phial.baas.api.domain.entity;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;

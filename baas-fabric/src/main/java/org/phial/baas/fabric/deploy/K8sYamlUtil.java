@@ -5,16 +5,13 @@ import io.kubernetes.client.custom.IntOrString;
 import io.kubernetes.client.openapi.models.V1ConfigMap;
 import io.kubernetes.client.openapi.models.V1ObjectMeta;
 import io.kubernetes.client.openapi.models.V1ServicePort;
-import org.phial.baas.api.constant.ChainTypeEnum;
 import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.NodeTypeEnum;
-import org.phial.baas.api.domain.Node;
+import org.phial.baas.api.domain.entity.Node;
 import org.phial.baas.api.util.YamlUtil;
 import org.phial.baas.fabric.deploy.yaml.K8sConfigMapYaml;
 import org.phial.baas.fabric.deploy.yaml.K8sDepolymentYaml;
 import org.phial.baas.fabric.deploy.yaml.K8sServiceYaml;
-import org.phial.baas.fabric.entity.NodeDomain;
-import org.phial.baas.fabric.entity.OrderNodeDomain;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -104,7 +101,7 @@ public class K8sYamlUtil {
 
         K8sDepolymentYaml yaml;
 
-        if (node.getType().equals(NodeTypeEnum.CA)) {
+        if (node.isCaNode()) {
             yaml = createCADeploymentYaml(node, dnsName, batch);
         } else if (node.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER)) {
             yaml = createOrderDeploymentYaml(node, dnsName, batch);
@@ -401,9 +398,9 @@ public class K8sYamlUtil {
             k8sServiceYaml.addPort("monitorport", node.getMonitorK8s(), CommonFabricConstant.DEFAULT_ORDERER_MONITOR_PORT, CommonFabricConstant.DEFAULT_ORDERER_MONITOR_PORT);
 //        //order节点
             k8sServiceYaml.addPort("rpcport", 0L, CommonFabricConstant.DEFAULT_ORDERER_RPC_PORT, CommonFabricConstant.DEFAULT_ORDERER_RPC_PORT);
-        } else if (node.getType().equals(NodeTypeEnum.CA)) {
+        } else if (node.isCaNode()) {
 //            //ca服务
-            k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), CommonFabricConstant.DEFAULT_CA_RPC_PORT, CommonFabricConstant.DEFAULT_CA_RPC_PORT);
+            //k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), CommonFabricConstant.DEFAULT_CA_RPC_PORT, CommonFabricConstant.DEFAULT_CA_RPC_PORT);
         }
 
         if (k8sServiceYaml.checkPortCount() == 0) {
