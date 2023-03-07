@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = true)
 @Data
 public class RoleOrganization extends Entity<Long> {
-    private String role_id; //角色ID，主键
-    private String org_id; //组织机构ID，主键
+    private Long id;
+    private String roleId; //角色ID主键
+    private String orgId; //组织机构ID主键
 }

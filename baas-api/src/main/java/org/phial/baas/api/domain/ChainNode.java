@@ -32,5 +32,5 @@ public class ChainNode extends Entity<Long> implements Serializable {
     /**
      * 组织域名
      */
-    private String domain;
+    private String orgDomain;
 }

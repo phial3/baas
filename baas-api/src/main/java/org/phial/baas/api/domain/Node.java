@@ -7,6 +7,7 @@ import org.phial.baas.api.constant.ChainTypeEnum;
 import org.phial.baas.api.constant.CommonConstant;
 import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.NodeStatusEnum;
+import org.phial.baas.api.constant.NodeTypeEnum;
 
 import java.io.Serializable;
 
@@ -25,19 +26,19 @@ public class Node extends Entity<Long> implements Serializable {
     private Long id;
 
     /**
-     * 组织域名
-     */
-    private String domain;
-
-    /**
      * 节点名称
      */
     private String name;
 
     /**
+     * 组织域名
+     */
+    private String orgDomain;
+
+    /**
      * 节点类型
      */
-    private ChainTypeEnum.FabricNodeType type;
+    private NodeTypeEnum type;
 
     /**
      * IP
@@ -125,5 +126,9 @@ public class Node extends Entity<Long> implements Serializable {
 
     public String getNodeGrpcUrl() {
         return CommonConstant.getNodeGrpcUrl(this.getRpcPort());
+    }
+
+    public boolean isCaNode() {
+        return this.type == NodeTypeEnum.CA;
     }
 }

@@ -27,7 +27,7 @@ public class NodeContainerStatus {
 
     @Data
     @AllArgsConstructor
-    public class ContainerStatus {
+    public static class ContainerStatus {
 
         String containerName;
 

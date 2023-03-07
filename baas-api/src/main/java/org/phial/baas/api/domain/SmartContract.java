@@ -2,6 +2,7 @@ package org.phial.baas.api.domain;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import org.phial.baas.api.constant.ContractEnum;
 
 import java.io.Serializable;
 
@@ -41,7 +42,7 @@ public class SmartContract extends Entity<Long> implements Serializable {
     /**
      * 合约状态
      */
-    private Integer status;
+    private ContractEnum.ContractStatusEnum status;
 
     /**
      * 运行类型, go,cpp,wasm

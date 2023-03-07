@@ -6,108 +6,17 @@ import lombok.Getter;
 
 @Getter
 public enum ChainTypeEnum {
-    CHAIN_MAKER("chainmaker"),
-    FISCO_BCOS("fisco_bcos"),
-    XUPER_CHAIN("xuperchain"),
-    HYPERLEDGER_FABRIC("hyperledger_fabric");
+    CHAIN_MAKER(1, "chainmaker"),
+    FISCO_BCOS(2, "fisco_bcos"),
+    XUPER_CHAIN(3, "xuperchain"),
+    HYPERLEDGER_FABRIC(4, "hyperledger_fabric");
 
-    private final String chainType;
+    private final Integer code;
+    private final String type;
 
-    ChainTypeEnum(String chainType) {
-        this.chainType = chainType;
-    }
-
-    @Getter
-    public enum ChainMakerNodeType {
-        CA("ca", "CA节点"),
-        CONSENSUS("consensus", "共识节点"),
-        COMMON("common", "同步节点"),
-        VM_ENGINE("contract.go", "合约引擎节点");
-
-        private final String type;
-        private final String name;
-
-        ChainMakerNodeType(String type, String name) {
-            this.type = type;
-            this.name = name;
-        }
-
-        public ChainMakerNodeType getByType(String type) {
-            for (ChainMakerNodeType nodeType : ChainMakerNodeType.values()) {
-                if (type.equals(nodeType.getType())) {
-                    return nodeType;
-                }
-            }
-            throw new IllegalArgumentException("ChainMakerNodeType getByType type=" + type + " not found");
-        }
-    }
-
-    @Getter
-    public enum FabricNodeType {
-        CA("ca", "CA节点"),
-        PEER("peer", "peer节点"),
-        ORDER("orderer", "order节点");
-
-        private final String type;
-        private final String name;
-
-        FabricNodeType(String type, String name) {
-            this.type = type;
-            this.name = name;
-        }
-
-        public FabricNodeType getByType(String type) {
-            for (FabricNodeType nodeType : FabricNodeType.values()) {
-                if (type.equals(nodeType.getType())) {
-                    return nodeType;
-                }
-            }
-            throw new IllegalArgumentException("FabricNodeType getByType type=" + type + " not found");
-        }
-    }
-
-    @Getter
-    public enum BcosNodeType {
-        CA("ca", "CA节点");
-
-        private final String type;
-        private final String name;
-
-        BcosNodeType(String type, String name) {
-            this.type = type;
-            this.name = name;
-        }
-
-        public BcosNodeType getByType(String type) {
-            for (BcosNodeType nodeType : BcosNodeType.values()) {
-                if (type.equals(nodeType.getType())) {
-                    return nodeType;
-                }
-            }
-            throw new IllegalArgumentException("BcosNodeType getByType type=" + type + " not found");
-        }
-    }
-
-    @Getter
-    public enum XuperNodeType {
-        CA("ca", "CA节点");
-
-        private final String type;
-        private final String name;
-
-        XuperNodeType(String type, String name) {
-            this.type = type;
-            this.name = name;
-        }
-
-        public XuperNodeType getByType(String type) {
-            for (XuperNodeType nodeType : XuperNodeType.values()) {
-                if (type.equals(nodeType.getType())) {
-                    return nodeType;
-                }
-            }
-            throw new IllegalArgumentException("XuperNodeType getByType type=" + type + " not found");
-        }
+    ChainTypeEnum(Integer code, String type) {
+        this.code = code;
+        this.type = type;
     }
 }
 

@@ -2,8 +2,6 @@ package org.phial.baas.manager.config.redis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.redisson.api.listener.MessageListener;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 import java.util.Set;

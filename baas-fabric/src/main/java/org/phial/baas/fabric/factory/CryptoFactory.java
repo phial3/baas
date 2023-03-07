@@ -3,10 +3,7 @@ package org.phial.baas.fabric.factory;
 import lombok.extern.slf4j.Slf4j;
 import org.bouncycastle.util.io.pem.PemObject;
 import org.bouncycastle.util.io.pem.PemWriter;
-import org.hyperledger.fabric.gateway.impl.identity.GatewayUser;
 import org.hyperledger.fabric.sdk.Enrollment;
-import org.hyperledger.fabric.sdk.User;
-import org.hyperledger.fabric.sdk.identity.X509Enrollment;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 import org.hyperledger.fabric.sdk.security.CryptoSuiteFactory;
 import org.hyperledger.fabric_ca.sdk.Attribute;
@@ -21,24 +18,17 @@ import org.phial.baas.api.domain.Organization;
 import org.phial.baas.api.domain.SysUser;
 import org.phial.baas.api.service.OrganizationService;
 import org.phial.baas.api.service.SysUserCertService;
-import org.phial.baas.fabric.deploy.CryptogenBatch;
 import org.phial.baas.fabric.entity.CANodeDomain;
-import org.phial.baas.fabric.entity.NodeDomain;
 import org.phial.baas.fabric.entity.UserContext;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import org.springframework.util.Assert;
 import org.springframework.util.CollectionUtils;
-import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.security.Key;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -89,13 +79,13 @@ public final class CryptoFactory {
 
 
     private HFCAClient getHFCAClient(Node caNode) throws Exception {
-        HFCAClient hfcaClient = hfcaClientCache.get(caNode.getDomain());
+        HFCAClient hfcaClient = hfcaClientCache.get(caNode.getOrgDomain());
         if (hfcaClient == null) {
             Properties properties = new Properties();
             hfcaClient = HFCAClient.createNewInstance(CommonConstant.getNodeHttpUrl(caNode.getRpcK8s()), properties);
             CryptoSuite cryptoSuite = CryptoSuiteFactory.getDefault().getCryptoSuite(properties);
             hfcaClient.setCryptoSuite(cryptoSuite);
-            hfcaClientCache.put(caNode.getDomain(), hfcaClient);
+            hfcaClientCache.put(caNode.getOrgDomain(), hfcaClient);
         }
         return hfcaClient;
     }

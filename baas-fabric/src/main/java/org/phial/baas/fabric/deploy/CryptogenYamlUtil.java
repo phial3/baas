@@ -5,13 +5,8 @@ import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.CryptoEnum;
 import org.phial.baas.api.domain.Node;
 import org.phial.baas.api.util.FileUtil;
-import org.phial.baas.api.util.YamlUtil;
 import org.phial.baas.fabric.entity.NodeDomain;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.CollectionUtils;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
@@ -174,7 +169,7 @@ public class CryptogenYamlUtil {
     //xxx/baidu/crypto-config/peerOrganizations/www.hlzh.com/peers/peer0-www-hlzh-com/
     //xxx/baidu/crypto-config/ordererOrganizations/www.hlzh.com/orderers/peer0-www-hlzh-com/
     public static String getNodePath(Node node) {
-        return getOrgPath(node.getType().getType(), node.getDomain())
+        return getOrgPath(node.getType().getType(), node.getOrgDomain())
                 + CryptoEnum.CryptoUserType.getCryptoUserType(node.getType().getType()).getMemberType() + "s/" + node.getDnsName() + "/";
     }
 }

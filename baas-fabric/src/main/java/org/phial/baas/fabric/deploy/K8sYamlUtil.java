@@ -7,6 +7,7 @@ import io.kubernetes.client.openapi.models.V1ObjectMeta;
 import io.kubernetes.client.openapi.models.V1ServicePort;
 import org.phial.baas.api.constant.ChainTypeEnum;
 import org.phial.baas.api.constant.CommonFabricConstant;
+import org.phial.baas.api.constant.NodeTypeEnum;
 import org.phial.baas.api.domain.Node;
 import org.phial.baas.api.util.YamlUtil;
 import org.phial.baas.fabric.deploy.yaml.K8sConfigMapYaml;
@@ -103,9 +104,9 @@ public class K8sYamlUtil {
 
         K8sDepolymentYaml yaml;
 
-        if (node.getType().equals(ChainTypeEnum.FabricNodeType.CA)) {
+        if (node.getType().equals(NodeTypeEnum.CA)) {
             yaml = createCADeploymentYaml(node, dnsName, batch);
-        } else if (node.getType().equals(ChainTypeEnum.FabricNodeType.ORDER)) {
+        } else if (node.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER)) {
             yaml = createOrderDeploymentYaml(node, dnsName, batch);
         } else {
             yaml = createPeerDeploymentYaml(node, dnsName, batch);
@@ -261,8 +262,8 @@ public class K8sYamlUtil {
         //先order后peer
         List<StringBuilder> argList = new LinkedList<>();
 
-        Map<String, Node> joinNodeDns = joinNodes.stream().filter(node -> node.getType() == ChainTypeEnum.FabricNodeType.ORDER).collect(Collectors.toMap(Node::getName, f -> f));
-        Map<String, Node> removeNodeDns = removeNodes.stream().filter(node -> node.getType() == ChainTypeEnum.FabricNodeType.ORDER).collect(Collectors.toMap(Node::getName, f -> f));
+        Map<String, Node> joinNodeDns = joinNodes.stream().filter(node -> node.getType() == NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER).collect(Collectors.toMap(Node::getName, f -> f));
+        Map<String, Node> removeNodeDns = removeNodes.stream().filter(node -> node.getType() == NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER).collect(Collectors.toMap(Node::getName, f -> f));
 
         while (batch != null) {
             if (joinNodeDns.get(batch.getDnsName()) != null) {
@@ -388,19 +389,19 @@ public class K8sYamlUtil {
         K8sServiceYaml k8sServiceYaml = new K8sServiceYaml("v1", "Service", dnsName, namespace, "ClusterIP");
         k8sServiceYaml.setName(dnsName);
 
-        if (node.getType().equals(ChainTypeEnum.FabricNodeType.PEER)) {
+        if (node.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_PEER)) {
             //peer节点
             k8sServiceYaml.addPort("p2pport", node.getP2pK8s(), CommonFabricConstant.DEFAULT_PEER_P2P_PORT, CommonFabricConstant.DEFAULT_PEER_P2P_PORT);
 //            k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), NodeFactory.DEFAULT_PEER_RPC_PORT, NodeFactory.DEFAULT_PEER_RPC_PORT);
             k8sServiceYaml.addPort("monitorport", node.getMonitorK8s(), CommonFabricConstant.DEFAULT_PEER_MONITOR_PORT, CommonFabricConstant.DEFAULT_PEER_MONITOR_PORT);
-        } else if (node.getType().equals(ChainTypeEnum.FabricNodeType.ORDER)) {
+        } else if (node.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER)) {
             //order节点
             k8sServiceYaml.addPort("p2pport", node.getP2pK8s(), CommonFabricConstant.DEFAULT_ORDERER_P2P_PORT, CommonFabricConstant.DEFAULT_ORDERER_P2P_PORT);
 //            k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), NodeFactory.DEFAULT_ORDER_RPC_PORT, NodeFactory.DEFAULT_ORDER_RPC_PORT);
             k8sServiceYaml.addPort("monitorport", node.getMonitorK8s(), CommonFabricConstant.DEFAULT_ORDERER_MONITOR_PORT, CommonFabricConstant.DEFAULT_ORDERER_MONITOR_PORT);
 //        //order节点
             k8sServiceYaml.addPort("rpcport", 0L, CommonFabricConstant.DEFAULT_ORDERER_RPC_PORT, CommonFabricConstant.DEFAULT_ORDERER_RPC_PORT);
-        } else if (node.getType().equals(ChainTypeEnum.FabricNodeType.CA)) {
+        } else if (node.getType().equals(NodeTypeEnum.CA)) {
 //            //ca服务
             k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), CommonFabricConstant.DEFAULT_CA_RPC_PORT, CommonFabricConstant.DEFAULT_CA_RPC_PORT);
         }
@@ -414,7 +415,7 @@ public class K8sYamlUtil {
 
     public static List<String> checkServiceNames(Node node) {
         String dnsName = node.getDnsName();
-        if (node.getType().equals(ChainTypeEnum.FabricNodeType.CA)) {
+        if (node.isCaNode()) {
             return Collections.singletonList(dnsName + "-nodeport");
         } else {
             return Arrays.asList(dnsName, dnsName + "-nodeport");
@@ -426,13 +427,13 @@ public class K8sYamlUtil {
         String dnsName = node.getDnsName();
         K8sServiceYaml k8sServiceYaml = new K8sServiceYaml("v1", "Service", dnsName, namespace, "NodePort");
         k8sServiceYaml.setName(dnsName + "-nodeport");
-        if (node.getType().equals(ChainTypeEnum.FabricNodeType.PEER)) {
+        if (node.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_PEER)) {
             //peer节点
             k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), CommonFabricConstant.DEFAULT_PEER_RPC_PORT, CommonFabricConstant.DEFAULT_PEER_RPC_PORT);
-        } else if (node.getType().equals(ChainTypeEnum.FabricNodeType.ORDER)) {
+        } else if (node.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER)) {
             //order节点
             k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), CommonFabricConstant.DEFAULT_ORDERER_RPC_PORT, CommonFabricConstant.DEFAULT_ORDERER_RPC_PORT);
-        } else if (node.getType().equals(ChainTypeEnum.FabricNodeType.CA)) {
+        } else if (node.isCaNode()) {
             //ca服务
             k8sServiceYaml.addPort("rpcport", node.getRpcK8s(), CommonFabricConstant.DEFAULT_CA_RPC_PORT, CommonFabricConstant.DEFAULT_CA_RPC_PORT);
         }

@@ -6,9 +6,10 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class Role extends Entity<Long> {
-    private String role_id; //角色ID，主键
-    private String tenant_id; //租户ID
-    private String role_name; //角色名称
+    private Long id; //角色ID，主键
+    //private String role_id;
+    private String name; //角色名称
+    private String tenantId; //租户ID
     private String description; //角色描述
-    private String status; //状态（启用、禁用等）;
+    private String status; //状态（1:启用, 0:禁用等）
 }

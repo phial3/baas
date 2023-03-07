@@ -4,9 +4,9 @@ import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 
 import org.phial.baas.api.constant.ChainStatusEnum;
-import org.phial.baas.api.constant.ChainTypeEnum;
 import org.phial.baas.api.constant.CommonFabricConstant;
 import org.phial.baas.api.constant.NodeStatusEnum;
+import org.phial.baas.api.constant.NodeTypeEnum;
 import org.phial.baas.api.domain.Chain;
 import org.phial.baas.api.domain.ChainNode;
 import org.phial.baas.api.domain.Node;
@@ -102,7 +102,7 @@ public class NetworkConfigConnection {
                 continue;
             }
 
-            Map<String, List<Node>> orgNodesMap = nodeList.stream().collect(Collectors.groupingBy(Node::getDomain));
+            Map<String, List<Node>> orgNodesMap = nodeList.stream().collect(Collectors.groupingBy(Node::getOrgDomain));
             retMap.put(channelId, orgNodesMap);
         }
 
@@ -198,7 +198,7 @@ public class NetworkConfigConnection {
                 List<Node> orgNodeList = orgEntry.getValue();
 
                 List<Node> peerNodeList = orgNodeList.stream()
-                        .filter(n -> n.getType() == ChainTypeEnum.FabricNodeType.PEER)
+                        .filter(n -> n.getType() == NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_PEER)
                         .collect(Collectors.toList());
 
                 for (int i = 0; i < peerNodeList.size(); i++) {
@@ -259,7 +259,7 @@ public class NetworkConfigConnection {
                 List<Node> orgNodeList = orgEntry.getValue();
 
                 List<Node> orderNodeList = orgNodeList.stream()
-                        .filter(n -> n.getType() == ChainTypeEnum.FabricNodeType.ORDER)
+                        .filter(n -> n.getType() == NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER)
                         .collect(Collectors.toList());
 
                 for (int i = 0; i < orderNodeList.size(); i++) {
@@ -465,7 +465,7 @@ public class NetworkConfigConnection {
 
     private List<String> getOrderers(List<Node> orgNodeList) {
         List<Node> orderNodeList = orgNodeList.stream()
-                .filter(n -> n.getStatus() == NodeStatusEnum.ONLINE && n.getType().equals(ChainTypeEnum.FabricNodeType.ORDER))
+                .filter(n -> n.getStatus() == NodeStatusEnum.ONLINE && n.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_ORDER))
                 .collect(Collectors.toList());
         return orderNodeList.stream().map(Node::getName).collect(Collectors.toList());
         //return IntStream.range(0, orgNodeMap.size()).mapToObj(i -> "orderer" + i).collect(Collectors.toList());
@@ -474,7 +474,7 @@ public class NetworkConfigConnection {
     private List<String> getPeers(List<Node> orgNodeList) {
         // org : peerNodes
         List<Node> peerNodeList = orgNodeList.stream()
-                .filter(n -> n.getStatus() == NodeStatusEnum.ONLINE && n.getType().equals(ChainTypeEnum.FabricNodeType.PEER))
+                .filter(n -> n.getStatus() == NodeStatusEnum.ONLINE && n.getType().equals(NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_PEER))
                 .collect(Collectors.toList());
 
         return peerNodeList.stream().map(Node::getName).collect(Collectors.toList());
@@ -528,7 +528,7 @@ public class NetworkConfigConnection {
                 List<Node> orgNodeList = orgEntry.getValue();
 
                 orgNodeList = orgNodeList.stream()
-                        .filter(n -> n.getType() == ChainTypeEnum.FabricNodeType.PEER)
+                        .filter(n -> n.getType() == NodeTypeEnum.HYPERLEDGER_FABRIC_NODE_PEER)
                         .collect(Collectors.toList());
 
                 Organization org = organizationService.getByDomainOrNull(orgDomain);

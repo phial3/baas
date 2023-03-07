@@ -29,6 +29,12 @@
             <artifactId>baas-fabric</artifactId>
             <version>${project.version}</version>
         </dependency>
+
+        <dependency>
+            <groupId>org.phial</groupId>
+            <artifactId>baas-chainmaker</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- -->
 
         <!-- 配置方法：https://blog.csdn.net/feiying0canglang/article/details/126524833  -->

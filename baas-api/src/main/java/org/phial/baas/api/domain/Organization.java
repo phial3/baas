@@ -8,7 +8,7 @@ import lombok.EqualsAndHashCode;
 public class Organization extends Entity<Long> {
     private Long id; //主键
 
-    private String name;//名称
+    private String name;//组织机构名称
 
     /**
      * 域名
@@ -29,11 +29,11 @@ public class Organization extends Entity<Long> {
      */
     private String locality;
 
-    private String org_id; //组织机构ID
-    private String tenant_id; //租户ID
-    private String org_name; //组织机构名称
+    private String tenantId; //租户ID
+
     private String description; //组织机构描述
-    private String status; //状态（启用、禁用等）
+
+    private Integer status; //状态（1:启用, 0:禁用等）
 
 
     /////////////////////////////////////////////
