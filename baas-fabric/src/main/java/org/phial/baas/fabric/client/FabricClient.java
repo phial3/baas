@@ -13,22 +13,12 @@
 package org.phial.baas.fabric.client;
 
 import org.hyperledger.fabric.sdk.HFClient;
-import org.hyperledger.fabric.sdk.LifecycleChaincodePackage;
-import org.hyperledger.fabric.sdk.LifecycleInstallChaincodeProposalResponse;
-import org.hyperledger.fabric.sdk.LifecycleInstallChaincodeRequest;
-import org.hyperledger.fabric.sdk.Peer;
-import org.hyperledger.fabric.sdk.ProposalResponse;
-import org.hyperledger.fabric.sdk.TransactionRequest;
 import org.hyperledger.fabric.sdk.User;
 import org.hyperledger.fabric.sdk.exception.CryptoException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
-import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
 
-import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.nio.file.Paths;
-import java.util.Collection;
 
 
 public class FabricClient {
@@ -68,44 +58,5 @@ public class FabricClient {
      */
     public HFClient getInstance() {
         return instance;
-    }
-
-
-    /**
-     * Deploy chain code.
-     *
-     * @param chainCodeName
-     * @param chaincodePath
-     * @param codePath
-     * @param version
-     * @param peers
-     * @return
-     * @throws InvalidArgumentException
-     * @throws ProposalException
-     */
-    public Collection<LifecycleInstallChaincodeProposalResponse> installChainCode(String chainCodeName, String chaincodePath, String codePath, String version, Collection<Peer> peers)
-            throws InvalidArgumentException, ProposalException, IOException {
-        LifecycleInstallChaincodeRequest installRequest = instance.newLifecycleInstallChaincodeRequest();
-
-        LifecycleChaincodePackage chaincodePackage =
-                LifecycleChaincodePackage.fromSource(chainCodeName, Paths.get(chaincodePath), TransactionRequest.Type.GO_LANG, null, null);
-        installRequest.setLifecycleChaincodePackage(chaincodePackage);
-        installRequest.setUserContext(instance.getUserContext());
-        installRequest.setProposalWaitTime(0L);
-        Collection<LifecycleInstallChaincodeProposalResponse> proposalResponses = instance.sendLifecycleInstallChaincodeRequest(installRequest, peers);
-        handleResult(proposalResponses);
-        return proposalResponses;
-    }
-
-    public void handleResult(Collection<? extends ProposalResponse> proposalResponse) {
-        for (ProposalResponse response : proposalResponse) {
-            if (response.getStatus() == ProposalResponse.Status.SUCCESS) {
-                // Proposal was successful
-                System.out.println("txId:" + response.getTransactionID() + ", msg:" + response.getMessage());
-            } else {
-                // Proposal failed, handle the error
-                System.err.println(response.getMessage());
-            }
-        }
     }
 }

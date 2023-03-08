@@ -13,9 +13,9 @@
 
 package org.phial.baas.fabric.client;
 
+import cn.hutool.core.util.NumberUtil;
 import com.alibaba.fastjson.JSONObject;
 import lombok.Data;
-
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.hyperledger.fabric.gateway.Contract;
@@ -25,18 +25,24 @@ import org.hyperledger.fabric.gateway.Identities;
 import org.hyperledger.fabric.gateway.Identity;
 import org.hyperledger.fabric.gateway.Network;
 import org.hyperledger.fabric.gateway.X509Identity;
-import org.hyperledger.fabric.sdk.BlockEvent.TransactionEvent;
+import org.hyperledger.fabric.protos.peer.TransactionPackage;
+import org.hyperledger.fabric.sdk.BlockEvent;
 import org.hyperledger.fabric.sdk.ChaincodeEndorsementPolicy;
 import org.hyperledger.fabric.sdk.ChaincodeID;
+import org.hyperledger.fabric.sdk.ChaincodeResponse;
 import org.hyperledger.fabric.sdk.Channel;
+import org.hyperledger.fabric.sdk.HFClient;
+import org.hyperledger.fabric.sdk.InstallProposalRequest;
 import org.hyperledger.fabric.sdk.InstantiateProposalRequest;
+import org.hyperledger.fabric.sdk.Peer;
 import org.hyperledger.fabric.sdk.ProposalResponse;
 import org.hyperledger.fabric.sdk.QueryByChaincodeRequest;
+import org.hyperledger.fabric.sdk.SDKUtils;
 import org.hyperledger.fabric.sdk.TransactionInfo;
 import org.hyperledger.fabric.sdk.TransactionProposalRequest;
-import org.hyperledger.fabric.sdk.TransactionRequest.Type;
+import org.hyperledger.fabric.sdk.TransactionRequest;
 import org.hyperledger.fabric.sdk.UpgradeProposalRequest;
-import org.hyperledger.fabric.sdk.exception.ChaincodeEndorsementPolicyParseException;
+import org.hyperledger.fabric.sdk.exception.BaseException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.phial.baas.fabric.deploy.NetworkConfigConnection;
@@ -48,21 +54,22 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigInteger;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.security.PrivateKey;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
 
 /**
  * Wrapper class for a channel client.
@@ -103,170 +110,7 @@ public class ChannelClient {
     }
 
     /**
-     * Query by chaincode.
-     *
-     * @param chaincodeId
-     * @param functionName
-     * @param args
-     * @return
-     * @throws InvalidArgumentException
-     * @throws ProposalException
-     */
-    public Collection<ProposalResponse> queryByChainCode(String chaincodeId, String functionName, String[] args)
-            throws InvalidArgumentException, ProposalException {
-        QueryByChaincodeRequest request = client.getInstance().newQueryProposalRequest();
-        ChaincodeID ccid = ChaincodeID.newBuilder().setName(chaincodeId).build();
-        request.setChaincodeID(ccid);
-        request.setFcn(functionName);
-        if (args != null) {
-            request.setArgs(args);
-        }
-        return channel.queryByChaincode(request);
-    }
-
-    /**
-     * Send transaction proposal.
-     *
-     * @param request
-     * @return
-     * @throws ProposalException
-     * @throws InvalidArgumentException
-     */
-    public Collection<ProposalResponse> sendTransactionProposal(TransactionProposalRequest request)
-            throws ProposalException, InvalidArgumentException, ExecutionException, InterruptedException {
-
-        Collection<ProposalResponse> response = channel.sendTransactionProposal(request, channel.getPeers());
-        for (ProposalResponse pres : response) {
-            String stringResponse = new String(pres.getChaincodeActionResponsePayload());
-
-        }
-
-        CompletableFuture<TransactionEvent> future = channel.sendTransaction(response);
-        TransactionEvent result = future.get();
-
-
-        return response;
-    }
-
-    /**
-     * Instantiate chaincode.
-     *
-     * @param chaincodeName
-     * @param version
-     * @param chaincodePath
-     * @param language
-     * @param functionName
-     * @param functionArgs
-     * @param policyPath
-     * @return
-     * @throws InvalidArgumentException
-     * @throws ProposalException
-     * @throws ChaincodeEndorsementPolicyParseException
-     * @throws IOException
-     */
-    public Collection<ProposalResponse> instantiateChainCode(String chaincodeName, String version, String chaincodePath,
-                                                             String language, String functionName, String[] functionArgs, String policyPath)
-            throws InvalidArgumentException, ProposalException, ChaincodeEndorsementPolicyParseException, IOException {
-//        Logger.getLogger(ChannelClient.class.getName()).log(Level.INFO,
-//                "Instantiate proposal request " + chaincodeName + " on channel " + channel.getName()
-//                        + " with Fabric client " + client.getInstance().getUserContext().getMspId() + " "
-//                        + client.getInstance().getUserContext().getName());
-        InstantiateProposalRequest instantiateProposalRequest = client.getInstance()
-                .newInstantiationProposalRequest();
-        instantiateProposalRequest.setProposalWaitTime(600000);  //default 180000
-
-        ChaincodeID.Builder chaincodeIDBuilder = ChaincodeID.newBuilder()
-                .setName(chaincodeName)
-                .setVersion(version)
-                .setPath(chaincodePath);
-
-        ChaincodeID ccid = chaincodeIDBuilder.build();
-        Logger.getLogger(ChannelClient.class.getName()).log(Level.INFO,
-                "Instantiating Chaincode ID " + chaincodeName + " on channel " + channel.getName());
-
-        instantiateProposalRequest.setChaincodeID(ccid);
-        if (language.equals(Type.GO_LANG.toString())) {
-            instantiateProposalRequest.setChaincodeLanguage(Type.GO_LANG);
-        } else {
-            instantiateProposalRequest.setChaincodeLanguage(Type.JAVA);
-        }
-
-        instantiateProposalRequest.setFcn(functionName);
-        instantiateProposalRequest.setArgs(functionArgs);
-        Map<String, byte[]> tm = new HashMap<>();
-        tm.put("HyperLedgerFabric", "InstantiateProposalRequest:JavaSDK".getBytes(UTF_8));
-        tm.put("method", "InstantiateProposalRequest".getBytes(UTF_8));
-        instantiateProposalRequest.setTransientMap(tm);
-
-        if (policyPath != null) {
-            ChaincodeEndorsementPolicy chaincodeEndorsementPolicy = new ChaincodeEndorsementPolicy();
-            chaincodeEndorsementPolicy.fromYamlFile(new File(policyPath));
-            instantiateProposalRequest.setChaincodeEndorsementPolicy(chaincodeEndorsementPolicy);
-        }
-
-        Collection<ProposalResponse> responses = channel.sendInstantiationProposal(instantiateProposalRequest);
-        CompletableFuture<TransactionEvent> cf = channel.sendTransaction(responses);
-        Logger.getLogger(ChannelClient.class.getName()).log(Level.INFO, "Chaincode " + chaincodeName + " on channel " + channel.getName() + " instantiation " + cf);
-
-        return responses;
-    }
-
-    /**
-     * upgradeChainCode chaincode.
-     *
-     * @param chaincodeName
-     * @param version
-     * @param chaincodePath
-     * @param language
-     * @param functionName
-     * @param functionArgs
-     * @param policyPath
-     * @return
-     * @throws InvalidArgumentException
-     * @throws ProposalException
-     * @throws ChaincodeEndorsementPolicyParseException
-     * @throws IOException
-     */
-    public Collection<ProposalResponse> upgradeChainCode(String chaincodeName, String version, String chaincodePath,
-                                                         String language, String functionName, String[] functionArgs, String policyPath)
-            throws InvalidArgumentException, ProposalException, ChaincodeEndorsementPolicyParseException, IOException {
-
-        UpgradeProposalRequest upgradeProposalRequest = client.getInstance().newUpgradeProposalRequest();
-        upgradeProposalRequest.setProposalWaitTime(600000);  //default 180000
-        ChaincodeID.Builder chaincodeIDBuilder = ChaincodeID.newBuilder()
-                .setName(chaincodeName)
-                .setVersion(version)
-                .setPath(chaincodePath);
-        ChaincodeID ccid = chaincodeIDBuilder.build();
-
-        upgradeProposalRequest.setChaincodeID(ccid);
-        if (language.equals(Type.GO_LANG.toString())) {
-            upgradeProposalRequest.setChaincodeLanguage(Type.GO_LANG);
-        } else {
-            upgradeProposalRequest.setChaincodeLanguage(Type.JAVA);
-        }
-        upgradeProposalRequest.setFcn(functionName);
-        upgradeProposalRequest.setArgs(functionArgs);
-        Map<String, byte[]> tm = new HashMap<>();
-        tm.put("HyperLedgerFabric", "UpgradeProposalRequest:JavaSDK".getBytes(UTF_8));
-        tm.put("method", "UpgradeProposalRequest".getBytes(UTF_8));
-        upgradeProposalRequest.setTransientMap(tm);
-
-        if (policyPath != null) {
-            ChaincodeEndorsementPolicy chaincodeEndorsementPolicy = new ChaincodeEndorsementPolicy();
-            chaincodeEndorsementPolicy.fromYamlFile(new File(policyPath));
-            upgradeProposalRequest.setChaincodeEndorsementPolicy(chaincodeEndorsementPolicy);
-        }
-
-        Collection<ProposalResponse> responses = channel.sendUpgradeProposal(upgradeProposalRequest);
-        CompletableFuture<TransactionEvent> cf = channel.sendTransaction(responses);
-
-        return responses;
-    }
-
-
-    /**
-     * Query a transaction by id.
+     * Query a transaction by txId.
      *
      * @param txId
      * @return
@@ -362,5 +206,289 @@ public class ChannelClient {
             e.printStackTrace();
         }
         return StringUtils.EMPTY;
+    }
+
+
+    /**
+     * Query by chaincode.
+     *
+     * @param chaincodeId
+     * @param functionName
+     * @param args
+     * @return
+     * @throws InvalidArgumentException
+     * @throws ProposalException
+     */
+    public Collection<ProposalResponse> queryByChainCode(String chaincodeId,String chainCodePath, String functionName, String[] args)
+            throws InvalidArgumentException, ProposalException {
+
+        QueryByChaincodeRequest request = client.getInstance().newQueryProposalRequest();
+        ChaincodeID chaincodeID = ChaincodeID.newBuilder()
+                .setName(chaincodeId)
+                .setPath(chainCodePath)
+                .build();
+        request.setChaincodeID(chaincodeID);
+        request.setFcn(functionName);
+        request.setArgs(args);
+
+        Collection<ProposalResponse> proposalResponses = this.channel.queryByChaincode(request);
+        handleProposalResponse(proposalResponses);
+        return proposalResponses;
+    }
+
+
+    /**
+     * 链码安装
+     *
+     * @param chainCodePath
+     * @param chainCodeName
+     * @param version
+     * @param codeSourceLocation
+     * @return
+     */
+    public boolean installChainCode(String chainCodePath, String chainCodeName, String version, String codeSourceLocation) {
+
+        boolean status = false;
+        Channel channel = this.channel;
+        HFClient instance = this.client.getInstance();
+        try {
+            ChaincodeID chaincodeID = ChaincodeID.newBuilder()
+                    .setName(chainCodeName)
+                    .setPath(chainCodePath)
+                    .setVersion(version)
+                    .build();
+
+            InstallProposalRequest request = instance.newInstallProposalRequest();
+            request.setChaincodeID(chaincodeID);
+            request.setChaincodeVersion(version);
+            request.setChaincodeName(chainCodeName);
+            request.setUserContext(instance.getUserContext());
+            request.setChaincodeLanguage(TransactionRequest.Type.GO_LANG);
+            request.setChaincodeSourceLocation(new File(codeSourceLocation));
+
+
+            Collection<ProposalResponse> responses = null;
+            responses = instance.sendInstallProposal(request, channel.getPeers());
+            handleProposalResponse(responses);
+            status = true;
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return status;
+    }
+
+    /**
+     * 链码初始化
+     *
+     * @param chainCodePath
+     * @param chainCodeName
+     * @param version
+     * @param func
+     * @param args
+     * @return
+     */
+    public boolean instantiateChaincode(String chainCodePath, String chainCodeName, String version, String func, String[] args) {
+
+        Channel channel = this.channel;
+        HFClient instance = this.client.getInstance();
+        boolean status = false;
+        try {
+            String endrosementPath = "/Users/admin/Workspace/java/umetrip.com/umeblockchain/umeblockchain-fabric/src/main/resources/network/endorsement/";
+            String pathToEndorsmentPolicy = endrosementPath + this.channelId + "/" + chainCodeName + "_endorsement_policy.yaml";
+
+            ChaincodeID chaincodeID = ChaincodeID.newBuilder()
+                    .setName(chainCodeName)
+                    .setPath(chainCodePath)
+                    .setVersion(version)
+                    .build();
+
+            InstantiateProposalRequest instantiateProposalRequest = instance.newInstantiationProposalRequest();
+            instantiateProposalRequest.setChaincodeID(chaincodeID);
+            instantiateProposalRequest.setFcn(func);
+            instantiateProposalRequest.setArgs(args);
+
+            Map<String, byte[]> tmp = new HashMap<>();
+            tmp.put("HyperLedgerFabric", "InstantiateProposalRequest:JavaSDK".getBytes(StandardCharsets.UTF_8));
+            tmp.put("method", "InstantiateProposalRequest".getBytes(StandardCharsets.UTF_8));
+            instantiateProposalRequest.setTransientMap(tmp);
+
+            ChaincodeEndorsementPolicy chaincodeEndorsementPolicy = ChaincodeEndorsementPolicy.fromYamlFile(Paths.get(pathToEndorsmentPolicy));
+            instantiateProposalRequest.setChaincodeEndorsementPolicy(chaincodeEndorsementPolicy);
+
+            Collection<ProposalResponse> responses = channel.sendInstantiationProposal(instantiateProposalRequest, channel.getPeers());
+            handleProposalResponse(responses);
+
+            CompletableFuture<BlockEvent.TransactionEvent> future = channel.sendTransaction(responses);
+            BlockEvent.TransactionEvent txEvent = future.get(30, TimeUnit.SECONDS);
+            handleFutureTransactionEvent(txEvent);
+            status = txEvent.isValid();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return status;
+    }
+
+    /**
+     * 执行交易
+     *
+     * @param chainCodePath
+     * @param chainCodeName
+     * @param version
+     * @param function
+     * @param args
+     * @return
+     */
+    public boolean invokeChaincode(String chainCodePath, String chainCodeName, String version, String function, String[] args) {
+        Channel channel = this.channel;
+        HFClient instance = this.client.getInstance();
+        Collection<ProposalResponse> invokePropResp = null;
+        boolean txResultValid = false;
+        try {
+            ChaincodeID chaincodeID = ChaincodeID.newBuilder()
+                    .setName(chainCodeName)
+                    .setPath(chainCodePath)
+                    .setVersion(version)
+                    .build();
+
+            TransactionProposalRequest request = instance.newTransactionProposalRequest();
+            request.setChaincodeID(chaincodeID);
+            request.setFcn(function);
+            request.setArgs(args);
+            request.setProposalWaitTime(10000000);
+            request.setUserContext(instance.getUserContext());
+
+            invokePropResp = channel.sendTransactionProposal(request, channel.getPeers());
+            handleProposalResponse(invokePropResp);
+
+            Collection<Set<ProposalResponse>> proposalConsistencySets = SDKUtils.getProposalConsistencySets(invokePropResp);
+            if (proposalConsistencySets.size() != 1) {
+                throw new ProposalException("Expected only one set of consistent move proposal responses but got " + proposalConsistencySets.size());
+            }
+
+            System.out.println("Sending transaction to orderer ...");
+            CompletableFuture<BlockEvent.TransactionEvent> txFuture = channel.sendTransaction(invokePropResp, channel.getOrderers(), instance.getUserContext());
+            BlockEvent.TransactionEvent txEvent = txFuture.get(30, TimeUnit.SECONDS);
+            handleFutureTransactionEvent(txEvent);
+            txResultValid = txEvent.isValid();
+        } catch (Exception e) {
+            if (e instanceof ExecutionException) {
+                ExecutionException ex = (ExecutionException) e;
+                // msg:
+                // org.hyperledger.fabric.sdk.exception.TransactionEventException: Received invalid transaction event. Transaction ID b59d1dbf0609cf028a6283ecbe7bf19eb65a84b5d8734f335dc1a9d9b8608ef3 status 10
+                String msg = ex.getMessage();
+                int i = msg.lastIndexOf(" status ");
+                String code = msg.substring(i + 8);
+                if (NumberUtil.isNumber(code)) {
+                    Integer num = Integer.parseInt(code);
+                    TransactionPackage.TxValidationCode validationCode = TransactionPackage.TxValidationCode.forNumber(num);
+                    msg += ", validation:" + validationCode.name();
+                }
+                System.out.println(msg);
+                e.printStackTrace();
+            } else if (e instanceof BaseException) {
+                e.printStackTrace();
+            } else {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        return txResultValid;
+    }
+
+
+    public boolean upgradeChainCode(String chainCodePath, String chainCodeName, String version, String function, String[] args) {
+        Channel channel = this.channel;
+        HFClient instance = this.client.getInstance();
+
+        String endrosementPath = "/Users/admin/Workspace/java/umetrip.com/umeblockchain/umeblockchain-fabric/src/main/resources/network/endorsement/";
+        String pathToEndorsmentPolicy = endrosementPath + this.channelId + "/" + chainCodeName + "_endorsement_policy.yaml";
+
+        Collection<ProposalResponse> responses;
+        boolean txResultValid = false;
+        try {
+            UpgradeProposalRequest upgradeProposalRequest = instance.newUpgradeProposalRequest();
+            upgradeProposalRequest.setProposalWaitTime(600000);  //default 180000
+
+            ChaincodeID chaincodeID = ChaincodeID.newBuilder()
+                    .setName(chainCodeName)
+                    .setPath(chainCodePath)
+                    .setVersion(version)
+                    .build();
+            upgradeProposalRequest.setChaincodeID(chaincodeID);
+            upgradeProposalRequest.setChaincodeLanguage(TransactionRequest.Type.GO_LANG);
+            upgradeProposalRequest.setFcn(function);
+            upgradeProposalRequest.setArgs(args);
+
+            Map<String, byte[]> tmap = new HashMap<>();
+            tmap.put("HyperLedgerFabric", "UpgradeProposalRequest:JavaSDK".getBytes(StandardCharsets.UTF_8));
+            tmap.put("method", "UpgradeProposalRequest".getBytes(StandardCharsets.UTF_8));
+            upgradeProposalRequest.setTransientMap(tmap);
+
+            ChaincodeEndorsementPolicy chaincodeEndorsementPolicy = ChaincodeEndorsementPolicy.fromYamlFile(Paths.get(pathToEndorsmentPolicy));
+            upgradeProposalRequest.setChaincodeEndorsementPolicy(chaincodeEndorsementPolicy);
+
+            responses = channel.sendUpgradeProposal(upgradeProposalRequest);
+            CompletableFuture<BlockEvent.TransactionEvent> future = channel.sendTransaction(responses);
+            BlockEvent.TransactionEvent transactionEvent = future.get();
+            handleFutureTransactionEvent(transactionEvent);
+            txResultValid = transactionEvent.isValid();
+        } catch (Exception e) {
+            if (e instanceof ExecutionException) {
+                ExecutionException ex = (ExecutionException) e;
+                // msg:
+                // org.hyperledger.fabric.sdk.exception.TransactionEventException: Received invalid transaction event. Transaction ID b59d1dbf0609cf028a6283ecbe7bf19eb65a84b5d8734f335dc1a9d9b8608ef3 status 10
+                String msg = ex.getMessage();
+                int i = msg.lastIndexOf(" status ");
+                String code = msg.substring(i + 8);
+                if (NumberUtil.isNumber(code)) {
+                    Integer num = Integer.parseInt(code);
+                    TransactionPackage.TxValidationCode validationCode = TransactionPackage.TxValidationCode.forNumber(num);
+                    msg += ", validation:" + validationCode.name();
+                }
+                System.out.println(msg);
+                e.printStackTrace();
+            } else if (e instanceof BaseException) {
+                e.printStackTrace();
+            } else {
+                e.printStackTrace();
+                throw new RuntimeException(e);
+            }
+        }
+        return txResultValid;
+    }
+
+    private void handleProposalResponse(Collection<? extends ProposalResponse> proposalResponse) throws ProposalException {
+        Collection<ProposalResponse> success = new LinkedList<>();
+        Collection<ProposalResponse> failed = new LinkedList<>();
+        for (ProposalResponse response : proposalResponse) {
+            if (response.getStatus() == ChaincodeResponse.Status.SUCCESS) {
+                System.out.printf("Successful transaction proposal response Txid: %s from peer %s\n", response.getTransactionID(), response.getPeer().getName());
+                success.add(response);
+            } else {
+                failed.add(response);
+            }
+        }
+
+        System.out.printf("handleProposalResponse Received %d transaction proposal responses. Successful verified: %d, Failed: %d\n", proposalResponse.size(), success.size(), failed.size());
+
+        if (failed.size() > 0) {
+            ProposalResponse firstTransactionProposalResponse = failed.iterator().next();
+            throw new ProposalException(firstTransactionProposalResponse.getMessage());
+        }
+
+        System.out.printf("handleProposalResponse Successfully received transaction proposal responses size:%d\n", success.size());
+    }
+
+    private void handleFutureTransactionEvent(BlockEvent.TransactionEvent txEvent) {
+        boolean isValid = txEvent.isValid();
+        long blockNumber = txEvent.getBlockEvent().getBlockNumber();
+        String channelId = txEvent.getChannelId();
+        String txId = txEvent.getTransactionID();
+        Peer peer = txEvent.getPeer();
+        int transactionCount = txEvent.getBlockEvent().getTransactionCount();
+        System.out.printf("handleFutureTransactionEvent verify transaction Successful! isValid:%s, channelId:%s, blockNumber:%d, peer:{%s, %s}, txId:%s, transactionCount:%d\n",
+                isValid, channelId, blockNumber, peer.getName(), peer.getUrl(), txId, transactionCount);
+
     }
 }
