@@ -1,13 +1,13 @@
 package org.phial.baas.service.constant;
 
-
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import org.phial.baas.service.annootation.EnumValue;
+import org.phial.baas.service.annootation.IEnum;
 
 
 @Getter
-public enum ChainTypeEnum {
+public enum ChainTypeEnum implements IEnum<Integer> {
     /**
      *
      */
@@ -18,12 +18,17 @@ public enum ChainTypeEnum {
 
     @EnumValue
     private final Integer code;
-    @JsonValue
+
     private final String type;
 
     ChainTypeEnum(Integer code, String type) {
         this.code = code;
         this.type = type;
+    }
+
+    @Override
+    public Integer getValue() {
+        return this.code;
     }
 
     public static ChainTypeEnum getByCode(int code) {
@@ -34,6 +39,8 @@ public enum ChainTypeEnum {
         }
         throw new IllegalArgumentException("ChainTypeEnum getByCode code=" + code + " not found");
     }
+
+
 }
 
 

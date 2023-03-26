@@ -1,23 +1,34 @@
 package org.phial.baas.service.constant;
 
 import lombok.Getter;
+import org.phial.baas.service.annootation.EnumValue;
+import org.phial.baas.service.annootation.IEnum;
 
 
 public class ContractEnum {
 
     @Getter
-    public enum ContractStatusEnum {
+    public enum ContractStatusEnum implements IEnum<Integer> {
+        /**
+         *
+         */
         INIT(1, "INIT"),
         NORMAL(2, "NORMAL"),
         REVOKED(3, "REVOKED"), //销毁
         FROZEN(4, "FROZEN");   //冻结
 
+        @EnumValue
         private final Integer code;
         private final String status;
 
         ContractStatusEnum(int code, String status) {
             this.status = status;
             this.code = code;
+        }
+
+        @Override
+        public Integer getValue() {
+            return this.code;
         }
 
         public static ContractStatusEnum getByCode(int code) {
@@ -31,7 +42,10 @@ public class ContractEnum {
     }
 
     @Getter
-    public enum RuntimeType {
+    public enum RuntimeType implements IEnum<Integer>{
+        /**
+         *
+         */
         RUST(1,"rust", "WASM"),
         CPP(2,"c++", "WXVM"),
         TINY_GO(3,"tinygo", "GASM"),
@@ -39,6 +53,7 @@ public class ContractEnum {
         JAVA(5,"java", "HVM"),
         GOLANG(6,"golang", "GO");
 
+        @EnumValue
         private final Integer code;
         private final String language;
         private final String runtimeType;
@@ -47,6 +62,11 @@ public class ContractEnum {
             this.code = code;
             this.language = language;
             this.runtimeType = runtimeType;
+        }
+
+        @Override
+        public Integer getValue() {
+            return this.code;
         }
 
         public static RuntimeType getByCode(int code) {

@@ -1,7 +1,7 @@
 package org.phial.baas.service.service;
 
 
-import org.phial.baas.service.domain.entity.ChainNode;
+import org.phial.baas.service.domain.entity.bc.ChainNode;
 
 import java.util.List;
 

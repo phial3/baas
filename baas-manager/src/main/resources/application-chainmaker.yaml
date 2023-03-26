@@ -5,6 +5,14 @@ baas:
       consensus: "chainmakerofficial/chainmaker:v2.3.1"
       common: "chainmakerofficial/chainmaker:v2.3.1"
       vm: "chainmakerofficial/chainmaker-vm-engine:v2.3.1"
-      db: ""
+    blockdb:
+      type: "leveldb"
+      disable-block-file-db: true
+    cadb:
+      ip: "127.0.0.1"
+      port: "3306"
+      username: "root"
+      password: "123456aA"
+      name: "cadb"
     k8s:
       namespace: chainmaker

@@ -31,7 +31,6 @@ public class AuthRequiredInterceptor implements HandlerInterceptor {
                 return false;
             }
 
-
             // 校验失败直接返回
             return false;
         }

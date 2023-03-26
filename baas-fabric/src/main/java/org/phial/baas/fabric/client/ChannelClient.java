@@ -48,7 +48,6 @@ import org.hyperledger.fabric.sdk.exception.CryptoException;
 import org.hyperledger.fabric.sdk.exception.InvalidArgumentException;
 import org.hyperledger.fabric.sdk.exception.ProposalException;
 import org.hyperledger.fabric.sdk.security.CryptoSuite;
-import org.phial.baas.fabric.deploy.NetworkConfigConnection;
 import org.phial.baas.fabric.factory.BaasFabricApplicationContext;
 
 import java.io.ByteArrayInputStream;
@@ -103,10 +102,12 @@ public class ChannelClient {
         this.client = gateway.getClient();
     }
 
+    // TODO:
     private Gateway getGateway(String mspId, String adminCert, String adminKey) {
-        NetworkConfigConnection fabricNetworkConnection = BaasFabricApplicationContext.getBean(NetworkConfigConnection.class);
-        JSONObject connectionJson = fabricNetworkConnection.buildConnectionJson();
-        return getGateway(connectionJson.toJSONString(), mspId, adminCert, adminKey);
+        //NetworkConfigConnection fabricNetworkConnection = BaasFabricApplicationContext.getBean(NetworkConfigConnection.class);
+        //JSONObject connectionJson = fabricNetworkConnection.buildConnectionJson();
+        //return getGateway(connectionJson.toJSONString(), mspId, adminCert, adminKey);
+        return null;
     }
 
     public HFClient buildClient(User context) throws InvalidArgumentException, CryptoException, ClassNotFoundException, InvocationTargetException, IllegalAccessException, InstantiationException, NoSuchMethodException {

@@ -2,6 +2,8 @@ package org.phial.baas.service.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.phial.baas.service.annootation.EnumValue;
+import org.phial.baas.service.annootation.IEnum;
 
 /**
  * @author gyf
@@ -23,10 +25,6 @@ public class CryptoEnum {
 
         CryptoStatus(String status) {
             this.status = status;
-        }
-
-        public String getStatus() {
-            return status;
         }
     }
 
@@ -53,8 +51,7 @@ public class CryptoEnum {
     }
 
     @Getter
-    @AllArgsConstructor
-    public enum CryptoUserType {
+    public enum CryptoUserType implements IEnum<Integer> {
         /**
          *
          */
@@ -72,10 +69,21 @@ public class CryptoEnum {
         //表里的
         private final String userType;
         //表里的
+        @EnumValue
         private final Integer code;
         //自定义区分business和user
         private final String memberType;
 
+        CryptoUserType(String userType, Integer code,String memberType) {
+            this.userType = userType;
+            this.code = code;
+            this.memberType = memberType;
+        }
+
+        @Override
+        public Integer getValue() {
+            return this.code;
+        }
 
         public static CryptoUserType getCryptoUserByCode(int code) {
             for (CryptoUserType cryptoUserType : CryptoUserType.values()) {

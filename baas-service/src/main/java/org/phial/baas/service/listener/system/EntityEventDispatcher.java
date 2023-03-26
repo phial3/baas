@@ -1,8 +1,9 @@
 package org.phial.baas.service.listener.system;
 
 import lombok.extern.slf4j.Slf4j;
-import org.phial.baas.service.domain.entity.Entity;
+import org.mayanjun.mybatisx.api.entity.Entity;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -16,7 +17,8 @@ public class EntityEventDispatcher implements ApplicationReadyListener {
     private Collection<EntityEventListener> listeners;
 
     @Resource
-    private ThreadPoolExecutor executor;
+    private ThreadPoolTaskExecutor executor;
+
 
     @Override
     public void applicationReady(ConfigurableApplicationContext context) {

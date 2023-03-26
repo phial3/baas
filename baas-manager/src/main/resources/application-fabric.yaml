@@ -5,6 +5,8 @@ baas:
       peer: "hyperledger/fabric-peer:2.4.7"
       orderer: "hyperledger/fabric-orderer:2.4.7"
       tools: "hyperledger/fabric-tools:2.4.7"
-      db: ""
+    dataSource:
+      type: "mysql"
+      url: "username:passwd@tcp(127.0.0.1:3306)/fabric_ca_db?parseTime=true"
     k8s:
       namespace: fabric

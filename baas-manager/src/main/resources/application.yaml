@@ -11,23 +11,97 @@ server:
   tomcat:
     uri-encoding: UTF-8
 
+# Global Application Config
+application:
+  name: "@maven.project.name@"
+  version: "@maven.project.version@"
+  mavenProfile: "@maven.profile.name@"
+
+# Logging Config
+logging:
+  file:
+    path: "./Logs/${application.name}/${application.mavenProfile}"
+    name: "info"
+  config: classpath:logback/logback-dev.xml
+
+app-config:
+  profile: "${application.mavenProfile}"
+  build-version: "2023.03"
+  domain: "baas.phial.org"
+  mobile-domain: "baas.phial.org"
+  uploadDir: "${user.home}/export/upload"
+  systemName: "baas"
+  cluster-nodes: "127.0.0.1"
+  server-port: ${server.port}
+  node-name: "node1"
+  autoShot: false
+  cluster-aes-key:
+    key: "tmhx424bnh640q7b975twdet2ryyt581"
+    iv: "aysyb8ep1msdm61h"
+  mobile-aes-key:
+    key: "tmhx424bnh640q7b975twdet2ryyt581"
+    iv: "aysyb8ep1msdm61h"
+  console-aes-key:
+    key: "tmhx424bnh640q7b975twdet2ryyt581"
+    iv: "aysyb8ep1msdm61h"
+  clusterSecretKey: "k8x1147g3d00xg03vpe3r0r46cent771"
+
+
+minio:
+  endpoint: "192.168.8.123"
+  port: 7996
+  accessKey: "tianwu-minio"
+  secretKey: "XcF236S@&^L30eB9"
+  bucketName: "test"
+  secure: false
+  configDir: "/data/"
+
 # profile
 spring:
   profiles:
-    active: db,dynamictp,fabric,chainmaker
+    active: db,fabric,chainmaker
   application:
     name: baas
   main:
     allow-circular-references: true
     allow-bean-definition-overriding: true
+  jackson:
+    default-property-inclusion: non_null
+    locale: zh_CN
+    time-zone: GMT+8
+    date-format: "yyyy-MM-dd'T'HH:mm:ss.SSS"
+  servlet:
+    multipart:
+      max-file-size: "100MB"
+      max-request-size: "100MB"
+  mvc:
+    dispatch-options-request: false
+  web:
+    locale: zh_CN
+  redis:
+    redisson:
+      file: "classpath:config/redisson.yml"
+
+okhttp:
+  connect-timeout-ms: 5000
+  keep-alive-duration-sec: 5000
+  max-idle: 100
+  read-timeout-ms: 15000
+  write-timeout-ms: 3000
 
 security:
   csrf:
     excludes: ""
     allows: ""
 
-logging:
-  config:
-    classpath: logback-spring.xml
-  level:
-    root: info
+mybatisx:
+  datasources:
+    - {
+      username: "root",
+      password: "123456aA#",
+      jdbcUrl: "jdbc:mysql://localhost:3306/baas?serverTimezone=Asia/Shanghai&useAffectedRows=true",
+      driverClassName: "com.mysql.cj.jdbc.Driver",
+      mybatisConfigLocation: "classpath:/config/mybatis-config.xml",
+      isolationLevelName: "ISOLATION_REPEATABLE_READ",
+      snowflakeIndexes: "1,2,3"
+    }

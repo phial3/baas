@@ -8,6 +8,8 @@ import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
+import java.lang.annotation.Annotation;
+import java.util.Map;
 
 /**
  * @author gyf
@@ -18,10 +20,6 @@ import javax.annotation.PostConstruct;
 public class BaasManagerApplicationContext implements ApplicationContextAware, BeanPostProcessor {
 
     private static ApplicationContext ctx;
-
-    @PostConstruct
-    public void init() {
-    }
 
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
         ctx = applicationContext;
@@ -41,6 +39,10 @@ public class BaasManagerApplicationContext implements ApplicationContextAware, B
 
     public static Object getBean(String beanName) {
         return ctx.getBean(beanName);
+    }
+
+    public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annotation) {
+        return ctx.getBeansWithAnnotation(annotation) ;
     }
 
 }

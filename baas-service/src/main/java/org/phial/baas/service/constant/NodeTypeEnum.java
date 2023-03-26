@@ -1,13 +1,14 @@
 package org.phial.baas.service.constant;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import lombok.Getter;
+import org.phial.baas.service.annootation.EnumValue;
+import org.phial.baas.service.annootation.IEnum;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
-public enum NodeTypeEnum {
+public enum NodeTypeEnum implements IEnum<Integer> {
     // 每个组织一个CA节点
     CA(0, "ca", "CA节点", ChainTypeEnum.CHAIN_MAKER),
 
@@ -36,6 +37,11 @@ public enum NodeTypeEnum {
         this.type = type;
         this.name = name;
         this.chainType = chainType;
+    }
+
+    @Override
+    public Integer getValue() {
+        return this.code;
     }
 
     public NodeTypeEnum getByCode(int code) {

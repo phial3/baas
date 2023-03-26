@@ -1,7 +1,6 @@
 package org.phial.baas.service.listener.system;
 
-
-import org.phial.baas.service.domain.entity.Entity;
+import org.mayanjun.mybatisx.api.entity.Entity;
 
 public interface EntityEventListener {
     void onEntityChange(Entity event);

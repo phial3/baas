@@ -23,18 +23,24 @@
     </properties>
 
     <dependencies>
+
         <!-- 内部组件 -->
          <dependency>
             <groupId>org.phial.baas</groupId>
             <artifactId>baas-fabric</artifactId>
             <version>${project.version}</version>
-
         </dependency>
 
         <dependency>
             <groupId>org.phial.baas</groupId>
             <artifactId>baas-chainmaker</artifactId>
             <version>${project.version}</version>
+        </dependency>
+
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
         </dependency>
 
         <!-- 配置方法：https://blog.csdn.net/feiying0canglang/article/details/126524833  -->
@@ -52,47 +58,36 @@
         </dependency>
 
         <!-- 动态线程池 https://dynamictp.cn/ -->
+<!--        <dependency>-->
+<!--            <groupId>cn.dynamictp</groupId>-->
+<!--            <artifactId>dynamic-tp-spring-boot-starter-common</artifactId>-->
+<!--            <version>${dynamic-tp.version}</version>-->
+<!--            <exclusions>-->
+<!--                <exclusion>-->
+<!--                    <artifactId>hutool-all</artifactId>-->
+<!--                    <groupId>cn.hutool</groupId>-->
+<!--                </exclusion>-->
+<!--            </exclusions>-->
+<!--        </dependency>-->
+
+
         <dependency>
-            <groupId>cn.dynamictp</groupId>
-            <artifactId>dynamic-tp-spring-boot-starter-common</artifactId>
-            <version>${dynamic-tp.version}</version>
+            <groupId>commons-beanutils</groupId>
+            <artifactId>commons-beanutils</artifactId>
+            <version>1.9.4</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.airlift</groupId>
+            <artifactId>airline</artifactId>
+            <version>0.9</version>
             <exclusions>
                 <exclusion>
-                    <artifactId>hutool-all</artifactId>
-                    <groupId>cn.hutool</groupId>
+                    <artifactId>guava</artifactId>
+                    <groupId>com.google.guava</groupId>
                 </exclusion>
             </exclusions>
         </dependency>
-
-        <!-- 日志 https://tlog.yomahub.com/ -->
-        <dependency>
-            <groupId>com.yomahub</groupId>
-            <artifactId>tlog-all-spring-boot-starter</artifactId>
-            <version>${tlog.version}</version>
-            <exclusions>
-                <exclusion>
-                    <artifactId>hutool-core</artifactId>
-                    <groupId>cn.hutool</groupId>
-                </exclusion>
-                <exclusion>
-                    <groupId>commons-beanutils</groupId>
-                    <artifactId>commons-beanutils</artifactId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>fastjson</artifactId>
-                    <groupId>com.alibaba</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>transmittable-thread-local</artifactId>
-                    <groupId>com.alibaba</groupId>
-                </exclusion>
-                <exclusion>
-                    <artifactId>commons-lang</artifactId>
-                    <groupId>commons-lang</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
 
         <dependency>
             <groupId>org.bouncycastle</groupId>

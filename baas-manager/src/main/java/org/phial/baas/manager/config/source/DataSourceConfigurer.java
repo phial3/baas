@@ -1,4 +1,4 @@
-package org.phial.baas.manager.config.source;//package org.phial.baas.config.source;
+package org.phial.baas.manager.config.source;
 //
 //import lombok.extern.slf4j.Slf4j;
 //import org.phial.baas.constant.CommonConstant;

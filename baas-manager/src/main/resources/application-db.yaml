@@ -8,7 +8,7 @@ spring:
         master:
           type: com.zaxxer.hikari.HikariDataSource
           driver-class-name: "com.mysql.cj.jdbc.Driver"
-          url: "jdbc:mysql://127.0.0.1:3306/test?useUnicode=true&characterEncoding=utf8"
+          url: "jdbc:mysql://127.0.0.1:3306/baas?useUnicode=true&characterEncoding=utf8"
           username: "root"
           password: "123456aA#"
           hikari:
@@ -31,21 +31,7 @@ spring:
             max-lifetime: 10000
             maximum-pool-size: 10
             minimum-idle: 5
-  redis:
-    redisson:
-      file: "classpath:config/redisson.yml"
 
-# mybatis
-mybatis-plus:
-  config-location: "classpath:config/mybatis-config.xml"
-  mapper-locations: "classpath:mapper/*.xml"
-  global-config:
-    db-config:
-      # id
-      id-type: auto
-      # logic-delete
-      logic-delete-field: delete
-      logic-not-delete-value: 0
-      logic-delete-value: 1
+
 
 

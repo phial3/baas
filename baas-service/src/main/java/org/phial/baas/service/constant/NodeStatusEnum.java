@@ -1,11 +1,12 @@
 package org.phial.baas.service.constant;
 
-import com.baomidou.mybatisplus.annotation.EnumValue;
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
+import org.phial.baas.service.annootation.EnumValue;
+import org.phial.baas.service.annootation.IEnum;
 
 @Getter
-public enum NodeStatusEnum {
+public enum NodeStatusEnum implements IEnum<Integer> {
     /**
      *
      */
@@ -22,6 +23,11 @@ public enum NodeStatusEnum {
     NodeStatusEnum(int code, String status) {
         this.code = code;
         this.status = status;
+    }
+
+    @Override
+    public Integer getValue() {
+        return this.code;
     }
 
     public NodeStatusEnum getByCode(int code) {
