@@ -3,6 +3,7 @@ package org.phial.baas.service.domain.entity.sys;
 import org.mayanjun.mybatisx.api.annotation.Column;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
 import org.mayanjun.mybatisx.api.enums.DataType;
+import org.phial.baas.service.domain.entity.rbac.Role;
 
 /**
  * 角色菜单映射

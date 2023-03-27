@@ -24,6 +24,9 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+/**
+ * @author admin
+ */
 @Slf4j
 @EnableAsync
 @EnableScheduling

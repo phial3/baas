@@ -23,7 +23,7 @@
         <setting name="logImpl" value="SLF4J"/>
         <setting name="lazyLoadTriggerMethods" value="equals,clone,hashCode,toString"/>
         <!--指定 Enum 使用的默认TypeHandler （新增于 3.4.5）-->
-        <setting name="defaultEnumTypeHandler" value="org.phial.baas.service.config.mybatis.MybatisEnumTypeHandler"/>
+        <!--<setting name="defaultEnumTypeHandler" value="org.phial.baas.service.config.mybatis.MybatisEnumTypeHandler"/>-->
     </settings>
 
     <typeHandlers>

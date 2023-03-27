@@ -15,9 +15,9 @@ APP_DIR="$(dirname $BIN_DIR)"
 
 md5 $APP_DIR/$APP_JAR_FILE
 echo "File size: `du -sh $APP_DIR/$APP_JAR_FILE`"
-scp $APP_DIR/$APP_JAR_FILE root@tianwu.jdd-iot.com:~/
+scp $APP_DIR/$APP_JAR_FILE root@baas.phial.com:~/
 
 # remote deploy
-ssh root@tianwu.jdd-iot.com "/export/App/tianwu/service/bin/deployjar.sh"
+ssh root@baas.phial.com "/export/App/tianwu/service/bin/deployjar.sh"
 
 echo "Client deploy done"

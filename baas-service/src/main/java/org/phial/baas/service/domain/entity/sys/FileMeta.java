@@ -12,13 +12,13 @@ import org.mayanjun.mybatisx.api.enums.DataType;
  * @author mayanjun
  * @date 2019-07-12
  */
-@Table(value = "t_file_meta",
-        indexes = {
-                @Index(value = "idx_name", columns = @IndexColumn("name")),
-                @Index(value = "idx_dir", columns = @IndexColumn("dir")),
-                @Index(value = "idx_tag", columns = @IndexColumn("tag")),
-        },
-        comment = "访客记录")
+//@Table(value = "t_file_meta",
+//        indexes = {
+//                @Index(value = "idx_name", columns = @IndexColumn("name")),
+//                @Index(value = "idx_dir", columns = @IndexColumn("dir")),
+//                @Index(value = "idx_tag", columns = @IndexColumn("tag")),
+//        },
+//        comment = "访客记录")
 public class FileMeta extends LongEditableEntity {
 
     /**

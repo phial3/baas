@@ -32,7 +32,6 @@ import java.util.regex.Pattern;
  * 系统初始化。初始化用户、菜单、权限等信息
  *
  * @author mayanjun
- * @vendor JDD (https://www.jddglobal.com)
  * @since 2019-07-06
  */
 @Component("ApplicationDataInitializer")
@@ -326,16 +325,17 @@ public class ApplicationDataInitializer implements CommandLineRunner {
 
     private void initSystemUser() {
         // create default user
-        SysUser user = dao.queryOne(QueryBuilder.custom(SysUser.class)
-                .andEquivalent("username", "admin")
-                .build());
+        SysUser user = dao.queryOne(
+                QueryBuilder.custom(SysUser.class)
+                        .andEquivalent("username", "admin")
+                        .build());
 
         if (user == null) {
             user = new SysUser();
             user.setAdministrator(true);
             user.setUsername("admin");
             user.setDescription("System init user");
-            String password = generatePassword();
+            String password = "123456aA!";  //generatePassword();
             String enc = sessionManager.encryptPassword(password);
             user.setPassword(enc);
             user.setCreator(INITIALIZER_USERNAME);
@@ -343,7 +343,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
             user.setEnabled(true);
 
             int ret = dao.save(user);
-            LOG.info("System init user created({}), init password={}", ret, password);
+            LOG.info("System init user:admin created({}), init password={}", ret, password);
         }
     }
 
@@ -376,7 +376,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
             }
             Menu menu = dao.getInclude(new Menu(id), "id");
             if (menu == null) {
-               createMenu(id, parentId, menuitem[1], menuitem[2], menuitem[3]);
+                createMenu(id, parentId, menuitem[1], menuitem[2], menuitem[3]);
             } else {
                 order.incrementAndGet();
             }

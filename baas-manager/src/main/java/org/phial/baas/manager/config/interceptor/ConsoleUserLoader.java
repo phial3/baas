@@ -42,10 +42,15 @@ public class ConsoleUserLoader extends DefaultUserLoader<SysUser> {
         Assert.notNull(user, AbstractSession.USERNAME_OR_PASSWORD_INCORRECT);
 
         // 查询角色列表
-        if (Boolean.TRUE.equals(user.getAdministrator())) { // is admin
+        // is admin
+        if (Boolean.TRUE.equals(user.getAdministrator())) {
             user.setMenus(allMenus());
         } else {
-            List<UserRole> userRoles = dao.query(QueryBuilder.custom(UserRole.class).andEquivalent("user", user.getId()).build());
+            List<UserRole> userRoles = dao.query(
+                    QueryBuilder.custom(UserRole.class)
+                            .andEquivalent("user", user.getId())
+                            .build()
+            );
             Set<String> privileges = new HashSet<>();
             Map<Long, Menu> menuMap = new HashMap<>();
             userRoles.forEach(userRole -> {
@@ -57,7 +62,7 @@ public class ConsoleUserLoader extends DefaultUserLoader<SysUser> {
                 );
                 roleMenus.forEach(rm -> {
                     Menu menu = dao.getInclude(rm.getMenu());
-                    if(menu != null){
+                    if (menu != null) {
                         menuMap.put(menu.getId(), menu);
 
                         Long pid = menu.getParentId();
@@ -73,15 +78,15 @@ public class ConsoleUserLoader extends DefaultUserLoader<SysUser> {
                 List<RolePrivilege> rolePrivileges = dao.query(
                         QueryBuilder.custom(RolePrivilege.class).andEquivalent("role", roleId).build()
                 );
-                rolePrivileges.stream().forEach(rolePrivilege -> {
+                rolePrivileges.forEach(rolePrivilege -> {
                     Long pid = rolePrivilege.getPrivilege().getId();
                     Privilege p = dao.getInclude(new Privilege(pid), "method", "dependencies");
                     if (p != null) {
                         privileges.add(p.getMethod());
                         String de = p.getDependencies();
                         if (StringUtils.isNotBlank(de)) {
-                            String des[] = de.split(",");
-                            for (String s : des) privileges.add(s);
+                            String[] des = de.split(",");
+                            privileges.addAll(Arrays.asList(des));
                         }
                     }
                 });

@@ -23,4 +23,14 @@ public class Role extends NamedEntity {
 
     @Column(comment = "租户ID", type = DataType.VARCHAR, length = "32")
     private String tenantId;
+
+    public Role(){}
+
+    public Role(Long id) {
+        super(id);
+    }
+
+    //接收权限参数
+    private Long[] privileges;
+    private Long[] menus;
 }

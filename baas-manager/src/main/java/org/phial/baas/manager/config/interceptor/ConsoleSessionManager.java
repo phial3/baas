@@ -10,13 +10,10 @@ import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
-
 /**
  * 会话管理器，管理登录状态
  * @since 2019-07-06
  * @author mayanjun
- * @vendor JDD (https://www.jddglobal.com)
  */
 @Component
 public class ConsoleSessionManager extends ConfigurableSession<SysUser> implements InitializingBean {

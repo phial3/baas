@@ -25,4 +25,11 @@ public class UserRole extends LongEditableEntity {
 
     @Column(comment = "角色ID主键;")
     private Long roleId;
+
+    public UserRole(){}
+
+    public UserRole(Long userId, Long roleId) {
+        this.userId = userId;
+        this.roleId = roleId;
+    }
 }

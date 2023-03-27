@@ -29,7 +29,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-//@Component
+@Component
 public class MybatisTypeHandlerRegistry implements InitializingBean {
     private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
     private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
@@ -42,7 +42,6 @@ public class MybatisTypeHandlerRegistry implements InitializingBean {
         for (DatabaseSession databaseSession : dao.databaseRouter().getDatabaseSessions()) {
             Configuration configuration = databaseSession.sqlSession().getConfiguration();
             TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
-            Collection<TypeHandler<?>> typeHandlers = typeHandlerRegistry.getTypeHandlers();
             Set<Class<?>> classes = scanClasses(CommonConstant.class.getPackage().getName(), IEnum.class);
             classes.stream()
                     .filter(Class::isEnum)

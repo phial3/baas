@@ -2,6 +2,7 @@ package org.phial.baas.service.listener.system;
 
 import lombok.extern.slf4j.Slf4j;
 import org.mayanjun.mybatisx.api.entity.Entity;
+import org.phial.baas.service.service.EntityEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class EntityEventDispatcher implements ApplicationReadyListener {
         log.info("::::::::Find Dispatcher::::::::EntityEventListeners: {}", listeners.size());
     }
 
-    public void emitEvent(final Entity event) {
+    public void emitEvent(final EntityEvent event) {
         listeners.forEach(e -> {
             if (e.support(event)) {
                 executor.execute(() -> e.onEntityChange(event));

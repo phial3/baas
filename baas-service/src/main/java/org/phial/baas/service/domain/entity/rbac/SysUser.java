@@ -11,6 +11,7 @@ import org.mayanjun.mybatisx.api.enums.DataType;
 import org.mayanjun.mybatisx.api.enums.IndexType;
 import org.phial.baas.service.domain.entity.sys.AbstractUser;
 import org.phial.baas.service.domain.entity.sys.Menu;
+import org.phial.baas.service.domain.entity.sys.UserType;
 
 import java.util.List;
 import java.util.Set;
@@ -28,9 +29,6 @@ import java.util.Set;
         },
         comment = "平台用户账号管理")
 public class SysUser extends AbstractUser {
-
-    private List<Menu> menus;
-    private Set<String> privileges;
 
     public SysUser() {
     }
@@ -59,20 +57,10 @@ public class SysUser extends AbstractUser {
      * 角色列表
      */
     private Long[] roles;
-
-    public void setMenus(List<Menu> menus) {
-        this.menus = menus;
-    }
-
-    public List<Menu> getMenus() {
-        return menus;
-    }
-
-    public void setPrivileges(Set<String> privileges) {
-        this.privileges = privileges;
-    }
-
-    public Set<String> getPrivileges() {
-        return privileges;
-    }
+    private String entityName;
+    private String oldPassword;
+    private List<Menu> menus;
+    private Set<String> privileges;
+    private List<String> slotList;
+    private UserType type;
 }
