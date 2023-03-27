@@ -3,6 +3,7 @@ package org.phial.baas.manager.config.init;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.Configuration;
+import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mayanjun.mybatisx.dal.dao.BasicDAO;
 import org.mayanjun.mybatisx.dal.dao.DatabaseSession;
@@ -23,11 +24,12 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
 @Slf4j
-@Component
+//@Component
 public class MybatisTypeHandlerRegistry implements InitializingBean {
     private static final ResourcePatternResolver RESOURCE_PATTERN_RESOLVER = new PathMatchingResourcePatternResolver();
     private static final MetadataReaderFactory METADATA_READER_FACTORY = new CachingMetadataReaderFactory();
@@ -40,6 +42,7 @@ public class MybatisTypeHandlerRegistry implements InitializingBean {
         for (DatabaseSession databaseSession : dao.databaseRouter().getDatabaseSessions()) {
             Configuration configuration = databaseSession.sqlSession().getConfiguration();
             TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
+            Collection<TypeHandler<?>> typeHandlers = typeHandlerRegistry.getTypeHandlers();
             Set<Class<?>> classes = scanClasses(CommonConstant.class.getPackage().getName(), IEnum.class);
             classes.stream()
                     .filter(Class::isEnum)

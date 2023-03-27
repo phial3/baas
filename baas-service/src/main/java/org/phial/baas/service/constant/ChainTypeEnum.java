@@ -1,6 +1,5 @@
 package org.phial.baas.service.constant;
 
-import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
 import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
@@ -12,7 +11,7 @@ public enum ChainTypeEnum implements IEnum<Integer> {
      *
      */
     CHAIN_MAKER(1, "chainmaker"),
-    FISCO_BCOS(2, "fisco_bcos"),
+    FISCO_BCOS(2, "fiscobcos"),
     XUPER_CHAIN(3, "xuperchain"),
     HYPERLEDGER_FABRIC(4, "hyperledger_fabric");
 
