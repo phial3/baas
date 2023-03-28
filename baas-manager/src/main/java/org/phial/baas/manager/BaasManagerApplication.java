@@ -3,7 +3,7 @@ package org.phial.baas.manager;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.phial.baas.manager.monitor.SystemMonitor;
-import org.phial.baas.service.listener.system.ApplicationReadyListener;
+import org.phial.baas.manager.listener.system.ApplicationReadyListener;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -49,6 +49,7 @@ public class BaasManagerApplication {
             }
         }
 
+        // 启动
         SpringApplicationBuilder builder = new SpringApplicationBuilder()
                 .sources(BaasManagerApplication.class)
                 .registerShutdownHook(true);

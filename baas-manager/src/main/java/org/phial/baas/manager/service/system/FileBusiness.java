@@ -29,6 +29,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.file.Files;
 
 /**
  * 文件管理
@@ -93,7 +94,8 @@ public class FileBusiness implements InitializingBean {
         File outFile = localFile(newFileName);
 
         int size = 0;
-        if (ratio0 != null && ratio1 != null) { // 检测图像比例
+        if (ratio0 != null && ratio1 != null) {
+            // 检测图像比例
             try {
                 if (ratio1 < ratio0) {
                     float f0 = ratio0;
@@ -101,7 +103,7 @@ public class FileBusiness implements InitializingBean {
                     ratio1 = f0;
                 }
                 BufferedImage image = ImageIO.read(file.getInputStream());
-                float ratio = new Double(new Double(image.getWidth()) / new Double(image.getHeight())).floatValue();
+                float ratio = new Double((double) image.getWidth() / (double) image.getHeight()).floatValue();
 
                 Assert.isTrue(
                         ratio >= ratio0 && ratio <= ratio1,
@@ -114,7 +116,7 @@ public class FileBusiness implements InitializingBean {
                 throw new ServiceException("错误的图片格式");
             }
         } else {
-            size = FileCopyUtils.copy(file.getInputStream(), new FileOutputStream(outFile));
+            size = FileCopyUtils.copy(file.getInputStream(), Files.newOutputStream(outFile.toPath()));
         }
 
         LOG.info("File upload done: file={}, size={}, copied={}", newFileName, file.getSize(), size);
@@ -178,7 +180,7 @@ public class FileBusiness implements InitializingBean {
 
         File file = localFile(filename);
         try {
-            FileCopyUtils.copy(new FileInputStream(file), outputStream);
+            FileCopyUtils.copy(Files.newInputStream(file.toPath()), outputStream);
         } catch (IOException e) {
             LOG.error("Can't copy file, file=" + file.getAbsolutePath(), e);
         }

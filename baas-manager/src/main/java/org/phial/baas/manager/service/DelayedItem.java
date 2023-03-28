@@ -1,4 +1,4 @@
-package org.phial.baas.service.service;
+package org.phial.baas.manager.service;
 
 import java.util.concurrent.Delayed;
 import java.util.concurrent.TimeUnit;

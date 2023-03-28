@@ -55,6 +55,7 @@ public class CryptoEnum {
         /**
          *
          */
+        MSP("msp", 9, "msp"),
         CLIENT_BUSINESS_USER("client", 8, "business"),
         CLIENT_MEMBER_USER("client", 7, "member"),
         REGISTER("client", 6, "register"),

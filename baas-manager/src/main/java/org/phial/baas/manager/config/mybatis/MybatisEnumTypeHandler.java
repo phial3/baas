@@ -1,4 +1,4 @@
-package org.phial.baas.service.config.mybatis;
+package org.phial.baas.manager.config.mybatis;
 
 import org.apache.ibatis.reflection.DefaultReflectorFactory;
 import org.apache.ibatis.reflection.MetaClass;

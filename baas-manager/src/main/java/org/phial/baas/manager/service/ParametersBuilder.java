@@ -1,4 +1,4 @@
-package org.phial.baas.service.service;
+package org.phial.baas.manager.service;
 
 
 import org.apache.commons.collections4.map.HashedMap;
@@ -11,8 +11,6 @@ import java.util.Map;
 /**
  * @author mayanjun
  * @vendor mayanjun.org
- * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
  * @since 2019-10-10
  */
 public class ParametersBuilder {

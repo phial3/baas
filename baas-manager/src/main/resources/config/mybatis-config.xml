@@ -31,7 +31,7 @@
     </typeHandlers>
 
     <plugins>
-        <plugin interceptor="org.phial.baas.service.config.mybatis.DataSourceInterceptorPlugin"/>
+        <plugin interceptor="org.phial.baas.manager.config.mybatis.DataSourceInterceptorPlugin"/>
     </plugins>
 
     <mappers>

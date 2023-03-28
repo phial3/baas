@@ -20,7 +20,6 @@ import java.util.Set;
  * 角色管理
  * @since 2019-07-06
  * @author mayanjun
- * @vendor JDD (https://www.jddglobal.com)
  */
 @Component
 public class RoleBusiness extends ConsoleBaseBusiness<Role> {

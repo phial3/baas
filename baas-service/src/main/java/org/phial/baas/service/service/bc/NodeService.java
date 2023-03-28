@@ -1,4 +1,4 @@
-package org.phial.baas.service.service;
+package org.phial.baas.service.service.bc;
 
 import org.phial.baas.service.domain.entity.bc.P2pNode;
 

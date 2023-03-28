@@ -1,10 +1,7 @@
-package org.phial.baas.service.sql;
+package org.phial.baas.manager.sql;
 
 import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.UpdateProvider;
-
-import java.util.Date;
 
 /**
  * 自定义SQL的 Mapper

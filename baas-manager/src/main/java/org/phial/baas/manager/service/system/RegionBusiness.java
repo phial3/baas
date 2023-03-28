@@ -22,7 +22,6 @@ import static net.sourceforge.pinyin4j.format.HanyuPinyinVCharType.WITH_V;
  * 地区管理
  * @since 2019-07-06
  * @author mayanjun
- * @vendor JDD (https://www.jddglobal.com)
  */
 @Component
 public class RegionBusiness extends ConsoleBaseBusiness<Region> {

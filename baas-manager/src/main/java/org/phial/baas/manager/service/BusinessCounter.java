@@ -1,14 +1,9 @@
 package org.phial.baas.manager.service;
 
 import com.esotericsoftware.minlog.Log;
-import org.joda.time.DateTime;
 import org.mayanjun.mybatisx.dal.dao.BasicDAO;
-import org.mayanjun.myrest.util.JSON;
 import org.phial.baas.manager.config.cache.CacheClient;
 import org.phial.baas.manager.config.cache.CacheKey;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
@@ -24,8 +19,6 @@ import java.util.Map;
 @Component
 public class BusinessCounter {
 
-    private static final Logger LOG = LoggerFactory.getLogger(BusinessCounter.class);
-
     @Resource
     private CacheClient cacheClient;
 
@@ -33,8 +26,9 @@ public class BusinessCounter {
     private BasicDAO dao;
 
     public enum Key {
-        GOODS_READY_FOR_MOVING, // 货物准备移动
-        GOODS_MOVING_DONE, // 货物移动结束
+        /**
+         *
+         */
         RFID_SCAN,
         ACTIVE_RFID_TEARDOWN,
         ACTIVE_RFID_LOW_BATTERY,

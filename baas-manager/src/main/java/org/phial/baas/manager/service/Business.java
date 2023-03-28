@@ -1,4 +1,4 @@
-package org.phial.baas.service.service;
+package org.phial.baas.manager.service;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -74,7 +74,7 @@ public abstract class Business<T extends Entity> {
 
     public <E extends LongEntity> Long[] ids(List<E> entities, Function<E, Long> function) {
         if (CollectionUtils.isNotEmpty(entities)) {
-            Long ids [] = new Long[entities.size()];
+            Long[] ids = new Long[entities.size()];
             if (function == null) {
                 function = this::entityId;
             }
@@ -87,7 +87,7 @@ public abstract class Business<T extends Entity> {
     }
 
     public <T extends LongEntity> T idInstance(Class<T> cls, Long id) {
-        if (id == null) throw new ServiceException("ID为空");
+        if (id == null) throw new ServiceException("ID不能为空");
         T instance = null;
         Exception exception = null;
         try {
@@ -112,7 +112,7 @@ public abstract class Business<T extends Entity> {
         }
 
         if (instance == null) {
-            LOG.error("Can't create Entity instance: class={}, id={}, exception={}", cls, id, exception == null ? "null" : exception.getMessage());
+            LOG.error("Can't create Entity instance: class={}, id={}, exception={}", cls, id, exception.getMessage());
             throw new ServiceException("无法创建实例");
         }
 

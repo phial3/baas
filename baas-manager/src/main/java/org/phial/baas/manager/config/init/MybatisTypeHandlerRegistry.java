@@ -3,12 +3,11 @@ package org.phial.baas.manager.config.init;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.Configuration;
-import org.apache.ibatis.type.TypeHandler;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mayanjun.mybatisx.dal.dao.BasicDAO;
 import org.mayanjun.mybatisx.dal.dao.DatabaseSession;
 import org.phial.baas.service.annootation.IEnum;
-import org.phial.baas.service.config.mybatis.MybatisEnumTypeHandler;
+import org.phial.baas.manager.config.mybatis.MybatisEnumTypeHandler;
 import org.phial.baas.service.constant.CommonConstant;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.util.ClassUtils;
 import org.springframework.util.StringUtils;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 

@@ -1,15 +1,13 @@
-package org.phial.baas.service.listener.system;
+package org.phial.baas.manager.listener.system;
 
 import lombok.extern.slf4j.Slf4j;
-import org.mayanjun.mybatisx.api.entity.Entity;
-import org.phial.baas.service.service.EntityEvent;
+import org.phial.baas.manager.service.EntityEvent;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.util.Collection;
-import java.util.concurrent.ThreadPoolExecutor;
 
 @Slf4j
 @Component

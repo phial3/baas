@@ -1,4 +1,4 @@
-package org.phial.baas.service.listener.system;
+package org.phial.baas.manager.listener.system;
 
 import org.springframework.context.ConfigurableApplicationContext;
 

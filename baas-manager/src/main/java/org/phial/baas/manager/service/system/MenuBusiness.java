@@ -9,7 +9,7 @@ import org.phial.baas.service.domain.entity.sys.Menu;
 import org.phial.baas.service.domain.entity.sys.MenuPrivilege;
 import org.phial.baas.service.domain.entity.sys.Privilege;
 import org.phial.baas.manager.service.ConsoleBaseBusiness;
-import org.phial.baas.service.service.ParametersBuilder;
+import org.phial.baas.manager.service.ParametersBuilder;
 import org.springframework.stereotype.Component;
 
 import java.util.*;
@@ -18,7 +18,6 @@ import java.util.*;
  * 菜单管理
  * @since 2019-07-06
  * @author mayanjun
- * @vendor JDD (https://www.jddglobal.com)
  */
 @Component
 public class MenuBusiness extends ConsoleBaseBusiness<Menu> {

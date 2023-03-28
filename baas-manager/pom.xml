@@ -20,6 +20,8 @@
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <guava.version>31.1-jre</guava.version>
     </properties>
 
     <dependencies>
@@ -29,12 +31,32 @@
             <groupId>org.phial.baas</groupId>
             <artifactId>baas-fabric</artifactId>
             <version>${project.version}</version>
-        </dependency>
+             <exclusions>
+                 <exclusion>
+                     <artifactId>api-common</artifactId>
+                     <groupId>com.google.api</groupId>
+                 </exclusion>
+                 <exclusion>
+                     <artifactId>bcprov-jdk15on</artifactId>
+                     <groupId>org.bouncycastle</groupId>
+                 </exclusion>
+                 <exclusion>
+                     <artifactId>commons-io</artifactId>
+                     <groupId>commons-io</groupId>
+                 </exclusion>
+             </exclusions>
+         </dependency>
 
         <dependency>
             <groupId>org.phial.baas</groupId>
             <artifactId>baas-chainmaker</artifactId>
             <version>${project.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>commons-io</artifactId>
+                    <groupId>commons-io</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
 
@@ -56,19 +78,6 @@
             <artifactId>sa-token-spring-boot-starter</artifactId>
             <version>${sa-token.version}</version>
         </dependency>
-
-        <!-- 动态线程池 https://dynamictp.cn/ -->
-<!--        <dependency>-->
-<!--            <groupId>cn.dynamictp</groupId>-->
-<!--            <artifactId>dynamic-tp-spring-boot-starter-common</artifactId>-->
-<!--            <version>${dynamic-tp.version}</version>-->
-<!--            <exclusions>-->
-<!--                <exclusion>-->
-<!--                    <artifactId>hutool-all</artifactId>-->
-<!--                    <groupId>cn.hutool</groupId>-->
-<!--                </exclusion>-->
-<!--            </exclusions>-->
-<!--        </dependency>-->
 
         <dependency>
             <groupId>io.airlift</groupId>

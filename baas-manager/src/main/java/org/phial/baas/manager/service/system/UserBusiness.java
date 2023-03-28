@@ -29,7 +29,6 @@ import java.util.Map;
  * 系统用户管理
  *
  * @author mayanjun
- * @vendor JDD (https://www.jddglobal.com)
  * @since 2019-07-06
  */
 @DependsOn("ApplicationDataInitializer")

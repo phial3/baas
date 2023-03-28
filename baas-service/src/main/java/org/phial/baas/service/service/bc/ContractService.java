@@ -1,6 +1,6 @@
-package org.phial.baas.service.service;
+package org.phial.baas.service.service.bc;
 
-public interface SmartContractService {
+public interface ContractService {
 
     /**
      * 部署

@@ -20,7 +20,7 @@ application:
 # Logging Config
 logging:
   file:
-    path: "./Logs/${application.name}/${application.mavenProfile}"
+    path: "./logs/baas/dev"
     name: "info"
   config: classpath:logback/logback-dev.xml
 
@@ -48,10 +48,10 @@ app-config:
 
 
 minio:
-  endpoint: "192.168.8.123"
+  endpoint: "127.0.0.1"
   port: 7996
-  accessKey: "tianwu-minio"
-  secretKey: "XcF236S@&^L30eB9"
+  accessKey: "minioadmin"
+  secretKey: "123456aA@789"
   bucketName: "test"
   secure: false
   configDir: "/data/"
@@ -99,7 +99,7 @@ mybatisx:
     - {
       username: "root",
       password: "123456aA#",
-      jdbcUrl: "jdbc:mysql://localhost:3306/baas?serverTimezone=Asia/Shanghai&useAffectedRows=true",
+      jdbcUrl: "jdbc:mysql://localhost:3306/baas?useAffectedRows=true&rewriteBatchedStatements=true&useSSL=false&useOldAliasMetadataBehavior=true&useUnicode=true&characterEncoding=utf-8&serverTimezone=GMT%2B8",
       driverClassName: "com.mysql.cj.jdbc.Driver",
       mybatisConfigLocation: "classpath:/config/mybatis-config.xml",
       isolationLevelName: "ISOLATION_REPEATABLE_READ",

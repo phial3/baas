@@ -1,4 +1,4 @@
-package org.phial.baas.service.config.mybatis;
+package org.phial.baas.manager.config.mybatis;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.ibatis.executor.Executor;

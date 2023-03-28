@@ -1,4 +1,4 @@
-package org.phial.baas.service.service;
+package org.phial.baas.manager.service;
 
 import org.mayanjun.mybatisx.api.entity.Entity;
 import org.springframework.beans.factory.DisposableBean;

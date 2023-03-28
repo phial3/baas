@@ -20,18 +20,11 @@ import org.mayanjun.myrest.session.UserLoader;
 import org.phial.baas.manager.config.cache.CacheClient;
 import org.phial.baas.manager.config.cache.CacheKey;
 import org.phial.baas.manager.config.interceptor.ConsoleSessionManager;
-import org.phial.baas.manager.config.interceptor.MobileSessionManager;
-import org.phial.baas.manager.service.system.FileBusiness;
-import org.phial.baas.manager.util.JsonUtils;
 import org.phial.baas.service.domain.entity.NamedEntity;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
 import org.phial.baas.service.domain.entity.sys.AbstractUser;
-import org.phial.baas.service.listener.system.EntityEventDispatcher;
-import org.phial.baas.service.listener.system.EntityEventListener;
-import org.phial.baas.service.service.Business;
-import org.phial.baas.service.service.EntityEvent;
-import org.phial.baas.service.service.ExportIgnore;
-import org.phial.baas.service.service.ParametersBuilder;
+import org.phial.baas.manager.listener.system.EntityEventDispatcher;
+import org.phial.baas.manager.listener.system.EntityEventListener;
 import org.phial.baas.service.util.Strings;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -52,8 +45,6 @@ import java.util.*;
  *
  * @author mayanjun
  * @vendor mayanjun.org
- * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
  * @since 2019-10-10
  */
 public abstract class ConsoleBaseBusiness<T extends Entity> extends Business implements EntityEventListener {
@@ -892,7 +883,7 @@ public abstract class ConsoleBaseBusiness<T extends Entity> extends Business imp
 
 
     protected void evict(EntityEvent event) {
-        Entity es[] = event.entities();
+        Entity[] es = event.entities();
         if (es != null && es.length > 0) {
             for (Entity e : es) {
                 cache.evict(e);
@@ -942,8 +933,8 @@ public abstract class ConsoleBaseBusiness<T extends Entity> extends Business imp
             for (Entity entity : event.getEntities()) {
                 if (SysUser.class.equals(event.getTargetClazz())) {
                     SysUser user = (SysUser) entity;
-//                    cacheClient.delete(CacheKey.CONSOLE_USER, user.getId().toString());
-//                    cacheClient.delete(CacheKey.CONSOLE_USER, user.getUsername());
+                    // cacheClient.delete(CacheKey.CONSOLE_USER, user.getId().toString());
+                    // cacheClient.delete(CacheKey.CONSOLE_USER, user.getUsername());
                     UserLoader<SysUser> userUserLoader = consoleSessionManager.getUserLoader();
                     SessionUser<SysUser> loadUser = userUserLoader.loadUser(user.getUsername());
 

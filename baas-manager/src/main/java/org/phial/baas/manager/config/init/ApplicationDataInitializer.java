@@ -7,7 +7,7 @@ import org.phial.baas.manager.factory.BaasManagerApplicationContext;
 import org.phial.baas.manager.util.CommonUtils;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
 import org.phial.baas.service.domain.entity.sys.Menu;
-import org.phial.baas.service.sql.CustomMapper;
+import org.phial.baas.manager.sql.CustomMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
@@ -15,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
 import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashMap;
