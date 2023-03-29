@@ -1,5 +1,6 @@
 package org.phial.baas.manager.config.mvc;
 
+import lombok.extern.slf4j.Slf4j;
 import org.mayanjun.mybatisx.api.annotation.Column;
 import org.mayanjun.myrest.RestResponse;
 import org.mayanjun.myrest.interceptor.ApplicationExceptionHandler;
@@ -22,6 +23,7 @@ import java.lang.reflect.Field;
  * @generator consolegen 1.0
  * @manufacturer https://mayanjun.org
  */
+@Slf4j
 @Component
 public class ServletContextConfig implements ServletContextInitializer {
 
@@ -30,26 +32,23 @@ public class ServletContextConfig implements ServletContextInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-        ApplicationExceptionHandler.installUnknownExceptionHandler(new ApplicationExceptionHandler.UnknownExceptionHandler() {
-            @Override
-            public RestResponse handleException(Throwable t) {
-                RestResponse response = RestResponse.error();
-                FieldError error = ((BindException) t).getFieldError();
-                String fieldName = error.getField();
-                Object target = ((BindException) t).getTarget();
-                try {
-                    Field field = target.getClass().getDeclaredField(fieldName);
-                    if (field != null) {
-                        Column column = field.getAnnotation(Column.class);
-                        if (column != null) {
-                            String comment = column.comment();
-                            response.setMessage(comment + " 参数错误").add("description", t.getMessage());
-                        }
-                    }
-                } catch (NoSuchFieldException e) {
+        log.info("ServletContextConfig onStartup() ...");
+        ApplicationExceptionHandler.installUnknownExceptionHandler(t -> {
+            RestResponse response = RestResponse.error();
+            FieldError error = ((BindException) t).getFieldError();
+            String fieldName = error.getField();
+            Object target = ((BindException) t).getTarget();
+            try {
+                Field field = target.getClass().getDeclaredField(fieldName);
+                Column column = field.getAnnotation(Column.class);
+                if (column != null) {
+                    String comment = column.comment();
+                    response.setMessage(comment + " 参数错误").add("description", t.getMessage());
                 }
-                return response;
+            } catch (NoSuchFieldException e) {
+                e.printStackTrace();
             }
+            return response;
         });
     }
 }

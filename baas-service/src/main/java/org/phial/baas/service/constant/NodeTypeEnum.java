@@ -1,7 +1,6 @@
 package org.phial.baas.service.constant;
 
 import lombok.Getter;
-import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
 
 import java.util.ArrayList;
@@ -26,7 +25,6 @@ public enum NodeTypeEnum implements IEnum<Integer> {
     // xuperchain NodeType
 
 
-    @EnumValue
     private final Integer code;
     private final String type;
     private final String name;

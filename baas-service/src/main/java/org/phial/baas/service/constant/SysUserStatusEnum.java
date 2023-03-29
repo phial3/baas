@@ -1,7 +1,6 @@
 package org.phial.baas.service.constant;
 
 import lombok.Getter;
-import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
 
 @Getter
@@ -14,7 +13,6 @@ public enum SysUserStatusEnum implements IEnum<Integer> {
     BLOCKED(1003, "BLOCKED"), //封禁
     REVOKED(1004, "REVOKED"); //注销
 
-    @EnumValue
     private final Integer code;
     private final String status;
 

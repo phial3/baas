@@ -1,7 +1,6 @@
 package org.phial.baas.service.constant;
 
 import lombok.Getter;
-import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
 
 
@@ -17,7 +16,6 @@ public class ContractEnum {
         REVOKED(3, "REVOKED"), //销毁
         FROZEN(4, "FROZEN");   //冻结
 
-        @EnumValue
         private final Integer code;
         private final String status;
 
@@ -53,7 +51,6 @@ public class ContractEnum {
         JAVA(5,"java", "HVM"),
         GOLANG(6,"golang", "GO");
 
-        @EnumValue
         private final Integer code;
         private final String language;
         private final String runtimeType;

@@ -4,53 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e4b378bb-ee4a-47e1-9b14-3c0aee31e8e5" name="Changes" comment=".">
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/DataController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/bc/ChainController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/bc/ChainBusiness.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/bc/ChainNodeBusiness.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/bc/ContractBusiness.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/bc/NodeBusiness.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/bc/OrganizationBusiness.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/bc/UserCertBusiness.java" afterDir="false" />
+    <list default="true" id="e4b378bb-ee4a-47e1-9b14-3c0aee31e8e5" name="Changes" comment="update">
+      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/CompositeEnumTypeHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/util/CollectionUtil.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/filter/CrosFilter.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/filter/CrosFilter.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/init/ApplicationDataInitializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/init/ApplicationDataInitializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/AbstractUserLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/AbstractUserLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConfigurableSession.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConfigurableSession.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConsoleUserLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConsoleUserLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/DefaultUserLoader.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/DefaultUserLoader.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/ConsoleBaseBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/ConsoleBaseBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/AppBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/AppBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/AttributeBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/AttributeBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/FileBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/FileBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/MenuBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/MenuBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/PrivilegeBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/PrivilegeBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/RegionBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/RegionBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/RoleBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/RoleBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/UserBusiness.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/service/system/UserBusiness.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/rbac/SysUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/rbac/SysUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/AbstractUser.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/AbstractUser.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Apk.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Apk.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/App.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/AppType.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/AppType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Attribute.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Attribute.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/AttributeItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/AttributeItem.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/FileMeta.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/FileMeta.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/MenuPrivilege.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/MenuPrivilege.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Privilege.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Privilege.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Region.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Region.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Role.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Role.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/RoleMenu.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/RoleMenu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/RolePrivilege.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/RolePrivilege.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/Settings.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/Settings.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/UserProfile.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/UserProfile.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/UserRole.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/UserRole.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/sys/UserType.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/UserType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/service/bc/ChainService.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/service/bc/ChainService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/service/bc/ContractService.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/service/bc/ContractService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/service/bc/NodeService.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/service/bc/NodeService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/init/MybatisTypeHandlerRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/init/MybatisTypeHandlerRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mvc/ServletContextConfig.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mvc/ServletContextConfig.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/MybatisEnumTypeHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/MybatisEnumTypeHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/annootation/EnumValue.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/annootation/IEnumValue.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/ChainStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/ChainStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/ChainTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/ChainTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/ContractEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/ContractEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/CryptoEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/CryptoEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/NodeStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/NodeStatusEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/NodeTypeEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/NodeTypeEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/SysUserStatusEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/constant/SysUserStatusEnum.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -139,11 +107,11 @@
       <recent name="$PROJECT_DIR$/baas-fabric/src/main/java/org/phial/baas/fabric/invoke" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="org.phial.baas.manager.util" />
+      <recent name="org.phial.baas.manager.config.mybatis" />
       <recent name="org.phial.baas.service.config.mybatis" />
       <recent name="org.phial.baas.service.controller" />
       <recent name="org.phial.baas.service.mapper" />
-      <recent name="org.phial.baas.service.util" />
-      <recent name="org.phial.baas.service.service" />
     </key>
   </component>
   <component name="RunManager" selected="Spring Boot.BaasManagerApplication">
@@ -195,7 +163,8 @@
       <workItem from="1679966357021" duration="733000" />
       <workItem from="1680004179427" duration="3212000" />
       <workItem from="1680055885378" duration="2764000" />
-      <workItem from="1680071473019" duration="696000" />
+      <workItem from="1680071473019" duration="951000" />
+      <workItem from="1680079361333" duration="3028000" />
     </task>
     <task id="LOCAL-00001" summary="add module">
       <created>1679331084407</created>
@@ -246,7 +215,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680008018396</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="update">
+      <created>1680072435010</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1680072435010</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -266,9 +242,9 @@
   <component name="VcsManagerConfiguration">
     <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
     <MESSAGE value="add module" />
-    <MESSAGE value="update" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="update" />
+    <option name="LAST_COMMIT_MESSAGE" value="update" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -280,11 +256,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/MybatisEnumTypeHandler.java</url>
-          <line>77</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/MybatisEnumTypeHandler.java</url>
           <line>104</line>
           <option name="timeStamp" value="10" />
         </line-breakpoint>
@@ -292,11 +263,6 @@
           <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/MybatisEnumTypeHandler.java</url>
           <line>133</line>
           <option name="timeStamp" value="13" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/MybatisEnumTypeHandler.java</url>
-          <line>79</line>
-          <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/bc/ChainController.java</url>
@@ -317,6 +283,36 @@
           <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/LoginInterceptor.java</url>
           <line>37</line>
           <option name="timeStamp" value="19" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConsoleSessionManager.java</url>
+          <line>26</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConsoleSessionManager.java</url>
+          <line>29</line>
+          <option name="timeStamp" value="21" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConfigurableSession.java</url>
+          <line>51</line>
+          <option name="timeStamp" value="22" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/interceptor/ConfigurableSession.java</url>
+          <line>30</line>
+          <option name="timeStamp" value="23" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/mybatis/CompositeEnumTypeHandler.java</url>
+          <line>47</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/init/MybatisTypeHandlerRegistry.java</url>
+          <line>43</line>
+          <option name="timeStamp" value="26" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

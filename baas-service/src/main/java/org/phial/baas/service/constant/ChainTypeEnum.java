@@ -1,7 +1,6 @@
 package org.phial.baas.service.constant;
 
 import lombok.Getter;
-import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
 
 
@@ -15,7 +14,6 @@ public enum ChainTypeEnum implements IEnum<Integer> {
     XUPER_CHAIN(3, "xuperchain"),
     HYPERLEDGER_FABRIC(4, "hyperledger_fabric");
 
-    @EnumValue
     private final Integer code;
 
     private final String type;

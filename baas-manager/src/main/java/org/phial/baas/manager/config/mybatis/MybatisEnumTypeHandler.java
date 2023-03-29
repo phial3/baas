@@ -6,8 +6,9 @@ import org.apache.ibatis.reflection.ReflectorFactory;
 import org.apache.ibatis.type.BaseTypeHandler;
 import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.reflection.invoker.Invoker;
-import org.phial.baas.service.annootation.EnumValue;
+import org.phial.baas.manager.util.CollectionUtil;
 import org.phial.baas.service.annootation.IEnum ;
+import org.phial.baas.service.annootation.IEnumValue;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -22,7 +23,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.Function;
 
 /**
  * 自定义枚举属性转换器
@@ -59,7 +59,7 @@ public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E
         MetaClass metaClass = MetaClass.forClass(enumClassType, REFLECTOR_FACTORY);
         String name = "value";
         if (!IEnum.class.isAssignableFrom(enumClassType)) {
-            name = findEnumValueFieldName(this.enumClassType).orElseThrow(() -> new IllegalArgumentException(String.format("Could not find @EnumValue in Class: %s.", this.enumClassType.getName())));
+            name = findEnumValueFieldName(this.enumClassType).orElseThrow(() -> new IllegalArgumentException(String.format("Could not find @IEnumValue in Class: %s.", this.enumClassType.getName())));
         }
         this.propertyType = resolvePrimitiveIfNecessary(metaClass.getGetterType(name));
         this.getInvoker = metaClass.getGetInvoker(name);
@@ -75,7 +75,7 @@ public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E
     public static Optional<String> findEnumValueFieldName(Class<?> clazz) {
         if (clazz != null && clazz.isEnum()) {
             String className = clazz.getName();
-            return Optional.ofNullable(computeIfAbsent(TABLE_METHOD_OF_ENUM_TYPES, className, key -> {
+            return Optional.ofNullable(CollectionUtil.computeIfAbsent(TABLE_METHOD_OF_ENUM_TYPES, className, key -> {
                 Optional<Field> fieldOptional = findEnumValueAnnotationField(clazz);
                 return fieldOptional.map(Field::getName).orElse(null);
             }));
@@ -84,7 +84,7 @@ public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E
     }
 
     private static Optional<Field> findEnumValueAnnotationField(Class<?> clazz) {
-        return Arrays.stream(clazz.getDeclaredFields()).filter(field -> field.isAnnotationPresent(EnumValue.class)).findFirst();
+        return Arrays.stream(clazz.getDeclaredFields()).filter(field -> field.isAnnotationPresent(IEnumValue.class)).findFirst();
     }
 
     /**
@@ -172,13 +172,6 @@ public class MybatisEnumTypeHandler<E extends Enum<E>> extends BaseTypeHandler<E
         return String.valueOf(o).trim();
     }
 
-    public static <K, V> V computeIfAbsent(Map<K, V> concurrentHashMap, K key, Function<? super K, ? extends V> mappingFunction) {
-        V v = concurrentHashMap.get(key);
-        if (v != null) {
-            return v;
-        }
-        return concurrentHashMap.computeIfAbsent(key, mappingFunction);
-    }
 
     public static Class<?> resolvePrimitiveIfNecessary(Class<?> clazz) {
         return (clazz.isPrimitive() && clazz != void.class ? PRIMITIVE_TYPE_TO_WRAPPER_MAP.get(clazz) : clazz);

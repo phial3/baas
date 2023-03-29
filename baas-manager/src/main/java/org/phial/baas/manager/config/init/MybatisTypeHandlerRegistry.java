@@ -6,6 +6,7 @@ import org.apache.ibatis.session.Configuration;
 import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mayanjun.mybatisx.dal.dao.BasicDAO;
 import org.mayanjun.mybatisx.dal.dao.DatabaseSession;
+import org.phial.baas.manager.config.mybatis.CompositeEnumTypeHandler;
 import org.phial.baas.service.annootation.IEnum;
 import org.phial.baas.manager.config.mybatis.MybatisEnumTypeHandler;
 import org.phial.baas.service.constant.CommonConstant;
@@ -39,15 +40,7 @@ public class MybatisTypeHandlerRegistry implements InitializingBean {
         // 注册Enum类型处理类
         for (DatabaseSession databaseSession : dao.databaseRouter().getDatabaseSessions()) {
             Configuration configuration = databaseSession.sqlSession().getConfiguration();
-            TypeHandlerRegistry typeHandlerRegistry = configuration.getTypeHandlerRegistry();
-            Set<Class<?>> classes = scanClasses(CommonConstant.class.getPackage().getName(), IEnum.class);
-            classes.stream()
-                    .filter(Class::isEnum)
-                    .filter(MybatisEnumTypeHandler::isMpEnums)
-                    .forEach(cls -> {
-                        typeHandlerRegistry.register(cls, MybatisEnumTypeHandler.class);
-                        log.info("class:{} register EnumTypeHandler.", cls.getName());
-                    });
+            configuration.setDefaultEnumTypeHandler(CompositeEnumTypeHandler.class);
         }
     }
 

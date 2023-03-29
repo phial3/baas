@@ -2,7 +2,6 @@ package org.phial.baas.service.constant;
 
 import com.fasterxml.jackson.annotation.JsonValue;
 import lombok.Getter;
-import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
 
 @Getter
@@ -14,7 +13,6 @@ public enum NodeStatusEnum implements IEnum<Integer> {
     ONLINE(2, "ONLINE"),
     OFFLINE(3, "OFFLINE");
 
-    @EnumValue
     private final Integer code;
 
     @JsonValue

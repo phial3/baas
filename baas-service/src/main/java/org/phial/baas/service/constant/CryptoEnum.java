@@ -2,7 +2,6 @@ package org.phial.baas.service.constant;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.phial.baas.service.annootation.EnumValue;
 import org.phial.baas.service.annootation.IEnum;
 
 /**
@@ -70,7 +69,6 @@ public class CryptoEnum {
         //表里的
         private final String userType;
         //表里的
-        @EnumValue
         private final Integer code;
         //自定义区分business和user
         private final String memberType;
