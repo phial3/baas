@@ -16,9 +16,6 @@ import javax.servlet.http.HttpServletResponse;
  * 登录检查拦截器
  * @since 2019-10-10
  * @author mayanjun
- * @vendor mayanjun.org
- * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
  */
 @Component
 public class LoginInterceptor extends AnnotationBasedHandlerInterceptor {

@@ -8,15 +8,13 @@ import org.mayanjun.mybatisx.api.entity.LongEntity;
 import org.mayanjun.mybatisx.api.query.Query;
 import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.phial.baas.manager.config.interceptor.ConsoleSessionManager;
+import org.phial.baas.manager.service.ConsoleBaseBusiness;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
 import org.phial.baas.service.domain.entity.rbac.UserRole;
 import org.phial.baas.service.domain.entity.system.UserProfile;
-import org.phial.baas.service.domain.entity.system.UserType;
-import org.phial.baas.manager.service.ConsoleBaseBusiness;
 import org.phial.baas.service.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.ApplicationArguments;
-import org.springframework.boot.ApplicationRunner;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.DependsOn;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Component;
@@ -33,7 +31,7 @@ import java.util.Map;
  */
 @Component
 @DependsOn("ApplicationDataInitializer")
-public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements ApplicationRunner {
+public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements CommandLineRunner {
 
     private static final String ADMIN_USERNAME = "admin";
 
@@ -78,7 +76,7 @@ public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements Applic
     protected List<SysUser> doQuery(QueryBuilder<SysUser> builder) {
         builder.excludeFields("password");
         List<SysUser> users = super.doQuery(builder);
-        users.stream().forEach(user -> user.setSecretKey(Strings.escape(user.getSecretKey())));
+        users.forEach(user -> user.setSecretKey(Strings.escape(user.getSecretKey())));
         return users;
     }
 
@@ -120,16 +118,7 @@ public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements Applic
         }
 
         // 验证用户类型
-        UserType type = entity.getType();
-        Assert.notNull(type, "请选择用户类型");
-
-        switch (type) {
-            case ORG:
-                assertEntityExists(type.getEntityType(), entity.getId(), "机构账号所属机构不能为空");
-                break;
-            default:
-
-        }
+        Assert.notNull(entity.getType(), "用户类型不能为空");
     }
 
     private void assertEntityExists(Class<? extends LongEntity> cls, Long id, String msg) {
@@ -174,7 +163,7 @@ public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements Applic
         if (CollectionUtils.isNotEmpty(userRoles)) {
             Long ids[] = new Long[userRoles.size()];
             for (int i = 0; i < ids.length; i++) {
-                ids[i] = userRoles.get(i).getRoleId();
+                ids[i] = userRoles.get(i).getRole().getId();
             }
             user.setRoles(ids);
         }
@@ -208,16 +197,6 @@ public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements Applic
         });
     }
 
-    @Override
-    public void run(ApplicationArguments args) throws Exception {
-        Query<SysUser> query = QueryBuilder.custom(SysUser.class)
-                .andEquivalent("username", "admin")
-                .build();
-        SysUser user = service.queryOne(query);
-        if (user != null) {
-            rootUserId = user.getId();
-        }
-    }
 
     public List<SysUser> all(){
         Query<SysUser> query = QueryBuilder.custom(SysUser.class).andNotEquivalent("username", "admin").build();
@@ -239,5 +218,16 @@ public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements Applic
         String enc = sessionManager.encryptPassword(password);
         Assert.isTrue(originUser.getPassword().equals(enc),"旧密码不正确");
 
+    }
+
+    @Override
+    public void run(String... args) throws Exception {
+        Query<SysUser> query = QueryBuilder.custom(SysUser.class)
+                .andEquivalent("username", "admin")
+                .build();
+        SysUser user = service.queryOne(query);
+        if (user != null) {
+            rootUserId = user.getId();
+        }
     }
 }

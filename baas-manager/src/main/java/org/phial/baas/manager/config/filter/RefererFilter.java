@@ -23,11 +23,6 @@ import java.util.regex.Pattern;
 public class RefererFilter implements Filter {
 
     /**
-     * 过滤器配置对象
-     */
-    FilterConfig filterConfig = null;
-
-    /**
      * 是否启用
      */
     private final boolean enable = true;
@@ -48,7 +43,6 @@ public class RefererFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-        this.filterConfig = filterConfig;
     }
 
     @Override
@@ -86,7 +80,6 @@ public class RefererFilter implements Filter {
 
     @Override
     public void destroy() {
-        this.filterConfig = null;
     }
 
     /**

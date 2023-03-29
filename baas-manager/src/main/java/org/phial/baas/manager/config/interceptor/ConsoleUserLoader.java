@@ -54,7 +54,7 @@ public class ConsoleUserLoader extends DefaultUserLoader<SysUser> {
             Set<String> privileges = new HashSet<>();
             Map<Long, Menu> menuMap = new HashMap<>();
             userRoles.forEach(userRole -> {
-                Long roleId = userRole.getRoleId();
+                Long roleId = userRole.getRole().getId();
 
                 // load menus
                 List<RoleMenu> roleMenus = dao.query(

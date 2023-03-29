@@ -1,5 +1,7 @@
 package org.phial.baas.service.domain.entity.system;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.mayanjun.mybatisx.api.annotation.Column;
 import org.mayanjun.mybatisx.api.annotation.Index;
 import org.mayanjun.mybatisx.api.annotation.IndexColumn;
@@ -13,6 +15,8 @@ import org.mayanjun.mybatisx.api.enums.DataType;
  * @author mayanjun
  * @since 2021/12/6
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Table(value = "t_menu_privilege",
         indexes = {
                 @Index(value = "idx_role", columns = @IndexColumn("menu")),
@@ -42,31 +46,5 @@ public class MenuPrivilege extends LongEditableEntity {
     public MenuPrivilege(Long menuId, Long privilegeId) {
         this.menu = new Menu(menuId);
         this.privilege = new Privilege(privilegeId);
-    }
-
-    /**
-     * 获取 menu
-     *
-     * @return menu
-     */
-    public Menu getMenu() {
-        return menu;
-    }
-
-    /**
-     * 设置 menu
-     *
-     * @param menu menu 值
-     */
-    public void setMenu(Menu menu) {
-        this.menu = menu;
-    }
-
-    public Privilege getPrivilege() {
-        return privilege;
-    }
-
-    public void setPrivilege(Privilege privilege) {
-        this.privilege = privilege;
     }
 }

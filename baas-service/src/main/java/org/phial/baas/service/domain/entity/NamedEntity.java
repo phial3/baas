@@ -29,17 +29,17 @@ public class NamedEntity extends LongEditableEntity {
     }
 
     @Column(comment = "名称", type = DataType.VARCHAR, length = "64")
-    private String name;
+    protected String name;
 
     @Column(comment = "名称拼音", type = DataType.VARCHAR, length = "255")
-    private String pinyin;
+    protected String pinyin;
 
     @Column(comment = "扩展信息", type = DataType.VARCHAR, length = "500")
-    private String extras;
+    protected String extras;
 
     @Column(comment = "备注", type = DataType.VARCHAR, length = "500")
-    private String description;
+    protected String description;
 
     @Column(comment = "是否启用", type = DataType.BIT, length = "1", defaultValue = "1")
-    private Boolean enabled;
+    protected Boolean enabled;
 }

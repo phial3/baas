@@ -1,6 +1,11 @@
 package org.phial.baas.service.domain.entity.system;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.mayanjun.mybatisx.api.annotation.Column;
+import org.mayanjun.mybatisx.api.annotation.Index;
+import org.mayanjun.mybatisx.api.annotation.IndexColumn;
+import org.mayanjun.mybatisx.api.annotation.Table;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
 import org.mayanjun.mybatisx.api.enums.DataType;
 
@@ -9,13 +14,15 @@ import org.mayanjun.mybatisx.api.enums.DataType;
  * @author mayanjun
  * @date 2019-07-12
  */
-//@Table(value = "t_file_meta",
-//        indexes = {
-//                @Index(value = "idx_name", columns = @IndexColumn("name")),
-//                @Index(value = "idx_dir", columns = @IndexColumn("dir")),
-//                @Index(value = "idx_tag", columns = @IndexColumn("tag")),
-//        },
-//        comment = "访客记录")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Table(value = "t_file_meta",
+        indexes = {
+                @Index(value = "idx_name", columns = @IndexColumn("name")),
+                @Index(value = "idx_dir", columns = @IndexColumn("dir")),
+                @Index(value = "idx_tag", columns = @IndexColumn("tag")),
+        },
+        comment = "访客记录")
 public class FileMeta extends LongEditableEntity {
 
     /**
@@ -75,77 +82,5 @@ public class FileMeta extends LongEditableEntity {
 
     public FileMeta(Long id) {
         super(id);
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDir() {
-        return dir;
-    }
-
-    public void setDir(String dir) {
-        this.dir = dir;
-    }
-
-    public Long getSize() {
-        return size;
-    }
-
-    public void setSize(Long size) {
-        this.size = size;
-    }
-
-    public String getMime() {
-        return mime;
-    }
-
-    public void setMime(String mime) {
-        this.mime = mime;
-    }
-
-    public String getTag() {
-        return tag;
-    }
-
-    public void setTag(String tag) {
-        this.tag = tag;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
-    public String getOriginalFileName() {
-        return originalFileName;
-    }
-
-    public void setOriginalFileName(String originalFileName) {
-        this.originalFileName = originalFileName;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public void setHost(String host) {
-        this.host = host;
-    }
-
-    public String getNodeName() {
-        return nodeName;
-    }
-
-    public void setNodeName(String nodeName) {
-        this.nodeName = nodeName;
     }
 }

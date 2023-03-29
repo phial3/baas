@@ -1,23 +1,31 @@
 package org.phial.baas.service.domain.entity.system;
 
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.mayanjun.mybatisx.api.annotation.Column;
+import org.mayanjun.mybatisx.api.annotation.Index;
+import org.mayanjun.mybatisx.api.annotation.IndexColumn;
+import org.mayanjun.mybatisx.api.annotation.Table;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
+import org.mayanjun.mybatisx.api.enums.IndexType;
 
 /**
  * 属性
  * @since 2021/4/8
  * @author mayanjun
  */
-//@Table(value = "t_attribute",
-//        indexes = {
-//                @Index(value = "idx_name", columns = {
-//                        @IndexColumn("group"),
-//                        @IndexColumn("name"),
-//                        @IndexColumn("user")
-//                }, type = IndexType.UNIQUE)
-//        },
-//        comment = "属性")
+@Data
+@EqualsAndHashCode(callSuper = true)
+@Table(value = "t_attribute",
+        indexes = {
+                @Index(value = "idx_name", columns = {
+                        @IndexColumn("group"),
+                        @IndexColumn("name"),
+                        @IndexColumn("user")
+                }, type = IndexType.UNIQUE)
+        },
+        comment = "属性")
 public class Attribute extends LongEditableEntity {
 
     /**

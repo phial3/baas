@@ -1,21 +1,29 @@
 package org.phial.baas.manager.config.init;
 
+import org.mayanjun.mybatisx.api.query.Query;
 import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.mayanjun.mybatisx.dal.dao.BasicDAO;
 import org.phial.baas.manager.config.interceptor.ConsoleSessionManager;
 import org.phial.baas.manager.factory.BaasManagerApplicationContext;
 import org.phial.baas.manager.util.CommonUtils;
+import org.phial.baas.service.constant.CryptoEnum;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
 import org.phial.baas.service.domain.entity.system.Menu;
 import org.phial.baas.manager.sql.CustomMapper;
+import org.phial.baas.service.domain.entity.system.Privilege;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.ApplicationArguments;
+import org.springframework.boot.ApplicationRunner;
 import org.springframework.boot.CommandLineRunner;
+import org.springframework.core.Ordered;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Method;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -33,8 +41,9 @@ import java.util.regex.Pattern;
  * @author mayanjun
  * @since 2019-07-06
  */
+@Order(value = Ordered.HIGHEST_PRECEDENCE)
 @Component("ApplicationDataInitializer")
-public class ApplicationDataInitializer implements CommandLineRunner {
+public class ApplicationDataInitializer implements ApplicationRunner {
 
     private static final Logger LOG = LoggerFactory.getLogger(ApplicationDataInitializer.class);
 
@@ -56,7 +65,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
     };
 
     @Override
-    public void run(String... args) throws Exception {
+    public void run(ApplicationArguments args) throws Exception {
         init();
     }
 
@@ -68,7 +77,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
                 initSystemUser();
                 initMenus();
                 initPrivileges();
-                //ab.initSystemSettings(false);
+                //initSystemSettings(false);
                 LOG.info("SYSTEM initialized!");
             }
         } catch (Exception e) {
@@ -86,8 +95,8 @@ public class ApplicationDataInitializer implements CommandLineRunner {
     }
 
     private void addMethodsToSet(Method[] methods, Set<Method> methodSet) {
-        if (methods != null && methods.length > 0) {
-            for (Method m : methods) methodSet.add(m);
+        if (methods != null) {
+            methodSet.addAll(Arrays.asList(methods));
         }
     }
 
@@ -100,7 +109,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
         Map<String, PrivilegeMetaData> privilegeMetaDataMap = new HashMap<>();
 
         if (beans != null && !beans.isEmpty()) {
-            beans.values().stream().forEach(e -> {
+            beans.values().forEach(e -> {
                 Class<?> cls = e.getClass();
 
                 if (AopUtils.isAopProxy(e)) {
@@ -123,14 +132,14 @@ public class ApplicationDataInitializer implements CommandLineRunner {
             // check the integrality of dependencies
             if (!privilegeMetaDataMap.isEmpty()) {
 
-                privilegeMetaDataMap.entrySet().stream().forEach(e -> {
-                    Dependency ds[] = e.getValue().dependencies;
+                privilegeMetaDataMap.forEach((key, value) -> {
+                    Dependency ds[] = value.dependencies;
                     if (ds != null && ds.length > 0) {
                         for (Dependency mn : ds) {
                             PrivilegeMetaData pmd = privilegeMetaDataMap.get(CommonUtils.getReferenceMethodName(mn));
                             if (pmd == null) {
                                 throw new NullPointerException(
-                                        String.format("The dependency not found: defined in [%s], value=%s", e.getValue().method, mn)
+                                        String.format("The dependency not found: defined in [%s], value=%s", value.method, mn)
                                 );
                             }
                         }
@@ -138,8 +147,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
                 });
 
                 // save privileges, 这里还必须处理间接依赖和循环依赖的问题
-                privilegeMetaDataMap.entrySet().stream().forEach(e -> {
-                    PrivilegeMetaData data = e.getValue();
+                privilegeMetaDataMap.forEach((key, data) -> {
                     if (data.dependencies.length > 0) {
                         Set<String> des = new HashSet<>();
                         determineDependencies(des, data.methodName, privilegeMetaDataMap);
@@ -161,7 +169,27 @@ public class ApplicationDataInitializer implements CommandLineRunner {
     }
 
     private void savePrivilege(PrivilegeMetaData data, String des) {
+        Privilege privilege = new Privilege();
+        privilege.setDependencies(des == null ? "" : des);
+        privilege.setDescription(data.description);
+        privilege.setMethod(data.methodName);
+        privilege.setName(data.name);
 
+        Query<Privilege> query = QueryBuilder.custom(Privilege.class)
+                .andEquivalent("method", data.methodName)
+                .includeFields("id")
+                .build();
+        Privilege dbp = dao.queryOne(query);
+        if (dbp == null) {
+            long id = dao.save(privilege);
+            LOG.info("Privilege saved: {} <===> {}", id, data.methodName);
+        } else {
+            privilege.setId(dbp.getId());
+            dao.update(privilege);
+            if (LOG.isDebugEnabled()) {
+                LOG.debug("Privilege updated: {} <===> {}", dbp.getId(), data.methodName);
+            }
+        }
     }
 
     private String commaSeparated(Set<String> set) {
@@ -184,9 +212,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
      * @param mn
      * @param map
      */
-    private void determineDependencies(Set<String> des,
-                                       String mn,
-                                       Map<String, PrivilegeMetaData> map) {
+    private void determineDependencies(Set<String> des, String mn, Map<String, PrivilegeMetaData> map) {
         des.add(mn);
         PrivilegeMetaData data = map.get(mn);
         if (data.dependencies.length == 0) return;
@@ -333,6 +359,7 @@ public class ApplicationDataInitializer implements CommandLineRunner {
             user = new SysUser();
             user.setAdministrator(true);
             user.setUsername("admin");
+            user.setType(CryptoEnum.CryptoUserType.ADMIN);
             user.setDescription("System init user");
             String password = "123456aA!";  //generatePassword();
             String enc = sessionManager.encryptPassword(password);

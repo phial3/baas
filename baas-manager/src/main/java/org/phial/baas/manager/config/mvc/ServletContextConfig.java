@@ -19,9 +19,6 @@ import java.lang.reflect.Field;
  * Servlet初始化回调
  * @since 2019-10-10
  * @author mayanjun
- * @vendor mayanjun.org
- * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
  */
 @Slf4j
 @Component

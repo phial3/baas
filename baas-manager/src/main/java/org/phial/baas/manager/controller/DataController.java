@@ -111,9 +111,10 @@ public abstract class DataController<T extends Entity> extends BaseController {
      * @param pb
      * @return
      */
-//    protected Object exportData(ParametersBuilder pb) {
-//        return RestResponse.ok().add("meta", business().exportData(pb));
-//    }
+    protected Object exportData(ParametersBuilder pb) {
+        //return RestResponse.ok().add("meta", business().exportData(pb));
+        return RestResponse.ok();
+    }
 
     /**
      * 按ids导出数据
@@ -122,9 +123,10 @@ public abstract class DataController<T extends Entity> extends BaseController {
      * @param ids
      * @return
      */
-//    protected Object exportData(ParametersBuilder pb, Long[] ids) {
-//        return RestResponse.ok().add("meta", business().exportData(pb, ids));
-//    }
+    protected Object exportData(ParametersBuilder pb, Long[] ids) {
+        //return RestResponse.ok().add("meta", business().exportData(pb, ids));
+        return RestResponse.ok();
+    }
 
 
     public SysUser getUser() {

@@ -9,9 +9,6 @@ import java.lang.reflect.Method;
  * 权限注解
  * @since 2019-10-10
  * @author mayanjun
- * @vendor mayanjun.org
- * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.METHOD)

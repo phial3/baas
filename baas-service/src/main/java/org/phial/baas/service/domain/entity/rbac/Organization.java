@@ -15,7 +15,7 @@ import org.phial.baas.service.domain.entity.NamedEntity;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@Table(value = "baas_organization",
+@Table(value = "t_organization",
         indexes = {
                 @Index(value = "idx_organization_domain", columns = @IndexColumn("domain"), type = IndexType.UNIQUE),
         },
@@ -38,9 +38,11 @@ public class Organization extends NamedEntity {
     @Column(comment = "租户ID", type = DataType.VARCHAR, length = "32")
     private String tenantId;
 
-    /////////////////////////////////////////////
-    /////////// 以下property没有持久化 //////////////
-    /////////////////////////////////////////////
+    public Organization() {}
+
+    public Organization(Long id){
+        super(id);
+    }
 
     public String getRegisterId() {
         return "register." + this.getDomain();

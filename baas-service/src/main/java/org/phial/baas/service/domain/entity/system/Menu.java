@@ -1,5 +1,7 @@
 package org.phial.baas.service.domain.entity.system;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.mayanjun.mybatisx.api.annotation.Column;
@@ -17,6 +19,8 @@ import java.util.stream.Collectors;
  * @since 2021/4/8
  * @author mayanjun
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Table(value = "t_menu",
         indexes = {
                 @Index(value = "idx_name", columns = @IndexColumn("name"))
@@ -49,7 +53,7 @@ public class Menu extends LongEditableEntity implements Comparable {
     private String description;
 
     // 预选的权限，即菜单关联的权限
-    private Long privileges[];
+    private Long[] privileges;
 
     private SortedSet<Menu> children;
 
@@ -60,62 +64,6 @@ public class Menu extends LongEditableEntity implements Comparable {
         super(id);
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public MenuType getType() {
-        return type;
-    }
-
-    public void setType(MenuType type) {
-        this.type = type;
-    }
-
-    public String getTarget() {
-        return target;
-    }
-
-    public void setTarget(String target) {
-        this.target = target;
-    }
-
-    public String getHref() {
-        return href;
-    }
-
-    public void setHref(String href) {
-        this.href = href;
-    }
-
-    public String getIcon() {
-        return icon;
-    }
-
-    public void setIcon(String icon) {
-        this.icon = icon;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Long getParentId() {
-        return parentId;
-    }
-
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
-    }
-
     @Override
     public int compareTo(Object o) {
         Menu menu = (Menu) o;
@@ -124,25 +72,9 @@ public class Menu extends LongEditableEntity implements Comparable {
         return thisOrder < thatOrder ? -1 : 1;
     }
 
-    public SortedSet<Menu> getChildren() {
-        return children;
-    }
-
-    public void setChildren(SortedSet<Menu> children) {
-        this.children = children;
-    }
-
     public static enum MenuType {
         LINK,
         SEPARATOR,
-    }
-
-    public Double getOrder() {
-        return order;
-    }
-
-    public void setOrder(Double order) {
-        this.order = order;
     }
 
     /**
@@ -201,23 +133,5 @@ public class Menu extends LongEditableEntity implements Comparable {
                     .sorted()
                     .collect(Collectors.toList());
         }
-    }
-
-    /**
-     * 获取 privileges
-     *
-     * @return privileges
-     */
-    public Long[] getPrivileges() {
-        return privileges;
-    }
-
-    /**
-     * 设置 privileges
-     *
-     * @param privileges privileges 值
-     */
-    public void setPrivileges(Long[] privileges) {
-        this.privileges = privileges;
     }
 }

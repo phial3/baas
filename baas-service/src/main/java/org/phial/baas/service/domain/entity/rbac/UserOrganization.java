@@ -14,17 +14,35 @@ import org.mayanjun.mybatisx.api.enums.IndexType;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@Table(value = "baas_user_organization",
+@Table(value = "t_user_organization",
         indexes = {
-                @Index(value = "idx_user_id", columns = @IndexColumn("userId"), type = IndexType.NULL),
+                @Index(value = "idx_user", columns = @IndexColumn("user"), type = IndexType.NULL),
         },
         comment = "用户组织关系表"
 )
 public class UserOrganization extends LongEditableEntity {
 
-    @Column(comment = "用户ID主键", type = DataType.BIGINT)
-    private Long userId;
+    @Column(type = DataType.BIGINT, referenceField = "id")
+    private SysUser user;
 
-    @Column(comment = "组织机构ID主键", type = DataType.BIGINT)
-    private Long orgId;
+    @Column(type = DataType.BIGINT, referenceField = "id")
+    private Organization organization;
+
+    public UserOrganization() {
+    }
+
+    public UserOrganization(Long id) {
+        super(id);
+    }
+
+    public UserOrganization(SysUser user, Organization org) {
+        this.user = user;
+        this.organization = org;
+    }
+
+    public UserOrganization(Long userId, Long orgId) {
+        this.user = new SysUser(userId);
+        this.organization = new Organization(orgId);
+    }
+
 }

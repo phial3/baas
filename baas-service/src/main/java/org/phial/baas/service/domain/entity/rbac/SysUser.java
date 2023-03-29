@@ -11,7 +11,6 @@ import org.mayanjun.mybatisx.api.enums.DataType;
 import org.mayanjun.mybatisx.api.enums.IndexType;
 import org.phial.baas.service.domain.entity.system.AbstractUser;
 import org.phial.baas.service.domain.entity.system.Menu;
-import org.phial.baas.service.domain.entity.system.UserType;
 
 import java.util.List;
 import java.util.Set;
@@ -23,7 +22,7 @@ import java.util.Set;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@Table(value = "baas_user",
+@Table(value = "t_user",
         indexes = {
                 @Index(value = "idx_username", columns = @IndexColumn(value = "username", length = 32), type = IndexType.UNIQUE)
         },
@@ -62,5 +61,4 @@ public class SysUser extends AbstractUser {
     private List<Menu> menus;
     private Set<String> privileges;
     private List<String> slotList;
-    private UserType type;
 }

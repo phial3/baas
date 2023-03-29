@@ -28,8 +28,8 @@ public class DataSourceInterceptorPlugin implements Interceptor {
     public Object intercept(Invocation invocation) throws Throwable {
         // 1.先看有没有注解，有注解就使用该注解对应的datasource
         Object[] orginArgs = invocation.getArgs();
-        MappedStatement mappedStatement = (MappedStatement) orginArgs[0];
-        String className = mappedStatement.getId().substring(0, mappedStatement.getId().lastIndexOf("."));
+//        MappedStatement mappedStatement = (MappedStatement) orginArgs[0];
+//        String className = mappedStatement.getId().substring(0, mappedStatement.getId().lastIndexOf("."));
 //        DataSource dataSource = Class.forName(className, true, Thread.currentThread().getContextClassLoader()).getAnnotation(DataSource.class);
 //        if (dataSource == null) {
 //            // 2.没有注解，按照source动态切换

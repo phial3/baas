@@ -3,6 +3,7 @@ package org.phial.baas.manager.config.mvc;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
+import org.phial.baas.manager.config.interceptor.MyInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
@@ -66,8 +67,8 @@ public class WebMvcConfigurerAdapter extends WebMvcConfigurationSupport {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         //注册自己的拦截器
-        // registry.addInterceptor().addPathPatterns("/**");
+         registry.addInterceptor(new MyInterceptor()).addPathPatterns("/**")
         //设置不拦截的请求路径
-        //.excludePathPatterns("/static/**", "/index");
+        .excludePathPatterns("/static/**", "/index");
     }
 }

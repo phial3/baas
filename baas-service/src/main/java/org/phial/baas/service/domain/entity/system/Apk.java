@@ -1,5 +1,7 @@
 package org.phial.baas.service.domain.entity.system;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.mayanjun.mybatisx.api.annotation.Column;
 import org.mayanjun.mybatisx.api.annotation.Index;
 import org.mayanjun.mybatisx.api.annotation.IndexColumn;
@@ -12,6 +14,8 @@ import org.phial.baas.service.domain.entity.NamedEntity;
  * @since 2021/4/8
  * @author mayanjun
  */
+@Data
+@EqualsAndHashCode(callSuper = true)
 @Table(value = "t_apk",
         indexes = {
                 @Index(value = "idx_code", columns = @IndexColumn("code"))
@@ -24,11 +28,12 @@ public class Apk extends NamedEntity {
      */
     @Column(comment = "应用编码", type = DataType.BIGINT)
     private Integer code;
+
     /**
      * 应用包名
      */
     @Column(comment = "应用包名", type = DataType.VARCHAR, length = "256")
-    private String packageName;
+    private String pkgName;
 
     /**
      * 应用路径
@@ -54,38 +59,5 @@ public class Apk extends NamedEntity {
      */
     public Apk(Long id) {
         super(id);
-    }
-
-
-    public Integer getCode() {
-        return code;
-    }
-
-    public void setCode(Integer code) {
-        this.code = code;
-    }
-
-    public String getPackageName() {
-        return packageName;
-    }
-
-    public void setPackageName(String packageName) {
-        this.packageName = packageName;
-    }
-
-    public String getFile() {
-        return file;
-    }
-
-    public void setFile(String file) {
-        this.file = file;
-    }
-
-    public Boolean getForced() {
-        return forced;
-    }
-
-    public void setForced(Boolean forced) {
-        this.forced = forced;
     }
 }

@@ -70,7 +70,7 @@ public abstract class AbstractUser extends NamedEntity {
     protected String address;
 
     @Column(comment = "账号类型:企业;个人", type = DataType.INT)
-    protected CryptoEnum.CryptoUserType userType;
+    protected CryptoEnum.CryptoUserType type;
 
     @Column(comment = "用户账号状态", type = DataType.INT)
     protected SysUserStatusEnum status;

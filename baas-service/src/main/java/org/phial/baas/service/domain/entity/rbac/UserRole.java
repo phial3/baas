@@ -8,28 +8,41 @@ import org.mayanjun.mybatisx.api.annotation.Index;
 import org.mayanjun.mybatisx.api.annotation.IndexColumn;
 import org.mayanjun.mybatisx.api.annotation.Table;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
+import org.mayanjun.mybatisx.api.enums.DataType;
 import org.mayanjun.mybatisx.api.enums.IndexType;
 
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@Table(value = "baas_user_role",
+@Table(value = "t_user_role",
         indexes = {
-                @Index(value = "idx_user_id", columns = @IndexColumn("userId"), type = IndexType.NULL),
+                @Index(value = "idx_user", columns = @IndexColumn("user"), type = IndexType.NULL),
+                @Index(value = "idx_role", columns = @IndexColumn("role"), type = IndexType.NULL),
         },
         comment = "用户角色关系表"
 )
 public class UserRole extends LongEditableEntity {
-    @Column(comment = "用户ID主键")
-    private Long userId;
 
-    @Column(comment = "角色ID主键;")
-    private Long roleId;
+    @Column(type = DataType.BIGINT, referenceField = "id")
+    private SysUser user;
 
-    public UserRole(){}
+    @Column(type = DataType.BIGINT, referenceField = "id")
+    private Role role;
+
+    public UserRole() {
+    }
+
+    public UserRole(Long id) {
+        super(id);
+    }
+
+    public UserRole(SysUser user, Role role) {
+        this.user = user;
+        this.role = role;
+    }
 
     public UserRole(Long userId, Long roleId) {
-        this.userId = userId;
-        this.roleId = roleId;
+        this.user = new SysUser(userId);
+        this.role = new Role(roleId);
     }
 }

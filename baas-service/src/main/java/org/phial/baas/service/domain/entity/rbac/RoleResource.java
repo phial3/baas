@@ -14,16 +14,34 @@ import org.mayanjun.mybatisx.api.enums.IndexType;
 @Data
 @Accessors(chain = true)
 @EqualsAndHashCode(callSuper = true)
-@Table(value = "baas_role_resource",
+@Table(value = "t_role_resource",
         indexes = {
-                @Index(value = "idx_role_id", columns = @IndexColumn("roleId"), type = IndexType.NULL),
+                @Index(value = "idx_role", columns = @IndexColumn("role"), type = IndexType.NULL),
         },
         comment = "角色资源关系表"
 )
 public class RoleResource extends LongEditableEntity {
-    @Column(comment = "角色ID主键", type = DataType.BIGINT)
-    private Long roleId;
 
-    @Column(comment = "资源ID主键", type = DataType.BIGINT)
-    private Long resourceId;
+    @Column(type = DataType.BIGINT, referenceField = "id")
+    private Role role;
+
+    @Column(type = DataType.BIGINT, referenceField = "id")
+    private SysResource resource;
+
+
+    public RoleResource(){}
+
+    public RoleResource(Long id) {
+        super(id);
+    }
+
+    public RoleResource(Role role, SysResource resource) {
+        this.role = role;
+        this.resource = resource;
+    }
+
+    public RoleResource(Long roleId, Long resourceId) {
+        this.role = new Role(roleId);
+        this.resource = new SysResource(resourceId);
+    }
 }

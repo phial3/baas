@@ -5,9 +5,6 @@ import org.mayanjun.core.Status;
 /**
  * @author mayanjun
  * @vendor mayanjun.org
- * @generator consolegen 1.0
- * @manufacturer https://mayanjun.org
- * @since 2019-10-10
  */
 public class StatusCode {
 

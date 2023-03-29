@@ -1,10 +1,13 @@
 package org.phial.baas.service.domain.entity.system;
 
+import lombok.Getter;
+
 /**
  * 应用类型
  * @since 2021/4/8
  * @author mayanjun
  */
+@Getter
 public enum AppType {
 
     /**
@@ -40,23 +43,5 @@ public enum AppType {
      */
     private String displayName;
 
-
-    /**
-     * 获取 displayName
-     *
-     * @return displayName
-     */
-    public String getDisplayName() {
-        return displayName;
-    }
-
-    /**
-     * 获取 icon
-     *
-     * @return icon
-     */
-    public String getIcon() {
-        return icon;
-    }
 
 }
