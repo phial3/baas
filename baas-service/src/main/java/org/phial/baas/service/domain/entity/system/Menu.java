@@ -1,4 +1,4 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;

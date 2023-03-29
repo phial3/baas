@@ -1,9 +1,6 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 import org.mayanjun.mybatisx.api.annotation.Column;
-import org.mayanjun.mybatisx.api.annotation.Index;
-import org.mayanjun.mybatisx.api.annotation.IndexColumn;
-import org.mayanjun.mybatisx.api.annotation.Table;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
 import org.mayanjun.mybatisx.api.enums.DataType;
 

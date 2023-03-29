@@ -1,4 +1,4 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

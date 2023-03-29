@@ -9,7 +9,7 @@ import org.mayanjun.myrest.session.AESSession;
 import org.mayanjun.myrest.session.SessionUser;
 import org.mayanjun.myrest.session.UserLoader;
 import org.phial.baas.manager.config.app.AppConfig;
-import org.phial.baas.service.domain.entity.sys.AbstractUser;
+import org.phial.baas.service.domain.entity.system.AbstractUser;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Autowired;
 

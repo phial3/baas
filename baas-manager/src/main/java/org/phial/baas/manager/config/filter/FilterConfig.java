@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class FilterConfig {
 
-    @Bean("corsFilter")
-    public FilterRegistrationBean crosFilteRegistration() {
-        FilterRegistrationBean<CrosFilter> registration = new FilterRegistrationBean<>();
-        registration.setFilter(new CrosFilter());
-        registration.addUrlPatterns("/*");
-        registration.setOrder(1);
-        return registration;
-    }
+//    @Bean("corsFilter")
+//    public FilterRegistrationBean crosFilteRegistration() {
+//        FilterRegistrationBean<CrosFilter> registration = new FilterRegistrationBean<>();
+//        registration.setFilter(new CrosFilter());
+//        registration.addUrlPatterns("/*");
+//        registration.setOrder(1);
+//        return registration;
+//    }
 }

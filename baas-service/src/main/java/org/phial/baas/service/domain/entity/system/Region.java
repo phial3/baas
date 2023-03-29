@@ -1,4 +1,4 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 import org.mayanjun.mybatisx.api.annotation.Column;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;

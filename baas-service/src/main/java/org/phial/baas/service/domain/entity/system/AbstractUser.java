@@ -1,9 +1,8 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.mayanjun.mybatisx.api.annotation.Column;
-import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
 import org.mayanjun.mybatisx.api.enums.DataType;
 import org.phial.baas.service.constant.CryptoEnum;
 import org.phial.baas.service.constant.SysUserStatusEnum;

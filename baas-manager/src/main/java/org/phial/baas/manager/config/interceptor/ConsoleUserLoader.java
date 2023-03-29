@@ -7,10 +7,10 @@ import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.mayanjun.mybatisx.api.query.SortDirection;
 import org.mayanjun.mybatisx.dal.dao.BasicDAO;
 import org.mayanjun.myrest.session.AbstractSession;
-import org.phial.baas.service.domain.entity.sys.Menu;
-import org.phial.baas.service.domain.entity.sys.Privilege;
-import org.phial.baas.service.domain.entity.sys.RoleMenu;
-import org.phial.baas.service.domain.entity.sys.RolePrivilege;
+import org.phial.baas.service.domain.entity.system.Menu;
+import org.phial.baas.service.domain.entity.system.Privilege;
+import org.phial.baas.service.domain.entity.system.RoleMenu;
+import org.phial.baas.service.domain.entity.system.RolePrivilege;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
 import org.phial.baas.service.domain.entity.rbac.UserRole;
 

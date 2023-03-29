@@ -2,7 +2,7 @@ package org.phial.baas.manager.service.system;
 
 import org.mayanjun.core.Assert;
 import org.mayanjun.mybatisx.api.query.QueryBuilder;
-import org.phial.baas.service.domain.entity.sys.App;
+import org.phial.baas.service.domain.entity.system.App;
 import org.phial.baas.manager.service.ConsoleBaseBusiness;
 import org.phial.baas.service.util.Strings;
 import org.springframework.stereotype.Component;

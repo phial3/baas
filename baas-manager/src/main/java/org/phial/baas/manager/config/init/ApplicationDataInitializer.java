@@ -6,7 +6,7 @@ import org.phial.baas.manager.config.interceptor.ConsoleSessionManager;
 import org.phial.baas.manager.factory.BaasManagerApplicationContext;
 import org.phial.baas.manager.util.CommonUtils;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
-import org.phial.baas.service.domain.entity.sys.Menu;
+import org.phial.baas.service.domain.entity.system.Menu;
 import org.phial.baas.manager.sql.CustomMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

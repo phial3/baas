@@ -7,7 +7,7 @@ import org.mayanjun.core.Assert;
 import org.mayanjun.mybatisx.api.query.Query;
 import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.mayanjun.mybatisx.api.query.SortDirection;
-import org.phial.baas.service.domain.entity.sys.Region;
+import org.phial.baas.service.domain.entity.system.Region;
 import org.phial.baas.manager.service.ConsoleBaseBusiness;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

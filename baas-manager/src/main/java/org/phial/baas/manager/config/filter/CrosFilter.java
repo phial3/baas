@@ -42,17 +42,21 @@ public class CrosFilter implements Filter {
         }
 
         String source = req.getHeader("source");
-        log.info("EnvFilter source:{}, [{} {}], params:{}", source, req.getMethod(), req.getRequestURL(), JSONUtil.toJsonStr(req.getParameterMap()));
-
         if (StringUtils.isBlank(source)) {
-            resp.setCharacterEncoding("utf-8");
-            resp.setContentType("application/json; charset=utf-8");
-            PrintWriter writer = resp.getWriter();
-            ResponseEntity<String> res = ResponseEntity.of(Optional.of("source not found error"));
-            log.error("source:{} not found error!", source);
-            writer.write(JSON.toJSONString(res));
-            return;
+            source=  "master";
         }
+
+        log.info("CrosFilter source:{}, [{} {}], params:{}", source, req.getMethod(), req.getRequestURL(), JSONUtil.toJsonStr(req.getParameterMap()));
+
+//        if (StringUtils.isBlank(source)) {
+//            resp.setCharacterEncoding("utf-8");
+//            resp.setContentType("application/json; charset=utf-8");
+//            PrintWriter writer = resp.getWriter();
+//            ResponseEntity<String> res = ResponseEntity.of(Optional.of("source not found error"));
+//            log.error("source:{} not found error!", source);
+//            writer.write(JSON.toJSONString(res));
+//            return;
+//        }
 
         // set source
         DynamicDataSourceContextHolder.setCurrentSource(source);
@@ -62,7 +66,7 @@ public class CrosFilter implements Filter {
 
     @Override
     public void init(FilterConfig filterConfig) {
-
+        log.info("filter init() filterConfig:{}", filterConfig.getFilterName());
     }
 
     @Override

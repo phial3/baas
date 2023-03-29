@@ -1,4 +1,4 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 /**
  * 系统设置

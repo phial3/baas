@@ -6,9 +6,9 @@ import org.mayanjun.mybatisx.api.query.Query;
 import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.phial.baas.service.domain.entity.rbac.Role;
 import org.phial.baas.service.domain.entity.rbac.UserRole;
-import org.phial.baas.service.domain.entity.sys.Privilege;
-import org.phial.baas.service.domain.entity.sys.RoleMenu;
-import org.phial.baas.service.domain.entity.sys.RolePrivilege;
+import org.phial.baas.service.domain.entity.system.Privilege;
+import org.phial.baas.service.domain.entity.system.RoleMenu;
+import org.phial.baas.service.domain.entity.system.RolePrivilege;
 import org.phial.baas.manager.service.ConsoleBaseBusiness;
 import org.springframework.stereotype.Component;
 

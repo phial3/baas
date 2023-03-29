@@ -9,9 +9,9 @@ import org.mayanjun.mybatisx.api.annotation.IndexColumn;
 import org.mayanjun.mybatisx.api.annotation.Table;
 import org.mayanjun.mybatisx.api.enums.DataType;
 import org.mayanjun.mybatisx.api.enums.IndexType;
-import org.phial.baas.service.domain.entity.sys.AbstractUser;
-import org.phial.baas.service.domain.entity.sys.Menu;
-import org.phial.baas.service.domain.entity.sys.UserType;
+import org.phial.baas.service.domain.entity.system.AbstractUser;
+import org.phial.baas.service.domain.entity.system.Menu;
+import org.phial.baas.service.domain.entity.system.UserType;
 
 import java.util.List;
 import java.util.Set;

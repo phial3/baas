@@ -22,7 +22,7 @@ import org.phial.baas.manager.config.cache.CacheKey;
 import org.phial.baas.manager.config.interceptor.ConsoleSessionManager;
 import org.phial.baas.service.domain.entity.NamedEntity;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
-import org.phial.baas.service.domain.entity.sys.AbstractUser;
+import org.phial.baas.service.domain.entity.system.AbstractUser;
 import org.phial.baas.manager.listener.system.EntityEventDispatcher;
 import org.phial.baas.manager.listener.system.EntityEventListener;
 import org.phial.baas.service.util.Strings;

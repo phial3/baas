@@ -10,8 +10,8 @@ import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.phial.baas.manager.config.interceptor.ConsoleSessionManager;
 import org.phial.baas.service.domain.entity.rbac.SysUser;
 import org.phial.baas.service.domain.entity.rbac.UserRole;
-import org.phial.baas.service.domain.entity.sys.UserProfile;
-import org.phial.baas.service.domain.entity.sys.UserType;
+import org.phial.baas.service.domain.entity.system.UserProfile;
+import org.phial.baas.service.domain.entity.system.UserType;
 import org.phial.baas.manager.service.ConsoleBaseBusiness;
 import org.phial.baas.service.util.Strings;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,8 +31,8 @@ import java.util.Map;
  * @author mayanjun
  * @since 2019-07-06
  */
-@DependsOn("ApplicationDataInitializer")
 @Component
+@DependsOn("ApplicationDataInitializer")
 public class UserBusiness extends ConsoleBaseBusiness<SysUser> implements ApplicationRunner {
 
     private static final String ADMIN_USERNAME = "admin";

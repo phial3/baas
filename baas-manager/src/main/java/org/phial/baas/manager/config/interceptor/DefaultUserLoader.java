@@ -4,7 +4,7 @@ import org.mayanjun.core.Assert;
 import org.mayanjun.mybatisx.api.query.QueryBuilder;
 import org.mayanjun.myrest.session.AbstractSession;
 import org.mayanjun.myrest.session.SessionUser;
-import org.phial.baas.service.domain.entity.sys.AbstractUser;
+import org.phial.baas.service.domain.entity.system.AbstractUser;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;

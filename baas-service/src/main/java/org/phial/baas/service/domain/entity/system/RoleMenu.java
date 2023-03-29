@@ -1,4 +1,4 @@
-package org.phial.baas.service.domain.entity.sys;
+package org.phial.baas.service.domain.entity.system;
 
 import org.mayanjun.mybatisx.api.annotation.Column;
 import org.mayanjun.mybatisx.api.entity.LongEditableEntity;
@@ -6,39 +6,39 @@ import org.mayanjun.mybatisx.api.enums.DataType;
 import org.phial.baas.service.domain.entity.rbac.Role;
 
 /**
- * 角色权限映射
+ * 角色菜单映射
  * @since 2021/4/8
  * @author mayanjun
  */
-//@Table(value = "t_role_privilege",
+//@Table(value = "t_role_menu",
 //        indexes = {
 //                @Index(value = "idx_role", columns = @IndexColumn("role")),
-//                @Index(value = "idx_privilege", columns = @IndexColumn("privilege"))
+//                @Index(value = "idx_menu", columns = @IndexColumn("menu"))
 //        },
 //        comment = "角色权限表")
-public class RolePrivilege extends LongEditableEntity {
+public class RoleMenu extends LongEditableEntity {
 
     @Column(type = DataType.BIGINT, referenceField = "id")
     private Role role;
 
     @Column(type = DataType.BIGINT, referenceField = "id")
-    private Privilege privilege;
+    private Menu menu;
 
-    public RolePrivilege() {
+    public RoleMenu() {
     }
 
-    public RolePrivilege(Long id) {
+    public RoleMenu(Long id) {
         super(id);
     }
 
-    public RolePrivilege(Role role, Privilege privilege) {
+    public RoleMenu(Role role, Menu menu) {
         this.role = role;
-        this.privilege = privilege;
+        this.menu = menu;
     }
 
-    public RolePrivilege(Long roleId, Long privilegeId) {
+    public RoleMenu(Long roleId, Long menuId) {
         this.role = new Role(roleId);
-        this.privilege = new Privilege(privilegeId);
+        this.menu = new Menu(menuId);
     }
 
     public Role getRole() {
@@ -49,11 +49,11 @@ public class RolePrivilege extends LongEditableEntity {
         this.role = role;
     }
 
-    public Privilege getPrivilege() {
-        return privilege;
+    public Menu getMenu() {
+        return menu;
     }
 
-    public void setPrivilege(Privilege privilege) {
-        this.privilege = privilege;
+    public void setMenu(Menu menu) {
+        this.menu = menu;
     }
 }
