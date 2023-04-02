@@ -33,7 +33,7 @@ public class ResourceController extends BaseController {
 
                 try {
                     Method method = c.getDeclaredMethod("values");
-                    Object vs[] = (Object[]) method.invoke(c);
+                    Object[] vs = (Object[]) method.invoke(c);
 
                     Map<String, Object> valueMap = new LinkedHashMap<>();
                     PropertyDescriptor [] pds = BeanUtils.getPropertyDescriptors(c);
@@ -57,11 +57,7 @@ public class ResourceController extends BaseController {
                         valueMap.put(name, fieldMap);
                     }
                     vm.put(c.getSimpleName(), valueMap);
-                } catch (NoSuchMethodException e) {
-                    e.printStackTrace();
-                } catch (IllegalAccessException e) {
-                    e.printStackTrace();
-                } catch (InvocationTargetException e) {
+                } catch (NoSuchMethodException | IllegalAccessException | InvocationTargetException e) {
                     e.printStackTrace();
                 }
             }

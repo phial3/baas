@@ -53,8 +53,8 @@ public class RoleController extends DataController<Role> {
         pb.add("id", sid);
         pb.add("__LIKE__name", sname);
         return RestResponse.ok()
-                .add("list", business.list(page, pageSize, pb))
-                .add("total", business.count(pb));
+                .add(RESP_KEY_LIST, business.list(page, pageSize, pb))
+                .add(RESP_KEY_TOTAL, business.count(pb));
     }
 
     @Profiler

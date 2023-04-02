@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
  * @author mayanjun
  * @since 2019-10-10
  */
-@Login
+//@Login
 @RestController
 @RequestMapping("api/user")
 @PrivilegedMeta(@MetaProperty(name = "module", value = "平台账号管理"))
@@ -63,12 +63,9 @@ public class UserController extends DataController<SysUser> {
         pb.add("__LIKE__phone", phone);
         pb.add("entityId", entityId);
         pb.add("__LIKE__email", email);
-        if("AlarmSetting".equals(apiType)){
-            pb.add("enabled", Boolean.TRUE);
-        }
-        if (!getUser().getUsername().equals("admin")) {
-            pb.add("__!=__username", "admin");
-        }
+        //if (!getUser().getUsername().equals("admin")) {
+        //    pb.add("__!=__username", "admin");
+        //}
 
         return RestResponse.ok()
                 .add("list", business.list(page, pageSize, pb))

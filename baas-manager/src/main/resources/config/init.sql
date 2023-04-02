@@ -467,3 +467,39 @@ CREATE TABLE IF NOT EXISTS `t_role_privilege`
 ) ENGINE = InnoDB
   DEFAULT CHARSET = utf8
   COLLATE = utf8_bin COMMENT ='角色权限表';
+
+CREATE TABLE IF NOT EXISTS `t_access_log`
+(
+    `id`            BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
+    `date`          DATETIME        NOT NULL DEFAULT '0000-00-00 00:00:00' COMMENT '时间',
+    `elapsed`       BIGINT          NOT NULL DEFAULT 0 COMMENT '请求时长:毫秒',
+    `parameters`    LONGTEXT        NOT NULL COMMENT '请求参数',
+    `exception`     BIT(1)          NOT NULL DEFAULT b'0' COMMENT '是否发生异常',
+    `serverAddress` VARCHAR(16)     NOT NULL DEFAULT '' COMMENT '服务端IP',
+    `clientAddress` VARCHAR(16)     NOT NULL DEFAULT '' COMMENT '客户端IP',
+    `httpMethod`    VARCHAR(20)     NOT NULL DEFAULT '' COMMENT 'HTTP方法',
+    `methodId`      VARCHAR(32)     NOT NULL DEFAULT '' COMMENT '方法签名ID',
+    `profilerName`  VARCHAR(32)     NOT NULL DEFAULT '' COMMENT '统计名称',
+    `user`          VARCHAR(64)     NOT NULL DEFAULT '' COMMENT '访问用户',
+    `uri`           VARCHAR(100)    NOT NULL DEFAULT '' COMMENT '访问URI',
+    `contentType`   VARCHAR(100)    NOT NULL DEFAULT '' COMMENT 'HTTP MIME',
+    `message`       VARCHAR(200)    NOT NULL DEFAULT '' COMMENT '错误消息',
+    `userAgent`     VARCHAR(1000)   NOT NULL DEFAULT '' COMMENT 'UA',
+    PRIMARY KEY (`id`),
+    KEY `idx_profilerName` (`profilerName`),
+    KEY `idx_uri` (`uri`(32)),
+    KEY `idx_date` (`date`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_bin COMMENT ='访问日志';
+
+CREATE TABLE IF NOT EXISTS `t_method_mapping`
+(
+    `id`        BIGINT UNSIGNED NOT NULL DEFAULT 0 COMMENT 'ID',
+    `name`      VARCHAR(1000)   NOT NULL DEFAULT '' COMMENT '名称',
+    `className` VARCHAR(1000)   NOT NULL DEFAULT '' COMMENT '类名',
+    PRIMARY KEY (`id`),
+    KEY `idx_name` (`name`(32))
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8
+  COLLATE = utf8_bin COMMENT ='方法名称映射';

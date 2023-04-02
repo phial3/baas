@@ -51,7 +51,6 @@ public class SessionController extends BaseController {
             }else{
                 throw new ServiceException(e.getStatus(), "用户名或者密码错误");
             }
-
         }
     }
 
