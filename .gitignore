@@ -3,8 +3,12 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-./logs
+logs
 *.log
+*.tar
+*.tar.gz
+*.zip
+
 
 ### IntelliJ IDEA ###
 .idea/modules.xml

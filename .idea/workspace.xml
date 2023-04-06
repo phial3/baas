@@ -5,21 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e4b378bb-ee4a-47e1-9b14-3c0aee31e8e5" name="Changes" comment="update">
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/aop/StatTrigger.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/aop/StatTriggerHandlerAspect.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/aop/StateEvent.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/AccessLog.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/baas-service/src/main/java/org/phial/baas/service/domain/entity/system/MethodMapping.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources/7493cdb9-31e6-41e8-b047-4405ff40922d.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources/7493cdb9-31e6-41e8-b047-4405ff40922d.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/init/ProfilerHandlerAspect.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/config/aop/ProfilerHandlerAspect.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/PrivilegeController.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/PrivilegeController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/ResourceController.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/ResourceController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/RoleController.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/RoleController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/SessionController.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/SessionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/UserController.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/java/org/phial/baas/manager/controller/system/UserController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-chainmaker/src/main/java/org/phial/baas/chainmaker/constant/ResourcePolicyEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/baas-chainmaker/src/main/java/org/phial/baas/chainmaker/constant/ResourcePolicyEnum.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/baas-manager/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/baas-manager/src/main/resources/application.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/resources/application.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/baas-manager/src/main/resources/config/init.sql" beforeDir="false" afterPath="$PROJECT_DIR$/baas-manager/src/main/resources/config/init.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -64,34 +53,34 @@
   <component name="ProjectViewState">
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/Users/admin/Workspace/java/github.com/baas/baas-service/src/main/java/org/phial/baas/service/domain/entity/system",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "project.structure.last.edited": "Facets",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.31264368",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
-    "spring.configuration.checksum": "9091cd1318d00c851f7bbe384af739fa",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/admin/Workspace/java/github.com/baas/baas-service/src/main/java/org/phial/baas/service/domain/entity/system&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Facets&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.31264368&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
+    &quot;spring.configuration.checksum&quot;: &quot;9091cd1318d00c851f7bbe384af739fa&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
-  "keyToStringList": {
-    "DatabaseDriversLRU": [
-      "mysql"
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
     ]
   }
-}]]></component>
+}</component>
   <component name="ReactorSettings">
     <option name="notificationShown" value="true" />
   </component>
@@ -169,6 +158,7 @@
       <workItem from="1680087267977" duration="9558000" />
       <workItem from="1680139481215" duration="236000" />
       <workItem from="1680432188061" duration="3794000" />
+      <workItem from="1680783651187" duration="453000" />
     </task>
     <task id="LOCAL-00001" summary="add module">
       <created>1679331084407</created>
@@ -251,7 +241,19 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
           </value>
         </entry>
       </map>

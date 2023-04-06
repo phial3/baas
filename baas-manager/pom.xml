@@ -91,6 +91,7 @@
             </exclusions>
         </dependency>
 
+        <!-- oss 集成 -->
         <dependency>
             <groupId>io.github.artislong</groupId>
             <artifactId>oss-spring-boot-starter</artifactId>

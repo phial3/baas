@@ -7,7 +7,9 @@ import java.util.regex.Pattern;
 
 @Getter
 public enum ResourcePolicyEnum {
-
+    /**
+     *
+     */
     CHAIN_CONFIG_CORE_UPDATE("CHAIN_CONFIG-CORE_UPDATE", "MAJORITY"),
     CHAIN_CONFIG_BLOCK_UPDATE("CHAIN_CONFIG-BLOCK_UPDATE", "MAJORITY"),
     CHAIN_CONFIG_TRUST_ROOT_ADD("CHAIN_CONFIG-TRUST_ROOT_ADD", "MAJORITY"),
@@ -71,7 +73,6 @@ public enum ResourcePolicyEnum {
         Pattern r = Pattern.compile(pattern);
 
         if (r.matcher(rule).matches()) {
-
             if (rule.contains("/")) {
                 String[] point = rule.split("/");
 
@@ -80,7 +81,6 @@ public enum ResourcePolicyEnum {
                 return Integer.parseInt(rule);
             }
         } else {
-
             switch (rule) {
                 case "ALL":
                     return orgList.size();
@@ -91,8 +91,9 @@ public enum ResourcePolicyEnum {
                     return orgList.size() / 2 + 1;
                 case "FORBIDDEN":
                     throw new RuntimeException("this resource is FORBIDDEN");
+                default:
+                    throw new IllegalArgumentException("no support rule:" + rule);
             }
         }
-        throw new RuntimeException("rule not found");
     }
 }
